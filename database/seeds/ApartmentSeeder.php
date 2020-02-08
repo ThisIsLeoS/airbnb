@@ -16,7 +16,7 @@ class ApartmentSeeder extends Seeder
      */
     public function run()
     {
-        factory(Apartment::class , 55)
+        factory(Apartment::class , 50)
         -> make()
         -> each(function($apartment){
 
