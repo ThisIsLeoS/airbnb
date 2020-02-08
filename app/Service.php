@@ -9,12 +9,7 @@ class Service extends Model
 {
      protected $fillable = [
 
-        "wifi",
-        "parking_slot",
-        "swimming_pool",
-        "sauna",
-        "sea_view",
-        "reception"
+        "type"
 
     ];
 

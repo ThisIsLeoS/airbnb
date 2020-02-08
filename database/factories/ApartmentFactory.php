@@ -16,6 +16,6 @@ $factory->define(Apartment::class, function (Faker $faker) {
         "bathrooms" => rand(1,2),
         "square_feet" => rand(25,100),
         "address" => $faker -> address ,
-        "poster_img" => Image::all()-> random() -> path
+        "poster_img" => "test"/* Image::all()-> random() -> path */
     ];
 });

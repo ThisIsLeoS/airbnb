@@ -40,9 +40,7 @@ class User extends Authenticatable
     public function apartments(){
         return $this -> hasMany(Apartment::class);
     }
-    public function messages(){
-        return $this -> hasMany(Message::class);
-    }
+    
 
 
 }

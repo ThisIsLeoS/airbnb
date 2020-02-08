@@ -29,8 +29,8 @@ class AddForeignKey extends Migration
         });
 
         Schema::table('messages', function (Blueprint $table) {
-            $table -> bigInteger("user_id")->unsigned()->index();
-            $table -> foreign("user_id","user_message_id")->references("id")->on("users");
+            $table -> bigInteger("apartment_id")->unsigned()->index();
+            $table -> foreign("apartment_id","apartment_message_id")->references("id")->on("apartments");
         });
 
         Schema::table('images', function (Blueprint $table) {
@@ -60,8 +60,8 @@ class AddForeignKey extends Migration
 
         });
          Schema::table('messages', function (Blueprint $table) {
-            $table -> dropForeign("user_message_id");
-            $table -> dropColumn("user_id");
+            $table -> dropForeign("apartment_message_id");
+            $table -> dropColumn("apartment_id");
 
         });
          Schema::table('images', function (Blueprint $table) {
