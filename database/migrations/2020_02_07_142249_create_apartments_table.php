@@ -21,7 +21,10 @@ class CreateApartmentsTable extends Migration
             $table->integer('bathrooms');
             $table->integer('square_feet');
             $table->string('address');
-            $table->string('poster_img');
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
+            $table->integer('views')->nullable()->deafult('0');
+            $table->string('poster_img')->nullable();
             $table->timestamps();
         });
     }
