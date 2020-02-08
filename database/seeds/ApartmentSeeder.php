@@ -20,13 +20,10 @@ class ApartmentSeeder extends Seeder
         -> make() 
         -> each(function($apartment){
 
-           /*  $user = User::inRandomOrder() -> first();
+            $user = User::inRandomOrder() -> first();
             $apartment -> user() -> associate($user);
-            */
-            $apartment -> save();
             
-            $service = Service::inRandomOrder() -> take(rand(2,6)) -> get();
-            $apartment -> services() -> attach($service);
+            $apartment -> save();
         });
     }
 }

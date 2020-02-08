@@ -16,12 +16,6 @@ $factory->define(Service::class, function (Faker $faker) {
             'reception'
     ];
     return [
-        "type" => $faker -> unique() -> randomElement($serviceList)
-        /* "wifi" => $faker -> boolean ,
-        "parking_slot"=> $faker -> boolean,
-        "swimming_pool"=> $faker -> boolean,
-        "sauna"=> $faker -> boolean,
-        "sea_view"=> $faker -> boolean,
-        "reception"=> $faker -> boolean */
+        "type" => $faker -> randomElement($serviceList)
     ];
 });

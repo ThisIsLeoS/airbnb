@@ -13,20 +13,27 @@ class AddForeignKey extends Migration
      */
     public function up()
     {
+        Schema::table('apartments', function (Blueprint $table) {
+            $table -> bigInteger("user_id")->unsigned()->index();
+            $table -> foreign("user_id","user_apartment_id")
+            ->references("id")
+            ->on("users");
+
+        });
+
           Schema::table('apartment_service', function (Blueprint $table) {
             $table -> bigInteger("apartment_id")->unsigned()->index();
-            $table -> foreign("apartment_id","apartment_service_apartment_id")->references("id")->on("apartments");
+            $table -> foreign("apartment_id","apartment_service_apartment_id")
+            ->references("id")
+            ->on("apartments");
 
             $table -> bigInteger("service_id")->unsigned()->index();
-            $table -> foreign("service_id","apartment_service_service_id")->references("id")->on("services");
+            $table -> foreign("service_id","apartment_service_service_id")
+            ->references("id")
+            ->on("services");
         });
 
 
-        Schema::table('users', function (Blueprint $table) {
-            $table -> bigInteger("apartment_id")->unsigned()->index();
-            $table -> foreign("apartment_id","user_apartment_id")->references("id")->on("apartments");
-
-        });
 
         Schema::table('messages', function (Blueprint $table) {
             $table -> bigInteger("apartment_id")->unsigned()->index();
@@ -54,9 +61,9 @@ class AddForeignKey extends Migration
             $table->dropColumn("service_id");
         });
 
-         Schema::table('users', function (Blueprint $table) {
+         Schema::table('apartments', function (Blueprint $table) {
             $table -> dropForeign("user_apartment_id");
-            $table -> dropColumn("apartment_id");
+            $table -> dropColumn("user_id");
 
         });
          Schema::table('messages', function (Blueprint $table) {
