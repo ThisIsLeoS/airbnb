@@ -26,6 +26,25 @@
   align-items: center;
 }
 
+.col-md-2 p {
+  font-weight: bold;
+}
+
+.col-md-2 ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.col-md-2 ul li a {
+  color: grey;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.col-md-2 ul li a:hover {
+  color: black;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -10913,6 +10932,10 @@ a.text-dark:focus {
 .noGutter {
   padding: 0;
   margin: 0;
+}
+
+.pagination {
+  justify-content: center;
 }
 
 .myCards {

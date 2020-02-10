@@ -29,7 +29,7 @@
 </div>
     
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12 myCards">
       @foreach ($apartments as $apt)
@@ -47,4 +47,7 @@
     </div>
   </div>
 </div>
+<div class="col-12 justify-content-center">
+    {{ $apartments->links() }}
+  </div>
 @endsection
