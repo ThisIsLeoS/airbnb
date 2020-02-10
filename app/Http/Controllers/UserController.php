@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Apartment;
 use App\User;
+use App\Apartment;
+use App\Message;
 
-class HomePageController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::paginate(12);
-        return view("pages.myHome",compact("apartments"));
+
     }
 
     /**
@@ -48,7 +48,17 @@ class HomePageController extends Controller
      */
     public function show($id)
     {
-        //
+      $user = User::findOrFail($id);
+
+      return view('pages.userShow', compact('user'));
+    }
+
+    public function userApartmentShow($idu, $ida)
+    {
+      $user = User::findOrFail($idu);
+      $apartment = Apartment::findOrFail($ida);
+
+      return view('pages.userApartmentShow', compact('user', 'apartment'));
     }
 
     /**

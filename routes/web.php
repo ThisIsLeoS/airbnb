@@ -20,7 +20,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
 Route::get("/" , "HomePageController@index")-> name("home.page");
 
 //Apartment route
-ROute::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");
+Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");
+
+
+//User route
+Route::get('/user/{id}/show', 'UserController@show') -> name('user.show');
+Route::get('/user/{idu}/show/apartment/{ida}' , 'UserController@userApartmentShow') -> name('userApartment.show');
