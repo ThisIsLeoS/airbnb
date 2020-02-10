@@ -58,7 +58,7 @@ class RegisterController extends Controller
                 'string',
                 /* regex that matches strings with a minimum of 8 chars, at least one letter and at
                 least one number */
-                'regex: ^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$',
+                'regex: /^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$/',
                 'confirmed'
             ],
         ]);
