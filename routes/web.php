@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get("/" , "HomePageController@index")-> name("home.page");
+
+//Apartment route
+ROute::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");

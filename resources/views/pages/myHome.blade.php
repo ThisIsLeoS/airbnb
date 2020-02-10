@@ -39,7 +39,7 @@
         <div class="card-body">
           <h5 class="card-title">Test</h5>
           <p class="card-text">{{$apt -> description}}</p>
-          <a href="#" class="btn btn-primary">Vai a pagina dettaglio</a>
+        <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
         </div>
       </div>
     
