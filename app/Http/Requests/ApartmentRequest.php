@@ -28,11 +28,12 @@ class ApartmentRequest extends FormRequest
             "rooms" => "required|integer|gt:0|max:255",
             "beds" => "required|integer|gt:0|max:255",
             "bathrooms" => "required|integer|gt:0|max:255",
+            "square_feet" => "integer|max:10000|gt:0",
             "address" => "required|string|max:255",
             "lat" => "required|numeric|between:-90,90",
             "lon" => "required|numeric|between:-180,180",
             "views" => "required|integer|gte:0",
-            "poster_path" => "string|max:255|nullable"
+            "poster_img" => "string|max:255|nullable"
         ];
     }
 }
