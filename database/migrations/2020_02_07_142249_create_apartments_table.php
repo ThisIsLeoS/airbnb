@@ -14,17 +14,17 @@ class CreateApartmentsTable extends Migration
     public function up()
     {
         Schema::create('apartments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('description');
-            $table->unsignedTinyInteger('rooms');
-            $table->unsignedTinyInteger('beds')->nullable();
-            $table->unsignedTinyInteger('bathrooms')->nullable();
-            $table->smallInteger('square_feet');
-            $table->string('address');
-            $table->decimal('lat', 10, 7)->nullable();
-            $table->decimal('lon', 10, 7)->nullable();
-            $table->integer('views')->deafult('0');
-            $table->string('poster_img')->nullable();
+            $table->bigIncrements("id");
+            $table->string("description");
+            $table->unsignedTinyInteger("rooms");
+            $table->unsignedTinyInteger("beds")->deafult("1");
+            $table->unsignedTinyInteger("bathrooms")->deafult("1");
+            $table->smallInteger("square_feet");
+            $table->string("address");
+            $table->decimal("lat", 10, 7);
+            $table->decimal("lon", 10, 7);
+            $table->integer("views")->deafult("0");
+            $table->string("poster_img")->nullable();
             $table->timestamps();
         });
     }
