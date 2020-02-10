@@ -24,7 +24,7 @@ class ImageRequest extends FormRequest
     public function rules()
     {
         return [
-            "path" => "string|url|max:255|nullable"
+            "path" => "string|max:255|nullable"
         ];
     }
 }

@@ -33,7 +33,7 @@ class ApartmentRequest extends FormRequest
             "lat" => "required|numeric|between:-90,90",
             "lon" => "required|numeric|between:-180,180",
             "views" => "required|integer|gte:0",
-            "poster_img" => "string|url|max:255|nullable"
+            "poster_img" => "string|max:255|nullable"
         ];
     }
 }
