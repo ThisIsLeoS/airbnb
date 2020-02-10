@@ -14,6 +14,9 @@ class Apartment extends Model
         "bathrooms",
         "square_feet",
         "address",
+        "lat",
+        "lon",
+        "views",
         "poster_img"
 
     ];
