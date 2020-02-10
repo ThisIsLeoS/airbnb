@@ -50,12 +50,19 @@
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
+            Servizi Aggiuntivi : 
+            <ul>
             @foreach ($apartment -> services as $service)
-            {{$service -> type}}
+            <li>{{$service -> type}}</li>
         @endforeach
+        </ul>
         </div>
         <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+        </div>
+        <div class="col-12">
+            <h3>TODO -> Messaggio al proprietario</h3>
+            Ti piace questa stanza ? Invia un messaggio al proprietario
         </div>
     </div>
 </div>
