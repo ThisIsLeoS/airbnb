@@ -10884,3 +10884,19 @@ a.text-dark:focus {
   }
 }
 
+.myCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.myCards .card {
+  margin: 10px;
+}
+
+.myCards .card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

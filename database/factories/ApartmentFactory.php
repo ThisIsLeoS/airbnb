@@ -19,6 +19,6 @@ $factory->define(Apartment::class, function (Faker $faker) {
         'views'=>rand(10, 1000) ,
         'lat'=> $faker-> latitude,
         'lon'=> $faker-> longitude,
-        "poster_img" => "test"/* Image::all()-> random() -> path */
+        "poster_img" => "https://source.unsplash.com/random/400x250/?apartment"
     ];
 });
