@@ -8,9 +8,10 @@
       <h4>{{ $apartment -> address }}</h4>
     </div>
     @foreach ($apartment -> messages as $message)
-      <p class="message_apt">{{$message -> sender}}</p>
-      <p class="d-none bodyMessage">{{$message -> text}}</p>
-
+      <div class="d-flex flex-column">
+        <span class="sender">{{$message -> sender}} </span>
+        <span class="d-none body_message"> {{$message -> text}}</span>
+      </div>
     @endforeach
   @endforeach
 
