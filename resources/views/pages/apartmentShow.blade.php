@@ -24,12 +24,12 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 </div>
 <div class="container">
-    
-    <h1>Titolo stanza </h1>  
+
+    <h1>Titolo stanza </h1>
     <div class="row">
         <div class="col-6">
           <h4>{{$apartment -> description}}</h4>
@@ -39,18 +39,18 @@
                 </div>
                 <div class="col-6">
                     <i class="fas fa-ruler-combined"></i><p>Dimensione : {{$apartment -> square_feet}} mq<sup>2</sup></p>
-                    
-                    
+
+
                 </div>
                 <div class="col-6">
                     <i class="fas fa-bed" style="color:black"></i> <p>Letti disponibili : {{$apartment -> beds}}</p>
-                    
+
                 </div>
                 <div class="col-6">
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
-            Servizi Aggiuntivi : 
+            Servizi Aggiuntivi :
             <ul>
             @foreach ($apartment -> services as $service)
             <li>{{$service -> type}}</li>
@@ -59,6 +59,25 @@
         </div>
         <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+            <style>
+               #map {
+                   width: 30vw;
+                   height: 50vh;
+               }
+            </style>
+            <div id='map' class='map'></div>
+          <!-- Replace version in the URL with desired library version -->
+          <script src = "https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/maps-web.min.js" > </script>
+            <script>
+              tt.setProductInfo('test_mappa', '5.45.0');
+              tt.map({
+                  key: 'PXlXaqWPf4QFvdznBmvVfmi3AMAscNRm',
+                  container: 'map',
+                  style: 'tomtom://vector/1/basic-main',
+                  center: [{{$apartment->lon}}, {{$apartment->lat}}],
+                  zoom: 8
+              });
+            </script>
         </div>
         <div class="col-12">
             <h3>TODO -> Messaggio al proprietario</h3>

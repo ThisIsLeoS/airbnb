@@ -31,8 +31,19 @@ const app = new Vue({
     el: '#app',
 });
 
+function showMessage(){
 
+  $('.message_apt').on('click',function(){
 
+    $(this).siblings('.bodyMessage').toggleClass('d-none');
+  })
 
+}
 
+function init(){
+  showMessage();
+  console.log('hello word');
 
+}
+
+$(document).ready(init);

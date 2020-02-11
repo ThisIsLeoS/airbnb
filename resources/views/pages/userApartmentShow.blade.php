@@ -10,8 +10,8 @@
       <img src="{{ $apartment -> poster_img }}" alt="">
     </div>
     @foreach ($apartment -> messages as $message)
-      <p>{{$message -> sender}}</p>
-      <p>{{$message -> text}}</p>
+      <p class="message_apt">{{$message -> sender}}</p>
+      <p class="d-none bodyMessage">{{$message -> text}}</p>
 
     @endforeach
   @endforeach
