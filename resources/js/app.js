@@ -31,7 +31,9 @@ const app = new Vue({
     el: '#app',
 });
 
-function showMessage(){
+
+
+/* function showMessage(){
 
   $('.message_apt').on('click',function(){
 
@@ -39,10 +41,33 @@ function showMessage(){
   })
 
 }
-
+ */
 function init(){
-  showMessage();
+  /* showMessage(); */
   console.log('hello word');
+
+  //funzione countdown per utenti non autorizzati
+  function startTimer(duration, display) {
+    var timer = duration, seconds;
+    setInterval(function () {
+      seconds = parseInt(timer % 4);
+      console.log(seconds)
+
+      /* seconds = seconds < 10 ? "3" + seconds : seconds; */
+
+      display.textContent = seconds + " secondi";
+
+      if (--timer < 0) {
+        timer = duration;
+      }
+    }, 1000);
+  }
+
+  window.onload = function () {
+    var threeSec = 60 * 0.05,
+      display = document.querySelector('#time');
+    startTimer(threeSec, display);
+  };
 
 }
 

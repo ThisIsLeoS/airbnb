@@ -54,7 +54,7 @@ class UserController extends Controller
       if ($user == Auth::user()){
         return view('pages.userShow', compact('user'));
       }else{
-          return view("pages.test");
+          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
       }
 
       
@@ -66,7 +66,8 @@ class UserController extends Controller
         if ($user == Auth::user()){
             return view('pages.userApartmentShow', compact('user'));
         }else{
-            return view("pages.test");
+             /* return view("pages.unauthorized"); */
+            return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
         }
       
     }

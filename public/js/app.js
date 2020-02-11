@@ -49526,16 +49526,41 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+/* function showMessage(){
 
-function showMessage() {
-  $('.message_apt').on('click', function () {
+  $('.message_apt').on('click',function(){
+
     $(this).siblings('.bodyMessage').toggleClass('d-none');
-  });
+  })
+
 }
+ */
 
 function init() {
-  showMessage();
-  console.log('hello word');
+  /* showMessage(); */
+  console.log('hello word'); //funzione countdown per utenti non autorizzati
+
+  function startTimer(duration, display) {
+    var timer = duration,
+        seconds;
+    setInterval(function () {
+      seconds = parseInt(timer % 4);
+      console.log(seconds);
+      /* seconds = seconds < 10 ? "3" + seconds : seconds; */
+
+      display.textContent = seconds + " secondi";
+
+      if (--timer < 0) {
+        timer = duration;
+      }
+    }, 1000);
+  }
+
+  window.onload = function () {
+    var threeSec = 60 * 0.05,
+        display = document.querySelector('#time');
+    startTimer(threeSec, display);
+  };
 }
 
 $(document).ready(init);
