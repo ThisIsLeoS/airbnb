@@ -16,11 +16,13 @@
     </div>
   </div>
   <div >
-    <h1>Ciao, io sono {{ $user->name }}</h1>
+    <h1>Ciao {{ $user->name }}</h1>
     <a href="#">Modifica il profilo </a>
   </div>
   <div >
+    
       <a href="{{ route('userApartment.show',$user -> id) }}">I miei appartamenti({{ $user -> apartments() -> count()}}) </a>
+    
   </div>
 
 

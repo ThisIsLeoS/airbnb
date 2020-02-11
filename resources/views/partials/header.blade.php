@@ -38,11 +38,11 @@
                                         {{ __('Logout') }}
                                     </a>
 
-
+                                    @if(Auth::user())
                                     <a class="dropdown-item" href="{{ route('user.show', Auth::user() -> id) }}">
                                       {{ __('Info utente') }}
                                     </a>
-
+                                     @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

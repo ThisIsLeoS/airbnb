@@ -26,6 +26,11 @@
   align-items: center;
 }
 
+#map {
+  width: 30vw;
+  height: 50vh;
+}
+
 .col-md-2 p {
   font-weight: bold;
 }

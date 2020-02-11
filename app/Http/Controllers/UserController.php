@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Apartment;
 use App\Message;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -49,15 +50,25 @@ class UserController extends Controller
     public function show($id)
     {
       $user = User::findOrFail($id);
+       
+      if ($user == Auth::user()){
+        return view('pages.userShow', compact('user'));
+      }else{
+          return view("pages.test");
+      }
 
-      return view('pages.userShow', compact('user'));
+      
     }
 
     public function userApartmentShow($id)
     {
       $user = User::findOrFail($id);
-
-      return view('pages.userApartmentShow', compact('user'));
+        if ($user == Auth::user()){
+            return view('pages.userApartmentShow', compact('user'));
+        }else{
+            return view("pages.test");
+        }
+      
     }
 
     /**

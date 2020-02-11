@@ -59,25 +59,25 @@
         </div>
         <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
-            <style>
-               #map {
-                   width: 30vw;
-                   height: 50vh;
-               }
-            </style>
-            <div id='map' class='map'></div>
+            
+            <div id='map' class='map'>
+            </div>
           <!-- Replace version in the URL with desired library version -->
           <script src = "https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/maps-web.min.js" > </script>
             <script>
-              tt.setProductInfo('test_mappa', '5.45.0');
-              tt.map({
+              /* tt.setProductInfo('test_mappa', '5.45.0'); */
+              var myCoord =  [{{$apartment->lon}}, {{$apartment->lat}}]
+              console.log(myCoord)
+              var map = tt.map({
                   key: 'PXlXaqWPf4QFvdznBmvVfmi3AMAscNRm',
                   container: 'map',
                   style: 'tomtom://vector/1/basic-main',
-                  center: [{{$apartment->lon}}, {{$apartment->lat}}],
+                  center: myCoord,
                   zoom: 8
-              });
-            </script>
+                });
+
+                var marker = new tt.Marker().setLngLat(myCoord).addTo(map);
+                </script>
         </div>
         <div class="col-12">
             <h3>TODO -> Messaggio al proprietario</h3>
