@@ -53,12 +53,11 @@ class UserController extends Controller
       return view('pages.userShow', compact('user'));
     }
 
-    public function userApartmentShow($idu, $ida)
+    public function userApartmentShow($id)
     {
-      $user = User::findOrFail($idu);
-      $apartment = Apartment::findOrFail($ida);
+      $user = User::findOrFail($id);
 
-      return view('pages.userApartmentShow', compact('user', 'apartment'));
+      return view('pages.userApartmentShow', compact('user'));
     }
 
     /**

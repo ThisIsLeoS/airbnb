@@ -20,11 +20,10 @@
     <a href="#">Modifica il profilo </a>
   </div>
   <div >
-    @foreach ($user->apartments as $apartment)
-
-      <a href="{{ route('userApartment.show',[ $user -> id, $apartment->id]) }}">I miei appartamenti</a>
-      <a href="#">Messaggi ricevuti</a>
-    @endforeach
+      <a href="{{ route('userApartment.show',$user -> id) }}">I miei appartamenti({{ $user -> apartments() -> count()}}) </a>
+  </div>
+  <div>
+    <a href="#">Messaggi ricevuti</a>
   </div>
 
 @endsection
