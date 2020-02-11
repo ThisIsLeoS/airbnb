@@ -8,15 +8,12 @@
     </div>
   @endif
   @foreach ($user -> apartments as $apartment)
-
-    <div class="apartments">
+  <div class="apartments">
       <h4>{{ $apartment -> address }}</h4>
       <p>{{ $apartment -> description }}</p>
       <img src="{{ $apartment -> poster_img }}" alt="">
     </div>
 
     <a href="{{ route('user.delete.apartment',  $apartment-> id) }}"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
-
   @endforeach
-
 @endsection
