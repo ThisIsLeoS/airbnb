@@ -43,8 +43,8 @@ const app = new Vue({
 }
  */
 function init(){
-  /* showMessage(); */
-  console.log('hello word');
+  
+  alertHide();
 
   //funzione countdown per utenti non autorizzati
   function startTimer(duration, display) {
@@ -69,6 +69,10 @@ function init(){
     startTimer(threeSec, display);
   };
 
+}
+
+function alertHide(){
+  $(".alert").delay(3000).slideUp(300);
 }
 
 $(document).ready(init);

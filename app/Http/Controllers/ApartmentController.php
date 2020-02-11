@@ -89,7 +89,6 @@ class ApartmentController extends Controller
       $apartment -> services() -> detach();
       $apartment -> messages() -> delete();
       $apartment -> delete();
-
-      return redirect() -> back();
+      return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
 }
