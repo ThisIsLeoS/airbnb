@@ -22,8 +22,6 @@
   <div >
       <a href="{{ route('userApartment.show',$user -> id) }}">I miei appartamenti({{ $user -> apartments() -> count()}}) </a>
   </div>
-  <div>
-    <a href="#">Messaggi ricevuti</a>
-  </div>
+
 
 @endsection

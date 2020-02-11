@@ -29,4 +29,5 @@ Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartme
 
 //User route
 Route::get('/user/{id}/show', 'UserController@show') -> name('user.show');
-Route::get('/user/{idu}/show/apartment' , 'UserController@userApartmentShow') -> name('userApartment.show');
+Route::get('/user/{id}/show/apartment' , 'UserController@userApartmentShow') -> name('userApartment.show');
+// Route::get('/user/{id}/show/message', 'UserController@apartmentMessageShow') -> name('apartmentMessage.show');

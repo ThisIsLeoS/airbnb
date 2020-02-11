@@ -9,6 +9,11 @@
       <p>{{ $apartment -> description }}</p>
       <img src="{{ $apartment -> poster_img }}" alt="">
     </div>
+    @foreach ($apartment -> messages as $message)
+      <p>{{$message -> sender}}</p>
+      <p>{{$message -> text}}</p>
+
+    @endforeach
   @endforeach
 
 @endsection
