@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\User;
+use App\Service;
+use App\Message;
 class ApartmentController extends Controller
 {
     /**
@@ -79,8 +82,14 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function userApartmentDelete($id)
     {
-        //
+      $apartment = Apartment::findOrFail($id);
+
+      $apartment -> services() -> detach();
+      $apartment -> messages() -> delete();
+      $apartment -> delete();
+
+      return redirect() -> back();
     }
 }
