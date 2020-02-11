@@ -11,5 +11,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    function startTimer(duration, display) {
+  var timer = duration, seconds;
+  setInterval(function () {
+    seconds = parseInt(timer % 4);
+
+    /* seconds = seconds < 10 ? "3" + seconds : seconds; */
+
+    display.textContent = seconds + " secondi";
+
+    if (--timer < 0) {
+      timer = duration;
+    }
+  }, 1000);
+}
+
+
+
+window.onload = function () {
+  var threeSec = 60 * 0.05,
+    display = document.querySelector('#time');
+  startTimer(threeSec, display);
+};
+</script>
 @endsection
 
