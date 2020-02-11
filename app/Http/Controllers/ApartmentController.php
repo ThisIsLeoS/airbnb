@@ -7,6 +7,9 @@ use App\Apartment;
 use App\User;
 use App\Service;
 use App\Message;
+use Illuminate\Support\Facades\Auth;
+
+
 class ApartmentController extends Controller
 {
     /**
@@ -51,6 +54,18 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($id);
 
         return view("pages.apartmentShow" , compact("apartment"));
+    }
+
+    public function apartmentUserMessageShow($id)
+    {
+      $user = User::findOrFail($id);
+
+      if ($user == Auth::user()){
+        return view('pages.messageApartmentShow', compact('user'));
+      }else{
+          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+      }
+
     }
 
     /**

@@ -25,6 +25,7 @@ Route::get("/" , "HomePageController@index")-> name("home.page");
 
 //Apartment route
 Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");
+Route::get('/apartament/message/user/{id}/show', 'ApartmentController@apartmentUserMessageShow') -> name('apartmentUserMessage.show');
 
 
 
