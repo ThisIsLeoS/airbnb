@@ -83,7 +83,7 @@
                 {{ session()->get('message') }}
             </div>
         @endif
-        <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post"">
+        <form class="mt-5" action="{{route("message.apartment.create", $apartment ->id)}}" method="post"">
         @csrf
         @method("POST")
         <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -98,6 +98,11 @@
       </div>
       <div class="modal-body mx-3">
         
+        <div class="md-form mb-5">
+          <strong> TO:</strong></i>
+        <input type="text" id="form32" class="form-control validate" disabled="disabled" value="{{$apartment -> user -> email}}">
+          <label data-error="wrong" data-success="right" for="form32"></label>
+        </div>
 
         <div class="md-form mb-5">
           <i class="fas fa-envelope prefix grey-text"></i>
@@ -105,16 +110,11 @@
           <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
         </div>
 
-        {{-- <div class="md-form mb-5">
-          <i class="fas fa-tag prefix grey-text"></i>
-          <input type="text" id="form32" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="form32">Subject</label>
-        </div> --}}
 
         <div class="md-form">
           <i class="fas fa-pencil prefix grey-text"></i>
           <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>
-          <label data-error="wrong" data-success="right" for="text">Your message</label>
+          <label data-error="wrong" data-success="right" for="text">Il tuo messaggio</label>
         </div>
 
       </div>
@@ -126,7 +126,7 @@
 </div>
 </form>
 <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
+  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
 </div>
        {{--  <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
         @csrf

@@ -22,11 +22,6 @@ class HomePageController extends Controller
         return view("pages.myHome",compact("apartments","messages"));
     }
 
-   /*  public function countMessage(){
-        $count_message = Auth::user() -> apartments -> messages -> count();
-        dd($count_message);
-    } */
-
     /**
      * Show the form for creating a new resource.
      *
