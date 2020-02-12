@@ -80,8 +80,20 @@
                 </script>
         </div>
         <div class="col-12">
-            <h3>TODO -> Messaggio al proprietario</h3>
-            Ti piace questa stanza ? Invia un messaggio al proprietario
+         @if(session()->has('message'))
+    <div class="alert alert-success my_message">
+        {{ session()->get('message') }}
+    </div>
+  @endif
+        <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
+        @csrf
+        @method("POST")
+        <label for="sender">Sender:</label><br>
+        <input type="text" name="sender"><br><br>
+        <label for="text">Body:</label><br>
+        <input type="text" name="text"><br><br>
+        <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
+        </form>
         </div>
     </div>
 </div>
