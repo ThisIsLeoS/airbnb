@@ -27,7 +27,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                              <a class="nav-link" href="{{ route('apartmentUserMessage.show', Auth::user() -> id) }}"><i class="fas fa-envelope"><sup>{{count(Auth::user() -> apartments)}}</sup></i></a>
+                              <a class="nav-link" href="{{ route('apartmentUserMessage.show', Auth::user() -> id) }}"><i class="fas fa-envelope"><sup>{{Auth::user() -> apartments()->count()}}</sup></i></a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
