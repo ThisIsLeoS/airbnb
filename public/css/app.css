@@ -49,6 +49,29 @@
     }
 } */
 
+.navbar sup {
+  background: #e95a08;
+  color: white;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.navbar .imgProfileNavbar {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar .imgProfileNavbar img {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  width: 100%;
+}
+
 .footer {
   bottom: 0;
 }

@@ -104,13 +104,22 @@
           <label data-error="wrong" data-success="right" for="form32"></label>
         </div>
 
+        
+
+        @if(Auth::user())
         <div class="md-form mb-5">
           <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="form29" name="sender" class="form-control validate">
+          {{-- non posso usare il disable , chiedere a mik perchè --}}
+          <input type="email" id="form29" name="sender"  value={{Auth::user() ->email}} class="form-control validate">
           <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
         </div>
-
-
+        @else
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form29" name="sender"  class="form-control validate">
+          <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
+        </div>
+        @endif
         <div class="md-form">
           <i class="fas fa-pencil prefix grey-text"></i>
           <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>

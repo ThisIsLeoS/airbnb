@@ -42,6 +42,9 @@ use App\Http\Controllers\HomePageController;
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+                                
+                                    
+                                
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                   @if(Auth::user())
@@ -61,6 +64,17 @@ use App\Http\Controllers\HomePageController;
                                     </form>
                                 </div>
                             </li>
+                            @if (Auth::user() -> profile_img)
+                                    <li class="nav-item"> 
+                                        <div class="imgProfileNavbar">
+                                            <img src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt="">
+                                        </div>
+                                    </li>
+                             @else
+                                  <div class="imgProfileNavbar">
+                                            <img src="{{asset('images/UserProfileImg/default.jpg')}}" alt="">
+                                        </div>
+                            @endif
                         @endguest
                     </ul>
                 </div>

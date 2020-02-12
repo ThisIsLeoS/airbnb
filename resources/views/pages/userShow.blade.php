@@ -13,7 +13,7 @@
                   <img class="avatar rounded-circle" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
                   @endif
           
-          <h6 class="card-subtitle mb-2 text-muted">Famous Actor</h6>
+          <h6 class="card-text">Data di nascita: {{Auth::user() -> date_of_birth}}</h6>
           <p class="card-text">Email: {{Auth::user() -> email}} </p>
           <p class="card-text">Numero Appartamenti su BoolBnb: {{$user -> apartments() -> count()}} </p>
           <form action="{{route("user.set.image")}}" method="post" enctype="multipart/form-data">
