@@ -4,14 +4,22 @@
   <div class="container-fluid ">
     <div class="card" style="width: 20rem;">
       <div class="card-body card_center">
-        <img class="img-profile" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="Card image cap">
+
         <div class="card-body">
-          <a href="#" class="card-link">Aggiorna foto</a>
+        <form action="{{route("user.set.image")}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method("POST")
+            <input type="file" name="profile_img" >
+            <input type="submit" value="Carica Immagine">
+          </form>
         </div>
       </div>
-      <div class="card-body">
-        <h4 class="card-text"> {{$user ->name}} </h4>
-        <p class="card-text"> {{$user -> email}} </p>
+    </div>
+    <div class="col-6">
+      <div class="mt-5 ">
+        <h1 class="display-4">Ciao {{ $user->name }}</h1>
+        <a href="#" class="btn btn-dark">Modifica il profilo </a>
+
       </div>
     </div>
   </div>
@@ -20,9 +28,14 @@
     <a href="#">Modifica il profilo </a>
   </div>
   <div >
-    
+
+    <img src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt="">
+
+
+
+
       <a href="{{ route('userApartment.show',$user -> id) }}">I miei appartamenti({{ $user -> apartments() -> count()}}) </a>
-    
+
   </div>
 
 

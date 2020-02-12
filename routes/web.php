@@ -33,7 +33,7 @@ Route::get('/apartament/message/user/{id}/show', 'ApartmentController@apartmentU
 Route::get('/user/{id}/show', 'UserController@show') -> name('user.show');
 Route::get('/user/{id}/show/apartment' , 'UserController@userApartmentShow') -> name('userApartment.show');
 Route::get('/user/delete/apartment/{id}', 'ApartmentController@userApartmentDelete') -> name('user.delete.apartment');
-
+Route::post('user/image/set' , "UserController@setUserImage") -> name("user.set.image");
 
 //Message route
 Route::post("/apartment/{id}/show" , "MessageController@createMessageForApt") -> name("message.apartment.create");

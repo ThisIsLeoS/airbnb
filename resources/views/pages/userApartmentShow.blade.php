@@ -1,18 +1,37 @@
 @extends('layouts.base')
 
 @section("content")
-  <h2>{{ $user -> name }}</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-3">Gestisci i tuoi appartamenti</h4>
+
+      </div>
+
+    </div>
+
+  </div>
   @if(session()->has('message'))
     <div class="alert alert-success my_message">
         {{ session()->get('message') }}
     </div>
   @endif
-  @foreach ($user -> apartments as $apartment)
-  <div class="apartments">
-      <h4>{{ $apartment -> address }}</h4>
-      <p>{{ $apartment -> description }}</p>
-      <img src="{{ $apartment -> poster_img }}" alt="">
-    </div>
-    <a href="{{ route('user.delete.apartment',  $apartment-> id) }}"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 myCards">
+        @foreach ($user->apartments as $apartment)
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{$apartment -> address}}</h4>
+            <p class="card-text">{{$apartment -> description}}</p>
+            <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class="btn btn-primary"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
+          </div>
+        </div>
+
   @endforeach
+      </div>
+    </div>
+  </div>
 @endsection

@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\HomePageController;
-     
+
 ?>
  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -30,7 +30,7 @@ use App\Http\Controllers\HomePageController;
                                 </li>
                             @endif
                         @else
-                        
+
                             <li class="nav-item">
                               <a class="nav-link" href="{{ route('apartmentUserMessage.show', Auth::user() -> id) }}"><i class="fas fa-envelope"><sup>
                                 @php($sum = 0)

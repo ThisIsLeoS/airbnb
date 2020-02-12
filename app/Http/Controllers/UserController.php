@@ -105,4 +105,20 @@ class UserController extends Controller
     {
         //
     }
+
+    public function setUserImage(Request $request){
+        $file = $request -> file("profile_img");
+        $filename = $file -> getClientOriginalName();
+        /* dd($filename); */
+
+        $file -> move("images/UserProfileImg", $filename);
+
+        $newUserImg = [
+            "profile_img" => $filename
+        ];
+
+        Auth::user() -> update($newUserImg);
+
+        return redirect() -> back();
+    }
 }
