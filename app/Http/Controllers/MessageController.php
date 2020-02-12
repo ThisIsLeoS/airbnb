@@ -93,4 +93,20 @@ class MessageController extends Controller
          $message -> save();
          return redirect() -> back() ->with('message', 'Messaggio inviato');
     }
+
+
+     /* public function search()
+    {
+        return view('pages.testAutocomplete');
+    }
+
+    public function autoComplete(Request $request){
+
+       
+        $data=User::select("email")
+        -> where("email","LIKE","%".$request-> input("query")."%")->get();
+        return response() -> json($data);
+    } */
+
+    
 }

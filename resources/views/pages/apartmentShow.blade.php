@@ -89,7 +89,7 @@
         @csrf
         @method("POST")
         <label for="sender">Sender:</label><br>
-        <input type="text" name="sender"><br><br>
+        <input  type="text" name="sender"><br><br>
         <label for="text">Body:</label><br>
         <input type="text" name="text"><br><br>
         <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
@@ -98,5 +98,18 @@
     </div>
 </div>
 
+{{-- <script type="text/javascript">
+console.log(typeahead())
+var path="{{route('autocomplete.sender')}}";
+$("input.typeahead").typeahead({
+    source:function(query,process){
+        return $.get(path,{query:sender},function(data){
+            return process(data);
+        })
+    }
+});
+
+</script>
+ --}}
 
 @endsection

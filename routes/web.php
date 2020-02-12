@@ -37,3 +37,5 @@ Route::get('/user/delete/apartment/{id}', 'ApartmentController@userApartmentDele
 
 //Message route
 Route::post("/apartment/{id}/show" , "MessageController@createMessageForApt") -> name("message.apartment.create");
+/* Route::get("/search", "MessageController@search") -> name("search");
+Route::get("/autocomplete", "MessageController@autoComplete") -> name("autocomplete.sender"); */
