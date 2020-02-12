@@ -27,8 +27,7 @@
 
     </div>
 </div>
-<div class="container">
-
+<div class="container-fluid">
     <h1>Titolo stanza </h1>
     <div class="row">
         <div class="col-6">
@@ -39,12 +38,9 @@
                 </div>
                 <div class="col-6">
                     <i class="fas fa-ruler-combined"></i><p>Dimensione : {{$apartment -> square_feet}} mq<sup>2</sup></p>
-
-
                 </div>
                 <div class="col-6">
                     <i class="fas fa-bed" style="color:black"></i> <p>Letti disponibili : {{$apartment -> beds}}</p>
-
                 </div>
                 <div class="col-6">
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
@@ -52,14 +48,17 @@
             </div>
             Servizi Aggiuntivi :
             <ul>
-            @foreach ($apartment -> services as $service)
-            <li>{{$service -> type}}</li>
-        @endforeach
-        </ul>
+                @foreach ($apartment -> services as $service)
+                <li>{{$service -> type}}</li>
+                @endforeach
+            </ul>
         </div>
         <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
-            
+        </div>
+        <div class="col-12">
+            <h3>Ubicazione</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi ratione iste unde aliquam, deleniti aspernatur ipsum, quae qui inventore debitis dolor possimus dolore eveniet quibusdam, corrupti necessitatibus tempora illum doloribus.</p>
             <div id='map' class='map'>
             </div>
           <!-- Replace version in the URL with desired library version -->
@@ -75,17 +74,61 @@
                   center: myCoord,
                   zoom: 8
                 });
-
                 var marker = new tt.Marker().setLngLat(myCoord).addTo(map);
                 </script>
         </div>
         <div class="col-12">
          @if(session()->has('message'))
-    <div class="alert alert-success my_message">
-        {{ session()->get('message') }}
+            <div class="alert alert-success my_message">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post"">
+        @csrf
+        @method("POST")
+        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Scrivici</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        
+
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form29" name="sender" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
+        </div>
+
+        {{-- <div class="md-form mb-5">
+          <i class="fas fa-tag prefix grey-text"></i>
+          <input type="text" id="form32" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form32">Subject</label>
+        </div> --}}
+
+        <div class="md-form">
+          <i class="fas fa-pencil prefix grey-text"></i>
+          <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>
+          <label data-error="wrong" data-success="right" for="text">Your message</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" name="submit" class="btn btn-unique">Invia <i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
     </div>
-  @endif
-        <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
+  </div>
+</div>
+</form>
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
+</div>
+       {{--  <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
         @csrf
         @method("POST")
         <label for="sender">Sender:</label><br>
@@ -94,7 +137,7 @@
         <input type="text" name="text"><br><br>
         <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
         </form>
-        </div>
+        </div> --}}
     </div>
 </div>
 
