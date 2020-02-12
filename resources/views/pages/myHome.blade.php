@@ -27,7 +27,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-    
+
 
 <div class="container-fluid">
   <div class="row">
@@ -42,7 +42,7 @@
         <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
         </div>
       </div>
-    
+
 @endforeach
     </div>
   </div>
