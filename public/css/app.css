@@ -31,6 +31,13 @@
   height: 50vh;
 }
 
+.avatar {
+  border: 0.3rem solid rgba(255, 255, 255, 0.3);
+  margin-top: -6rem;
+  margin-bottom: 1rem;
+  max-width: 9rem;
+}
+
 /* .navbar{
     position:absolute !important;
     width:100%;
@@ -41,6 +48,10 @@
         color:white !important;
     }
 } */
+
+.footer {
+  bottom: 0;
+}
 
 .col-md-2 p {
   font-weight: bold;

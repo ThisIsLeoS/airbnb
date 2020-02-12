@@ -1,5 +1,5 @@
 <footer class="mt-5">
-  <div class="container-fluid ">
+  <div class="container-fluid footer">
 
     <div class="row border-bottom">
 
