@@ -15,6 +15,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
+    <link rel="shortcut icon" href="{{asset("images/logoAirbnb.png")}}" type="image/x-icon" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">

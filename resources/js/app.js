@@ -145,10 +145,4 @@ function alertHide() {
 }
 
 
-
-
-
-
-
-
 $(document).ready(init);

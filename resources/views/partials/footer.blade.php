@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-light showFooter shadow d-flex justify-content-around align-items-center"><i class="fas fa-info-circle mr-2"></i> Termini,privacy e altro</button>
-<footer class="mt-5 d-none">
-  <div class="container-fluid footer">
+<footer class="mt-5 d-none ">
+  <div class="container-fluid footer shadow p-3">
 
     <div class="row border-bottom">
 
