@@ -49498,6 +49498,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+// @ts-check
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49534,8 +49536,36 @@ function showMessage() {
 }
 
 function init() {
-  showMessage();
-  console.log('hello word');
+  showMessage(); // eventi
+
+  $("#create-apt-form").submit(function (event) {
+    // la sottomissione del form viene abortita
+    event.preventDefault();
+    var thisForm = $(this);
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/structuredGeocode.json/",
+      "method": "GET",
+      "data": {
+        "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
+        "limit": "1",
+        // opzione per farsi restituire solo 1 risultato
+        "streetName": "Via Milano",
+        "streetNumber": "15",
+        "municipality": "Genova",
+        "postalCode": "16126",
+        "countrySubdivision": "Liguria",
+        "countryCode": "IT"
+      },
+      "success": function success(data) {
+        thisForm // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
+        .submit();
+      },
+      "error": function error(iqXHR, textStatus, errorThrown) {
+        alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
+      }
+    });
+  });
 }
 
 $(document).ready(init);
@@ -49674,8 +49704,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -25,6 +25,8 @@ Route::get("/" , "HomePageController@index")-> name("home.page");
 
 //Apartment route
 Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");
+Route::get("/apartment/create", "ApartmentController@create")->name("apartment.create");
+Route::post("/apartment/{id}/store", "ApartmentController@store")->name("apartment.store");
 
 
 
