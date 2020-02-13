@@ -33,16 +33,27 @@ const app = new Vue({
     el: '#app',
 });
 
+
+
 function showMessage(){
-
-  $('.message_apt').on('click',function(){
-
-    $(this).siblings('.bodyMessage').toggleClass('d-none');
+  $('.sender').on('click', function () {
+    /* console.log("sto cliccando") */
+    if ($(this).siblings(".body_message").hasClass("d-none")){
+      $(this).siblings(".body_message").fadeIn();
+      $(this).siblings(".body_message").toggleClass("d-none");
+    }else{
+      $(this).siblings(".body_message").fadeOut();
+      $(this).siblings(".body_message").toggleClass("d-none");
+    }
   })
-
 }
 
+ 
+
+
+
 function init(){
+  alertHide();
   showMessage();
 
   // eventi
@@ -82,6 +93,29 @@ function init(){
       }
     });
   });
+  navbar();
+}
+
+
+
+//funzione per personalizzare la nav in base all'indirizzo
+function navbar(){
+  console.log(window.location.href)
+
+  var homePage = window.location.href;
+
+  if (homePage == "http://localhost:3000/" || homePage == "http://localhost:8000/") {
+    $(".my_nvb").addClass("nav_home").removeClass("bg-white shadow-sm")
+    $(".my_nvb svg").addClass("my_svgW")
+  } else {
+    $(".my_nvb").removeClass("nav_home").addClass("bg-white shadow-sm")
+    $(".my_nvb svg").addClass("my_svgR")
+  }
+}
+
+
+function alertHide(){
+  $(".alert").delay(3000).slideUp(300);
 }
 
 $(document).ready(init);

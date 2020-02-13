@@ -8,6 +8,8 @@ use App\User;
 use App\Service;
 use App\Message;
 use App\Http\Requests\ApartmentRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class ApartmentController extends Controller
 {
@@ -75,6 +77,18 @@ class ApartmentController extends Controller
         return view("pages.apartmentShow" , compact("apartment"));
     }
 
+    public function apartmentUserMessageShow($id)
+    {
+      $user = User::findOrFail($id);
+
+      if ($user == Auth::user()){
+        return view('pages.messageApartmentShow', compact('user'));
+      }else{
+          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+      }
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -111,7 +125,6 @@ class ApartmentController extends Controller
       $apartment -> services() -> detach();
       $apartment -> messages() -> delete();
       $apartment -> delete();
-
-      return redirect() -> back();
+      return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
 }

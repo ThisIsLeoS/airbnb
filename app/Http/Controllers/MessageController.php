@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\User;
-use App\Apartment;
 use App\Message;
-use Illuminate\Support\Facades\Auth;
+use App\Apartment;
+use App\User;
+use App\Http\Requests\MessageRequest;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -49,27 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-      $user = User::findOrFail($id);
-       
-      if ($user == Auth::user()){
-        return view('pages.userShow', compact('user'));
-      }else{
-          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
-      }
-
-      
-    }
-
-    public function userApartmentShow($id)
-    {
-      $user = User::findOrFail($id);
-        if ($user == Auth::user()){
-            return view('pages.userApartmentShow', compact('user'));
-        }else{
-             /* return view("pages.unauthorized"); */
-            return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
-        }
-      
+        //
     }
 
     /**
@@ -106,19 +85,28 @@ class UserController extends Controller
         //
     }
 
-    public function setUserImage(Request $request){
-        $file = $request -> file("profile_img");
-        $filename = $file -> getClientOriginalName();
-        /* dd($filename); */
-
-        $file -> move("images/UserProfileImg", $filename);
-
-        $newUserImg = [
-            "profile_img" => $filename
-        ];
-
-        Auth::user() -> update($newUserImg);
-
-        return redirect() -> back();
+    public function createMessageForApt(MessageRequest $request , $id){
+         $validatedData = $request -> validated();
+         $message = Message::make($validatedData);
+         $apartament = Apartment::findOrFail($id);
+         $message -> apartment() -> associate($apartament);
+         $message -> save();
+         return redirect() -> back() ->with('message', 'Messaggio inviato');
     }
+
+
+     /* public function search()
+    {
+        return view('pages.testAutocomplete');
+    }
+
+    public function autoComplete(Request $request){
+
+       
+        $data=User::select("email")
+        -> where("email","LIKE","%".$request-> input("query")."%")->get();
+        return response() -> json($data);
+    } */
+
+    
 }

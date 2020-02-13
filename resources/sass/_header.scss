@@ -1,0 +1,42 @@
+.nav_home{
+    position:absolute !important;
+    width:100%;
+    z-index:10;
+    background:transparent;
+    color:white;
+    .nav-link{
+        color:white !important;
+    }
+}
+
+
+.navbar{
+    .my_svgR{
+        fill:red;
+    }
+    .my_svgW{
+        fill:white;
+    }
+    sup{
+        background:rgb(233, 90, 8);
+        color:white;
+        border-radius:50%;
+        padding:2px;
+    }
+
+    .imgProfileNavbar{
+            border-radius:100%;
+            width:30px;
+            height: 30px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            img{
+               border-radius:100%;
+               width:30px;
+            height: 30px;
+                width: 100%;
+
+            }
+        }
+    }

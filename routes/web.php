@@ -27,6 +27,7 @@ Route::get("/" , "HomePageController@index")-> name("home.page");
 Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartment.show");
 Route::get("/apartment/create", "ApartmentController@create")->name("apartment.create");
 Route::post("/apartment/{id}/store", "ApartmentController@store")->name("apartment.store");
+Route::get('/apartament/message/user/{id}/show', 'ApartmentController@apartmentUserMessageShow') -> name('apartmentUserMessage.show');
 
 
 
@@ -34,3 +35,7 @@ Route::post("/apartment/{id}/store", "ApartmentController@store")->name("apartme
 Route::get('/user/{id}/show', 'UserController@show') -> name('user.show');
 Route::get('/user/{id}/show/apartment' , 'UserController@userApartmentShow') -> name('userApartment.show');
 Route::get('/user/delete/apartment/{id}', 'ApartmentController@userApartmentDelete') -> name('user.delete.apartment');
+Route::post('user/image/set' , "UserController@setUserImage") -> name("user.set.image");
+
+//Message route
+Route::post("/apartment/{id}/show" , "MessageController@createMessageForApt") -> name("message.apartment.create");

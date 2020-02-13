@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\User;
+use App\Message;
+use Illuminate\Support\Facades\Auth;
 
 class HomePageController extends Controller
 {
@@ -15,8 +17,9 @@ class HomePageController extends Controller
      */
     public function index()
     {
+        
         $apartments = Apartment::paginate(12);
-        return view("pages.myHome",compact("apartments"));
+        return view("pages.myHome",compact("apartments","messages"));
     }
 
     /**

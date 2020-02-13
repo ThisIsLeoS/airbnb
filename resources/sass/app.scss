@@ -4,8 +4,11 @@
 // Variables
 @import 'variables';
 @import 'detailApt';
+@import 'detailUser';
+@import 'header';
 @import 'footer';
-@import 'userShow';
+@import 'unauthorized';
+@import 'userShowApt';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -17,6 +20,10 @@
 
 .pagination{
     justify-content: center;
+}
+
+.my_message{
+    width:50%;
 }
 
 .myCards{
