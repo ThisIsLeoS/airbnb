@@ -62,10 +62,10 @@ function init(){
 
     $("footer").toggleClass("d-none");
     if ($("footer").hasClass("d-none") == false) {
-      $("main").removeClass("my_margin_bottom")
       $(this).html("<i class='fas fa-times mr-2'></i> Chiudi")
-    } else {
       $("main").addClass("my_margin_bottom")
+    } else {
+      $("main").removeClass("my_margin_bottom")
       $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
     }
   })
