@@ -50,6 +50,14 @@
   color: white !important;
 }
 
+.navbar .my_svgR {
+  fill: red;
+}
+
+.navbar .my_svgW {
+  fill: white;
+}
+
 .navbar sup {
   background: #e95a08;
   color: white;

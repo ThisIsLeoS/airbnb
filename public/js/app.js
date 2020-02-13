@@ -49553,8 +49553,10 @@ function navbar() {
 
   if (homePage == "http://localhost:3000/" || homePage == "http://localhost:8000/") {
     $(".my_nvb").addClass("nav_home").removeClass("bg-white shadow-sm");
+    $(".my_nvb svg").addClass("my_svgW");
   } else {
     $(".my_nvb").removeClass("nav_home").addClass("bg-white shadow-sm");
+    $(".my_nvb svg").addClass("my_svgR");
   }
 }
 
