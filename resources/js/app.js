@@ -71,7 +71,7 @@ function init(){
   })
   // eventi
   $("#create-apt-form").submit(function(event) {
-    // la sottomissione del form viene abortita
+    console.log($("#create-apt-form"))// la sottomissione del form viene abortita
     event.preventDefault();
     var thisForm = $(this);
     $.ajax({
