@@ -55,7 +55,20 @@ function showMessage(){
 function init(){
   alertHide();
   showMessage();
+  navbar();
 
+  $(".showFooter").on("click", function () {
+    /* console.log("sto click") */
+
+    $("footer").toggleClass("d-none");
+    if ($("footer").hasClass("d-none") == false) {
+      $("main").removeClass("my_margin_bottom")
+      $(this).html("<i class='fas fa-times mr-2'></i> Chiudi")
+    } else {
+      $("main").addClass("my_margin_bottom")
+      $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
+    }
+  })
   // eventi
   $("#btn-create").click(function(event) {
     // la sottomissione del form viene abortita
@@ -93,13 +106,12 @@ function init(){
       }
     });
   });
-  navbar();
 }
 
 
 
 //funzione per personalizzare la nav in base all'indirizzo
-function navbar(){
+function navbar() {
   console.log(window.location.href)
 
   var homePage = window.location.href;
@@ -114,8 +126,15 @@ function navbar(){
 }
 
 
-function alertHide(){
+function alertHide() {
   $(".alert").delay(3000).slideUp(300);
 }
+
+
+
+
+
+
+
 
 $(document).ready(init);

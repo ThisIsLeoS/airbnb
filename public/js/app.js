@@ -49544,7 +49544,20 @@ function showMessage() {
 
 function init() {
   alertHide();
-  showMessage(); // eventi
+  showMessage();
+  navbar();
+  $(".showFooter").on("click", function () {
+    /* console.log("sto click") */
+    $("footer").toggleClass("d-none");
+
+    if ($("footer").hasClass("d-none") == false) {
+      $("main").removeClass("my_margin_bottom");
+      $(this).html("<i class='fas fa-times mr-2'></i> Chiudi");
+    } else {
+      $("main").addClass("my_margin_bottom");
+      $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
+    }
+  }); // eventi
 
   $("#btn-create").click(function (event) {
     // la sottomissione del form viene abortita
@@ -49574,7 +49587,6 @@ function init() {
       }
     });
   });
-  navbar();
 } //funzione per personalizzare la nav in base all'indirizzo
 
 
@@ -49731,8 +49743,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
