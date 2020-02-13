@@ -2,7 +2,7 @@
 use App\Http\Controllers\HomePageController;
 
 ?>
- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+ <nav class="navbar my_nvb navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'B&B') }} --}}

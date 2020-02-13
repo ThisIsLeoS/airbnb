@@ -53,9 +53,16 @@
                 @endforeach
             </ul>
         </div>
-        <div class="col-6">
+        @if (Auth::user() -> id == $apartment -> user -> id)
+          <div class="col-6">
+            Questo appartamento è tuo
+        </div>  
+        @else
+           <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
-        </div>
+        </div> 
+        @endif
+        
         <div class="col-12">
             <h3>Ubicazione</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi ratione iste unde aliquam, deleniti aspernatur ipsum, quae qui inventore debitis dolor possimus dolore eveniet quibusdam, corrupti necessitatibus tempora illum doloribus.</p>
@@ -77,6 +84,10 @@
                 var marker = new tt.Marker().setLngLat(myCoord).addTo(map);
                 </script>
         </div>
+        @if (Auth::user() -> id !== $apartment -> user -> id)
+            
+        
+            
         <div class="col-12">
          @if(session()->has('message'))
             <div class="alert alert-success my_message">
@@ -86,57 +97,52 @@
         <form class="mt-5" action="{{route("message.apartment.create", $apartment ->id)}}" method="post"">
         @csrf
         @method("POST")
-        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Scrivici</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        
-        <div class="md-form mb-5">
-          <strong> TO:</strong></i>
-        <input type="text" id="form32" class="form-control validate" disabled="disabled" value="{{$apartment -> user -> email}}">
-          <label data-error="wrong" data-success="right" for="form32"></label>
+          <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Scrivici</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <strong> TO:</strong></i>
+                    <input type="text" id="form32" class="form-control validate" disabled="disabled" value="{{$apartment -> user -> email}}">
+                    <label data-error="wrong" data-success="right" for="form32"></label>
+                  </div>
+                  @if(Auth::user())
+                    <div class="md-form mb-5">
+                      <i class="fas fa-envelope prefix grey-text"></i>
+                        {{-- non posso usare il disable , chiedere a mik perchè --}}
+                        <input type="email" id="form29" name="sender"  value={{Auth::user() ->email}} class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
+                    </div>
+                  @else
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="form29" name="sender"  class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
+                  </div>
+                  @endif
+                  <div class="md-form">
+                    <i class="fas fa-pencil prefix grey-text"></i>
+                    <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>
+                    <label data-error="wrong" data-success="right" for="text">Il tuo messaggio</label>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="submit" name="submit" class="btn btn-unique">Invia <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="text-center">
+          <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
         </div>
-
-        
-
-        @if(Auth::user())
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          {{-- non posso usare il disable , chiedere a mik perchè --}}
-          <input type="email" id="form29" name="sender"  value={{Auth::user() ->email}} class="form-control validate">
-          <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
-        </div>
-        @else
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="form29" name="sender"  class="form-control validate">
-          <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
-        </div>
-        @endif
-        <div class="md-form">
-          <i class="fas fa-pencil prefix grey-text"></i>
-          <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>
-          <label data-error="wrong" data-success="right" for="text">Il tuo messaggio</label>
-        </div>
-
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" name="submit" class="btn btn-unique">Invia <i class="fas fa-paper-plane-o ml-1"></i></button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>
-<div class="text-center">
-  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
-</div>
        {{--  <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
         @csrf
         @method("POST")
@@ -145,8 +151,9 @@
         <label for="text">Body:</label><br>
         <input type="text" name="text"><br><br>
         <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
-        </form>
-        </div> --}}
+        </form>--}}
+        </div> 
+        @endif
     </div>
 </div>
 

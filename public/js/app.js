@@ -49541,11 +49541,22 @@ function showMessage() {
 }
 
 function init() {
-  /* showMessage(); */
   alertHide();
   showMessage();
-} //funzione countdown per utenti non autorizzati
+  navbar();
+} //funzione per personalizzare la nav in base all'indirizzo
 
+
+function navbar() {
+  console.log(window.location.href);
+  var homePage = window.location.href;
+
+  if (homePage == "http://localhost:3000/" || homePage == "http://localhost:8000/") {
+    $(".my_nvb").addClass("nav_home").removeClass("bg-white shadow-sm");
+  } else {
+    $(".my_nvb").removeClass("nav_home").addClass("bg-white shadow-sm");
+  }
+}
 
 function alertHide() {
   $(".alert").delay(3000).slideUp(300);

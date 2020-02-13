@@ -51,14 +51,25 @@ function showMessage(){
 
 
 function init(){
-  /* showMessage(); */
   alertHide();
   showMessage();
-
-
+  navbar();
 }
 
-//funzione countdown per utenti non autorizzati
+
+
+//funzione per personalizzare la nav in base all'indirizzo
+function navbar(){
+  console.log(window.location.href)
+
+  var homePage = window.location.href;
+
+  if (homePage == "http://localhost:3000/" || homePage == "http://localhost:8000/") {
+    $(".my_nvb").addClass("nav_home").removeClass("bg-white shadow-sm")
+  } else {
+    $(".my_nvb").removeClass("nav_home").addClass("bg-white shadow-sm")
+  }
+}
 
 
 function alertHide(){
