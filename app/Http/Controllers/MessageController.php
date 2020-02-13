@@ -102,11 +102,11 @@ class MessageController extends Controller
 
     public function autoComplete(Request $request){
 
-       
+
         $data=User::select("email")
         -> where("email","LIKE","%".$request-> input("query")."%")->get();
         return response() -> json($data);
     } */
 
-    
+
 }

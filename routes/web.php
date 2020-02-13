@@ -28,6 +28,8 @@ Route::get("/apartment/{id}/show" , "ApartmentController@show") -> name("apartme
 Route::get("/apartment/create", "ApartmentController@create")->name("apartment.create");
 Route::post("/apartment/{id}/store", "ApartmentController@store")->name("apartment.store");
 Route::get('/apartament/message/user/{id}/show', 'ApartmentController@apartmentUserMessageShow') -> name('apartmentUserMessage.show');
+Route::get('/apartament/{id}/edit', 'ApartmentController@edit') -> name('apartment.edit');
+Route::post('/apartament/{id}/update', 'ApartmentController@update') -> name('apartment.update');
 
 
 
