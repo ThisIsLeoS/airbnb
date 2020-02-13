@@ -57,9 +57,7 @@ function init(){
   showMessage();
   navbar();
 
-  $('.carousel').carousel({
-    interval: 3000
-  });
+ 
 
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */

@@ -129,7 +129,7 @@ class ApartmentController extends Controller
       }
       $apartment -> services() -> sync($services);
 
-      return redirect() -> route('home.page');
+      return redirect() -> route('userApartment.show', Auth::user()->id);
     }
 
     /**
