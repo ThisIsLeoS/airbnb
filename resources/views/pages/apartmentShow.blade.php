@@ -113,7 +113,7 @@
               </div>
             @else
             {{-- FORM utente loggato NON PROPRIETARIO --}}
-              <form class="mt-5" action="{{route("message.apartment.create", $apartment ->id)}}" method="post"">
+              <form class="mt-5" action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
         @csrf
         @method("POST")
           <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -177,20 +177,11 @@
                     <input type="text" id="form32" class="form-control validate" disabled="disabled" value="{{$apartment -> user -> email}}">
                     <label data-error="wrong" data-success="right" for="form32"></label>
                   </div>
-                  {{-- @if(Auth::user())
-                    <div class="md-form mb-5">
-                      <i class="fas fa-envelope prefix grey-text"></i>
-                       
-                        <input type="email" id="form29" name="sender"  value={{Auth::user() ->email}} class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
-                    </div>
-                  @else --}}
                   <div class="md-form mb-5">
                     <i class="fas fa-envelope prefix grey-text"></i>
                     <input type="email" id="form29" name="sender"  class="form-control validate">
                     <label data-error="wrong" data-success="right" for="sender">La Tua Mail</label>
                   </div>
-                  {{-- @endif --}}
                   <div class="md-form">
                     <i class="fas fa-pencil prefix grey-text"></i>
                     <textarea type="text" id="form8" name="text" class="md-textarea form-control" rows="4"></textarea>
@@ -208,17 +199,7 @@
           <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
         </div>
         @endif
-       {{--  <form action="{{route("message.apartment.create", $apartment ->id)}}" method="post">
-        @csrf
-        @method("POST")
-        <label for="sender">Sender:</label><br>
-        <input  type="text" name="sender"><br><br>
-        <label for="text">Body:</label><br>
-        <input type="text" name="text"><br><br>
-        <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
-        </form>--}}
         </div> 
-        {{-- @endif --}}
     </div>
 </div>
 
