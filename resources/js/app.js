@@ -70,10 +70,9 @@ function init(){
     }
   })
   // eventi
-  $("#btn-create").click(function(event) {
+  $("#create-aptm-btn").click(function(event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
-    // var thisForm = $(this);
     $.ajax({
       "url": "https://api.tomtom.com/search/2/structuredGeocode.json/", 
       "method": "GET",
@@ -88,7 +87,7 @@ function init(){
         "countryCode": "IT"
       },
       "success": function (data) {
-        $("#create-apt-form")
+        $("#create-aptm-form")
           // al form vengono aggiunti i campi contenenti longitudine e latitudine
           .append(
             "<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>",

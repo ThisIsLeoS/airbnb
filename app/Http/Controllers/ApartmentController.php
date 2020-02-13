@@ -41,27 +41,29 @@ class ApartmentController extends Controller
      */
     public function store(Request $request, $userId)
     {
-        // $validatedData = $aptRequest->validate();
+        // TODO: validazione dati
         $data = $request->all();
-        dd($data);
-        // l'utente che ha aggiunto l'appartamento viene salvato in una var.
+
+        // viene creato l'appartamento (senza salvarlo nel DB)
+        $apt = Apartment::make($data);
+
+        // all'appartamento viene "agganciato" l'utente
         $user = User::findOrFail($userId);
-        // viene creato l'appartamento
-        $apt = Apartment::create($data);
-        // all'utente viene "agganciato" l'appartamento
         $apt->user()->associate($userId);
-        // all'appartamento vengono "agganciati" i servizi
-            // i servizi vengono creati e salvati in una collezione
-            $services = collect();
-            foreach ($data["services"] as $serviceType) {
-                $service = Service::make([$serviceType]);
-                $services->push($service);
-            }
-        // agganciarlo a user, messages, services, images
-        $apt->services()->attach($services);
 
         // l'appartamento viene salvato nel DB
-        return redirect()->route("userApartment.show");
+        $apt->save();
+
+        // all'appartamento vengono "agganciati" i servizi
+        foreach ($data["services"] as $serviceType) {
+            // viene creato un servizio nel DB
+            $service = Service::create(['type' => $serviceType]);
+            // il servizio è agganciato all'appartamento
+            $apt->services()->attach($service->id);
+        }
+
+        // l'appartamento viene salvato nel DB
+        return redirect()->route("userApartment.show", $userId);
     }
 
     /**

@@ -49559,10 +49559,9 @@ function init() {
     }
   }); // eventi
 
-  $("#btn-create").click(function (event) {
+  $("#create-aptm-btn").click(function (event) {
     // la sottomissione del form viene abortita
-    event.preventDefault(); // var thisForm = $(this);
-
+    event.preventDefault();
     $.ajax({
       "url": "https://api.tomtom.com/search/2/structuredGeocode.json/",
       "method": "GET",
@@ -49578,7 +49577,7 @@ function init() {
         "countryCode": "IT"
       },
       "success": function success(data) {
-        $("#create-apt-form") // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        $("#create-aptm-form") // al form vengono aggiunti i campi contenenti longitudine e latitudine
         .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
         .submit();
       },
@@ -49755,8 +49754,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> e7bc870e7cc1474fd7a8d68dd8070c3f45bd5578
 
 
 /***/ })

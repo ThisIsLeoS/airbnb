@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form id="create-apt-form" action="{{ route("apartment.store", Auth::user()->id) }}" method="POST">
+            <form id="create-aptm-form" action="{{ route("apartment.store", Auth::user()->id) }}" method="POST">
                 @csrf
                 @method("POST")
                 <h1>
@@ -36,7 +36,7 @@
                         <input type="number" id="bathrooms" name="bathrooms">
                     </li>
                     <li>
-                        <label>Quali servizi metti a disposizione?</label>
+                        Quali servizi metti a disposizione?
                         <ul>
                             <li>
                                 <input type="checkbox" id="wifi" name="services[]" value="wifi">
@@ -69,7 +69,7 @@
                         <input type="file" id="photo" name="photo">
                     </li>
                 </ol>
-                <button id="btn-create">Aggiungi appartamento</button>
+                <button id="create-aptm-btn">Aggiungi appartamento</button>
             </form>
         </div>  
     </div>
