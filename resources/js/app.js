@@ -57,6 +57,10 @@ function init(){
   showMessage();
   navbar();
 
+  $('.carousel').carousel({
+    interval: 3000
+  });
+
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
 
@@ -114,6 +118,8 @@ function navbar() {
   console.log(window.location.href)
 
   var url = window.location.href;
+
+  
   var page3000 = "http://localhost:3000/";
   var page3000_1 = "http://localhost:3000/?page=1";
   var page3000_2 = "http://localhost:3000/?page=2";
