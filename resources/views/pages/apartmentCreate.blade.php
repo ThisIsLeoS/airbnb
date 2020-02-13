@@ -69,7 +69,7 @@
                         <input type="file" id="photo" name="photo">
                     </li>
                 </ol>
-                <button>Aggiungi appartamento</button>
+                <button id="btn-create">Aggiungi appartamento</button>
             </form>
         </div>  
     </div>
