@@ -49538,12 +49538,6 @@ function showMessage() {
       $(this).siblings(".body_message").toggleClass("d-none");
     }
   });
-}
-
-function init() {
-  alertHide();
-  showMessage();
-  navbar();
 } //funzione per personalizzare la nav in base all'indirizzo
 
 
@@ -49562,6 +49556,30 @@ function navbar() {
 
 function alertHide() {
   $(".alert").delay(3000).slideUp(300);
+}
+
+function showFooter() {
+  $(".showFooter").on("click", function () {
+    console.log("sto click");
+  });
+}
+
+function init() {
+  alertHide();
+  showMessage();
+  navbar();
+  $(".showFooter").on("click", function () {
+    /* console.log("sto click") */
+    $("footer").toggleClass("d-none");
+
+    if ($("footer").hasClass("d-none") == false) {
+      $("main").removeClass("my_margin_bottom");
+      $(this).html("<i class='fas fa-times mr-2'></i> Chiudi");
+    } else {
+      $("main").addClass("my_margin_bottom");
+      $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
+    }
+  });
 }
 
 $(document).ready(init);

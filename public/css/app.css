@@ -83,6 +83,18 @@
 
 .footer {
   bottom: 0;
+  position: fixed;
+  background: white;
+  z-index: 4;
+  height: 280px;
+}
+
+.showFooter {
+  z-index: 5;
+  position: fixed;
+  bottom: 10px;
+  background: red;
+  right: 20px;
 }
 
 .col-md-2 p {
@@ -11016,6 +11028,10 @@ a.text-dark:focus {
 
 .pagination {
   justify-content: center;
+}
+
+.my_margin_bottom {
+  margin-bottom: 280px;
 }
 
 .my_message {

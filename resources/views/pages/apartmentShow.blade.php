@@ -53,15 +53,15 @@
                 @endforeach
             </ul>
         </div>
-        @if (Auth::user() -> id == $apartment -> user -> id)
+        {{-- @if (Auth::user() -> id == $apartment -> user -> id)
           <div class="col-6">
             Questo appartamento è tuo
         </div>  
-        @else
+        @else --}}
            <div class="col-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
         </div> 
-        @endif
+        {{-- @endif --}}
         
         <div class="col-12">
             <h3>Ubicazione</h3>
@@ -84,7 +84,7 @@
                 var marker = new tt.Marker().setLngLat(myCoord).addTo(map);
                 </script>
         </div>
-        @if (Auth::user() -> id !== $apartment -> user -> id)
+        {{-- @if (Auth::user() -> id !== $apartment -> user -> id) --}}
             
         
             
@@ -153,7 +153,7 @@
         <button type="submit" name="submit" value="ADD">Invia Messaggio</button>
         </form>--}}
         </div> 
-        @endif
+        {{-- @endif --}}
     </div>
 </div>
 

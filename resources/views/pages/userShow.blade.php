@@ -25,8 +25,9 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-8  col-md-6 offset-lg-1 col-lg-5">
+    <div class="col-sm-8  col-md-6 offset-lg-1 col-lg-5 d-flex flex-column justify-content-center">
         <h1>Ciao {{ $user->name }}</h1>
+        <a href="{{ route('userApartment.show',$user -> id) }}">I miei appartamenti({{ $user -> apartments() -> count()}}) </a>
     </div>
   </div>
 </div>
