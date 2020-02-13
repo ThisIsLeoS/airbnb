@@ -99,7 +99,14 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+
+      $apartment = Apartment::findOrFail($id);
+      $services = Service::all();
+      if (Auth::user()-> id == $apartment -> user -> id){
+        return view('pages.editApartment', compact('apartment', 'services'));
+      }else{
+          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+      }
     }
 
     /**
@@ -111,7 +118,18 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $data = $request -> all();
+      $apartment = Apartment::findOrFail($id);
+      $apartment -> update($data);
+      if (isset($data['services'])) {
+        $services = Service::find($data['services']);
+        $apartment -> services() -> attach($services);
+      } else {
+        $services = [];
+      }
+      $apartment -> services() -> sync($services);
+
+      return redirect() -> route('home.page');
     }
 
     /**

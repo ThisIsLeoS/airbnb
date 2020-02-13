@@ -26,6 +26,7 @@
           <div class="card-body">
             <h4 class="card-title">{{$apartment -> address}}</h4>
             <p class="card-text">{{$apartment -> description}}</p>
+            <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="mb-1 btn btn-primary"><i class="fas fa-pen"> Modifica appartamento </i></a>
             <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class="btn btn-primary"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
           </div>
         </div>
