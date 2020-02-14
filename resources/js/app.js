@@ -57,18 +57,27 @@ function init(){
   showMessage();
   navbar();
 
- 
+  console.log($(document).height())
 
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
-
+    
     $("footer").toggleClass("d-none");
     if ($("footer").hasClass("d-none") == false) {
       $(this).html("<i class='fas fa-times mr-2'></i> Chiudi")
       $("main").addClass("my_margin_bottom")
+     
+
+        window.scrollBy({
+          top: 1000,
+          left: 0,
+          behavior: 'smooth'
+        });
+     
     } else {
       $("main").removeClass("my_margin_bottom")
       $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
+      
     }
   })
   // eventi
