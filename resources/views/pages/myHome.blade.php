@@ -28,10 +28,12 @@
   </a>
 </div>
 <div>
-  <form id="mySearch" action="{{ route('apartment.search') }}" method="get">
+  <form id="mySearch" action=" {{ route('apartment.search') }}" method="get"> 
     @csrf
     @method('GET')
-    <input  type="text" name="" value="">
+    <input id="search-street" type="text" name="" placeholder="via">
+    <input id="search-municipality" type="text" name="" placeholder="città">
+    <input id="search-postalCode" type="text" name="" placeholder="CAP">
     <button  name="button">cerca</button>
   </form>
 

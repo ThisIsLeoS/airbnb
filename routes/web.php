@@ -30,8 +30,8 @@ Route::post("/apartment/{id}/store", "ApartmentController@store")->name("apartme
 Route::get('/apartament/message/user/{id}/show', 'ApartmentController@apartmentUserMessageShow') -> name('apartmentUserMessage.show');
 Route::get('/apartament/{id}/edit', 'ApartmentController@edit') -> name('apartment.edit');
 Route::post('/apartament/{id}/update', 'ApartmentController@update') -> name('apartment.update');
-Route::get('/apartment/search', function(){return view('pages.searchApartment');}) ->name('apartment.search');
-
+Route::get('/apartment/search', "ApartmentController@apartmentSearch") ->name('apartment.search');
+/*function(){return view('pages.searchApartment');}*/
 
 
 //User route
