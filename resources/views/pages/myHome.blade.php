@@ -27,7 +27,17 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<div>
+  <form id="mySearch" action=" {{ route('apartment.search') }}" method="get"> 
+    @csrf
+    @method('GET')
+    <input id="search-street" type="text" name="" placeholder="via">
+    <input id="search-municipality" type="text" name="" placeholder="città">
+    <input id="search-postalCode" type="text" name="" placeholder="CAP">
+    <button  name="button">cerca</button>
+  </form>
 
+</div>
 
 <div class="container-fluid">
   <div class="row">

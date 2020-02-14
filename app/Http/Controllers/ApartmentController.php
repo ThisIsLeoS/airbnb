@@ -147,4 +147,62 @@ class ApartmentController extends Controller
       $apartment -> delete();
       return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
+
+    // public function distance($lat1, $lon1, $lat2, $lon2 /*unit*/) {
+    //   if (($lat1 === $lat2) && ($lon1 === $lon2)) {
+    //     return 0;
+    //     }
+    //   else {
+    //     $radlat1 = pi() * $lat1/180;
+    //     $radlat2 = pi() * $lat2/180;
+    //     $theta = $lon1-$lon2;
+    //     $radtheta = pi() * $theta/180;
+    //     $dist = sin($radlat1) * sin($radlat2) + cos($radlat1) * cos($radlat2) * cos($radtheta);
+    //     if ($dist > 1) {
+    //     $dist = 1;
+    //     }
+    //     $dist = acos($dist);
+    //     $dist = $dist * 180/pi();
+    //     $dist = $dist * 60 * 1.1515;
+    //     $dist = $dist * 1.609344;
+    //     return $dist;
+    //   }
+    // }
+    
+    public function apartmentSearch(Request $request)
+    {
+      $data = $request -> all();
+      $apartments = Apartment::all();
+      
+      // $latitudeFrom = $data["lat"];
+      // $longitudeFrom = $data["lon"];
+      // $latitudeTo = $apartment->lat;
+      //   $longitudeTo = $apartment->lon;
+      // dd($data);
+      $apartmentsToShow = [];
+      foreach($apartments as $apartment) {
+        $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
+        if ($distance < 50) {
+            $apartmentsToShow[] = $apartment;
+        }
+      }
+    // dd($distances);
+    // dd($apartmentsToShow);
+    return view("pages.searchApartment", compact("apartmentsToShow"));
+  }
+
+  public function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius) {
+    $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $lonDelta = $lonTo - $lonFrom;
+        $a = pow(cos($latTo) * sin($lonDelta), 2) +
+          pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
+        $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
+
+        $angle = atan2(sqrt($a), $b);
+        return $angle * $earthRadius;
+  }
 }

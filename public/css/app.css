@@ -11054,3 +11054,9 @@ a.text-dark:focus {
   justify-content: space-around;
 }
 
+#mySearch {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+}
+

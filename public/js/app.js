@@ -49592,6 +49592,49 @@ function init() {
       }
     });
   });
+  $("#mySearch button").click(function (event) {
+    event.preventDefault();
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/structuredGeocode.json/",
+      "method": "GET",
+      "data": {
+        "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
+        "limit": "10",
+        // opzione per farsi restituire solo 1 risultato
+        "streetName": $("#search-street").val(),
+        // "streetNumber": "15",
+        "municipality": $("#search-municipality").val(),
+        // "postalCode": $("#search-postalCode").val(),
+        // "countrySubdivision": "Liguria",
+        "countryCode": "IT"
+      },
+      "success": function success(data) {
+        // throw(data);
+        console.log(data); // TODO: da fare con while invece di for
+        // per ogni via restituita dall'API
+
+        var res;
+
+        for (var i = 0; i < data.results.length; ++i) {
+          // se la via ha la città uguale a quella inserita dall'utente
+          var city = $("#search-municipality").val();
+          city = city.charAt(0).toUpperCase() + city.slice(1); // throw (city);
+
+          if (data.results[i].address.municipality == city) {
+            res = data.results[i];
+            break;
+          }
+        }
+
+        $("#mySearch") // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        .append("<input type='hidden' name='lat' value='" + res.position.lat + "'/>", "<input type='hidden' name='lon' value='" + res.position.lon + "'/>") // il form viene sottomesso
+        .submit();
+      },
+      "error": function error(iqXHR, textStatus, errorThrown) {
+        alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
+      }
+    });
+  });
 } //funzione per personalizzare la nav in base all'indirizzo
 
 
@@ -49760,8 +49803,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
