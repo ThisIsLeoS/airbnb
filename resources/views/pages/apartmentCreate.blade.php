@@ -16,33 +16,8 @@
                         <input type="text" id="description" name="description">
                     </li>
                     <li>
-                        Indirizzo dell'appartamento
-                        <ul>
-                            <li>
-                                <label for="streetName">Via</label>
-                                <input type="text" id="streetName" name="address">
-                            </li>
-                            <li>
-                                <label for="streetNumber">Numero civico</label>
-                                <input type="text" id="streetNumber" name="streetNumber">
-                            </li>
-                            <li>
-                                <label for="municipality">Città</label>
-                                <input type="text" id="municipality" name="municipality">
-                            </li>
-                            <li>
-                                <label for="postalCode">CAP</label>
-                                <input type="text" id="postalCode" name="postalCode">
-                            </li>
-                            <li>
-                                <label for="countrySubdivision">Regione</label>
-                                <input type="text" id="countrySubdivision" name="countrySubdivision">
-                            </li>
-                            <li>
-                                <label for="coutryCode">Paese (IT/ITA o FR/FRA ecc.)</label>
-                                <input type="text" id="coutryCode" name="coutryCode">
-                            </li>  
-                         </ul>
+                        <label for="address">Indirizzo dell'appartamento</label>
+                        <input type="text" id="address" name="address">
                     </li>
                     <li>
                         <label for="square-feet">Metri quadri</label>

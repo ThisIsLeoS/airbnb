@@ -31,9 +31,7 @@
   <form id="mySearch" action=" {{ route('apartment.search') }}" method="get"> 
     @csrf
     @method('GET')
-    <input id="search-street" type="text" name="" placeholder="via">
-    <input id="search-municipality" type="text" name="" placeholder="città">
-    <input id="search-postalCode" type="text" name="" placeholder="CAP">
+    <input id="address-to-search" type="text" name="" placeholder="indirizzo">
     <button  name="button">cerca</button>
   </form>
 
