@@ -95,7 +95,7 @@ class MessageController extends Controller
     }
 
 
-     /* public function search()
+     public function search()
     {
         return view('pages.testAutocomplete');
     }
@@ -106,7 +106,7 @@ class MessageController extends Controller
         $data=User::select("email")
         -> where("email","LIKE","%".$request-> input("query")."%")->get();
         return response() -> json($data);
-    } */
+    }
 
 
 }

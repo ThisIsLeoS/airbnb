@@ -41,3 +41,5 @@ Route::post('user/image/set' , "UserController@setUserImage") -> name("user.set.
 
 //Message route
 Route::post("/apartment/{id}/show" , "MessageController@createMessageForApt") -> name("message.apartment.create");
+
+
