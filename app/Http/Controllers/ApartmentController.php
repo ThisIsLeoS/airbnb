@@ -154,6 +154,7 @@ class ApartmentController extends Controller
     }
     
     public function getApartmentsAndDistances($startLat, $startLon, $radius, $apartments) {
+      $filteredAptsAndDists = [];
       foreach($apartments as $apartment) {
         $distance = $this->distance($startLat, $startLon, $apartment->lat, $apartment->lon, 6371);
         if ($distance < $radius) {
@@ -197,7 +198,7 @@ class ApartmentController extends Controller
     if ($apartment->rooms == $numOfRooms && $apartment->beds == $numOfBeds) {
       /* si controlla anche che abbia tutti i servizi passati in input */
       $numOfMatches = 0;
-      if (count($services) == count($apartment->services)) {;
+      if (count($services) == count($apartment->services)) {
         // per ogni servizio tra quelli passati in input
         foreach ($services as $service) {
           // se il servizio è presente tra servizi dell'appartamento        
@@ -209,7 +210,7 @@ class ApartmentController extends Controller
           }
         }
       }
-      return $numOfMatches == count($services);
+      return $numOfMatches == count($apartment->services);
     } 
   }
 
