@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
+
+  public static $shownApartments = [];
     /**
      * Display a listing of the resource.
      *
@@ -173,7 +175,7 @@ class ApartmentController extends Controller
     {
       $data = $request -> all();
       $apartments = Apartment::all();
-      
+
       // $latitudeFrom = $data["lat"];
       // $longitudeFrom = $data["lon"];
       // $latitudeTo = $apartment->lat;
@@ -192,7 +194,11 @@ class ApartmentController extends Controller
       }
       // dd($distanceForApt,$apartmentsToShow);
     // dd($distances);
-    // dd($apartmentsAndDistances);
+    // dd($apartmentsAndDistances); 
+    // dd($this);
+    session()->put('apartmentsAndDistances', $apartmentsAndDistances); 
+    session()->save();
+    dd($apartmentsAndDistances, session()->get('apartmentsAndDistances'));
     return view("pages.searchApartment", compact("apartmentsAndDistances")/* => $apartmentsToShow,"distanceForApt" => $distanceForApt]*/);
   }
 
@@ -209,5 +215,31 @@ class ApartmentController extends Controller
 
         $angle = atan2(sqrt($a), $b);
         return $angle * $earthRadius;
+  }
+
+  public function apartmentAdvSearch(Request $request) {
+    $apartmentsAndDistances2 = [];
+    $data = $request -> all();
+    // dd($data);
+    // dd(session()->get('shownApartments'));
+
+    $numOfRooms = $data["rooms"];
+    $numOfBeds = $data["beds"];
+    $radius = $data["radius"];
+    $services = $data["services"];
+    dd(session()->get('apartmentsAndDistances'));
+    foreach(session()->get('apartmentsAndDistances') as $aptmAndDist) {
+      if(
+        $aptmAndDist["apartment"]->rooms == $numOfRooms &&
+        $aptmAndDist["apartment"]->beds == $numOfBeds
+      ) {
+        $apartmentsAndDistances2[] = array(
+          "apartment" => $aptmAndDist["apartment"],
+          "distance" => $aptmAndDist["distance"]
+        );
+      }
+    }
+    // dd($apartmentsAndDistances);
+    return view("pages.searchApartment", compact("apartmentsAndDistances"));
   }
 }
