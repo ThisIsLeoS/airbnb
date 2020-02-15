@@ -55,13 +55,20 @@ class ApartmentController extends Controller
         // l'appartamento viene salvato nel DB
         $apt->save();
 
-        // all'appartamento vengono "agganciati" i servizi
-        foreach ($data["services"] as $serviceType) {
-            // viene creato un servizio nel DB
-            $service = Service::create(['type' => $serviceType]);
-            // il servizio è agganciato all'appartamento
-            $apt->services()->attach($service->id);
+        if (isset($data["services"]))
+        {
+          // all'appartamento vengono "agganciati" i servizi
+          foreach ($data["services"] as $serviceType) {
+              // viene creato un servizio nel DB
+              $service = Service::create(['type' => $serviceType]);
+              // il servizio è agganciato all'appartamento
+              $apt->services()->attach($service->id);
+          }
         }
+        else {
+          $apt->services =[];
+        }
+
 
         // l'appartamento viene salvato nel DB
         return redirect()->route("userApartment.show", $userId);
@@ -174,32 +181,20 @@ class ApartmentController extends Controller
     {
       $data = $request -> all();
       $apartments = Apartment::all();
-
-      // $latitudeFrom = $data["lat"];
-      // $longitudeFrom = $data["lon"];
-      // $latitudeTo = $apartment->lat;
-      //   $longitudeTo = $apartment->lon;
-      // dd($data);
       $apartmentsAndDistances = [];
       foreach($apartments as $apartment) {
         $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
-        if ($distance < 1000) {
+        if ($distance < 500000000) {
           $apartmentsAndDistances[]  = array(
             "apartment" => $apartment, 
             "distance" => $distance
           );
-          // $distanceForApt[] = $distance;
         }
       }
-      // dd($distanceForApt,$apartmentsToShow);
-    // dd($distances);
-    // dd($apartmentsAndDistances); 
-    // dd($this);
-    session()->put('apartmentsAndDistances', $apartmentsAndDistances); 
-    session()->save();
-    // dd($apartmentsAndDistances, session()->get('apartmentsAndDistances'));
-    return view("pages.searchApartment", compact("apartmentsAndDistances")/* => $apartmentsToShow,"distanceForApt" => $distanceForApt]*/);
-  }
+      session()->put('apartmentsAndDistances', $apartmentsAndDistances); 
+      session()->save();
+      return view("pages.searchApartment", compact("apartmentsAndDistances"));
+    }
 
   public function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius) {
     $latFrom = deg2rad($latitudeFrom);
@@ -219,26 +214,86 @@ class ApartmentController extends Controller
   public function apartmentAdvSearch(Request $request) {
     $apartmentsAndDistances = [];
     $data = $request -> all();
-    // dd($data);
-    // dd(session()->get('shownApartments'));
-
     $numOfRooms = $data["rooms"];
     $numOfBeds = $data["beds"];
     $radius = $data["radius"];
-    $services = $data["services"];
-    // dd(session()->get('apartmentsAndDistances'));
-    foreach(session()->get('apartmentsAndDistances') as $aptmAndDist) {
-      if(
-        $aptmAndDist["apartment"]->rooms == $numOfRooms &&
-        $aptmAndDist["apartment"]->beds == $numOfBeds
-      ) {
-        $apartmentsAndDistances[] = array(
-          "apartment" => $aptmAndDist["apartment"],
-          "distance" => $aptmAndDist["distance"]
-        );
+    if (isset($data["services"])) $services = $data["services"];
+    else $services = [];
+    $apartments = Apartment::all();
+    $apartmentsAndDistances = [];
+      foreach($apartments as $apartment) {
+        $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
+        if ($distance < 500000000) {
+          $apartmentsAndDistances[]  = array(
+            "apartment" => $apartment, 
+            "distance" => $distance
+          );
+        }
+      }
+    if ($radius != 500000000)
+    {
+      // foreach sugli appartamenti ottenuti dalla ricerca della home page
+      foreach( as $aptmAndDist) {
+        // se l'appartamento ha lo stesso numero di stanze e letti indicato dall'utente
+        if(
+          $aptmAndDist["apartment"]->rooms == $numOfRooms &&
+          $aptmAndDist["apartment"]->beds == $numOfBeds
+        ) {
+          // si controlla anche che abbia tutti i servizi indicati dall'utente
+          $numOfMatches = 0;
+          // per ogni servizio indicato dall'utente
+          foreach ($services as $service) {
+            // cerca se il servizio è presente nei servizi dell'appartamento        
+            foreach($aptmAndDist["apartment"]->services as $aptmService)
+            {
+              if ($service === $aptmService->type) {
+                $numOfMatches++;
+                break;
+              }
+            }
+          }
+          if ($numOfMatches == count($services))
+          {
+            $apartmentsAndDistances[] = array(
+            "apartment" => $aptmAndDist["apartment"],
+            "distance" => $aptmAndDist["distance"]
+            );
+          }
+        }
       }
     }
-    // dd($apartmentsAndDistances);
+    else
+    {
+      // foreach sugli appartamenti ottenuti dalla ricerca della home page
+      foreach(session()->get('apartmentsAndDistances') as $aptmAndDist) {
+        // se l'appartamento ha lo stesso numero di stanze e letti indicato dall'utente
+        if(
+          $aptmAndDist["apartment"]->rooms == $numOfRooms &&
+          $aptmAndDist["apartment"]->beds == $numOfBeds
+        ) {
+          // si controlla anche che abbia tutti i servizi indicati dall'utente
+          $numOfMatches = 0;
+          // per ogni servizio indicato dall'utente
+          foreach ($services as $service) {
+            // cerca se il servizio è presente nei servizi dell'appartamento        
+            foreach($aptmAndDist["apartment"]->services as $aptmService)
+            {
+              if ($service === $aptmService->type) {
+                $numOfMatches++;
+                break;
+              }
+            }
+          }
+          if ($numOfMatches == count($services))
+          {
+            $apartmentsAndDistances[] = array(
+            "apartment" => $aptmAndDist["apartment"],
+            "distance" => $aptmAndDist["distance"]
+            );
+          }
+        }
+      }
+    }
     return view("pages.searchApartment", compact("apartmentsAndDistances"));
   }
 }

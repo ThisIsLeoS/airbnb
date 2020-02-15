@@ -9,19 +9,19 @@
   <input type="number" id="rooms" name="rooms" min="1" max="4">
   <label for="beds">Numero Letti</label>
   <input type="number" id="beds" name="beds" min="1" max="4"><br>
-  <label for="radius">Numero Letti</label>
-  <input type="number" id="radius" name="radius" min="1" max="100"><br>
+  <label for="radius">Raggio</label>
+  <input type="number" id="radius" name="radius" min="1" max="500000000"><br>
   <ul>
     <li>
         <input type="checkbox" id="wifi" name="services[]" value="wifi">
         <label for="wifi">Wi-Fi</label>
     </li>
     <li>
-        <input type="checkbox" id="parking-slot" name="services[]" value="parking-slot">
+        <input type="checkbox" id="parking-slot" name="services[]" value="parking_slot">
         <label for="parking-slot">posto auto</label>
     </li>
     <li>
-        <input type="checkbox" id="swimming-pool" name="services[]" value="swimming-pool">
+        <input type="checkbox" id="swimming-pool" name="services[]" value="swimming_pool">
         <label for="swimming-pool">piscina</label>
     </li>
     <li>
@@ -29,7 +29,7 @@
         <label for="sauna">sauna</label>
     </li>
     <li>
-        <input type="checkbox" id="sea-view" name="services[]" value="sea-view">
+        <input type="checkbox" id="sea-view" name="services[]" value="sea_view">
         <label for="sea-view">vista mare</label>
     </li>
     <li>
