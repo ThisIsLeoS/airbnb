@@ -196,9 +196,11 @@ class ApartmentController extends Controller
   public function matchesFilters($apartment, $numOfRooms, $numOfBeds, $services) {
     // se l'appartamento ha lo stesso numero di stanze e letti passati in input
     if ($apartment->rooms == $numOfRooms && $apartment->beds == $numOfBeds) {
-      /* si controlla anche che abbia tutti i servizi passati in input */
-      $numOfMatches = 0;
-      if (count($services) == count($apartment->services)) {
+      /* si controlla anche che abbia come servizi gli stessi passati in input */
+      $servicesMatch = false;
+      // se il numero di servizi passati in input è lo stesso numero di servizi dell'appartamento
+      if (count($services) === count($apartment->services)) {
+        $numOfMatches = 0;
         // per ogni servizio tra quelli passati in input
         foreach ($services as $service) {
           // se il servizio è presente tra servizi dell'appartamento        
@@ -209,8 +211,9 @@ class ApartmentController extends Controller
             }
           }
         }
+        if ($numOfMatches === count($services)) $servicesMatch = true;
       }
-      return $numOfMatches == count($apartment->services) && $numOfMatches == count($services);
+      return $servicesMatch;
     } 
   }
 
