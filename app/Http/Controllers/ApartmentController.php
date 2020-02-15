@@ -31,7 +31,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view("pages.apartmentCreate");
+
+        $services = Service::all();
+        return view("pages.apartmentCreate" , compact("services"));
     }
 
     /**
@@ -57,13 +59,16 @@ class ApartmentController extends Controller
 
         if (isset($data["services"]))
         {
+
+          $services = Service::find($data["services"]);
+          $apt -> services() -> attach($services);
           // all'appartamento vengono "agganciati" i servizi
-          foreach ($data["services"] as $serviceType) {
+         /*  foreach ($data["services"] as $serviceType) { */
               // viene creato un servizio nel DB
-              $service = Service::create(['type' => $serviceType]);
+              /* $service = Service::create(['type' => $serviceType]); */
               // il servizio è agganciato all'appartamento
-              $apt->services()->attach($service->id);
-          }
+              /* $apt->services()->attach($service->id); */
+          
         }
         else {
           $apt->services =[];
@@ -211,7 +216,7 @@ class ApartmentController extends Controller
         return $angle * $earthRadius;
   }
 
-  public function apartmentAdvSearch(Request $request) {
+  /* public function apartmentAdvSearch(Request $request) {
     $apartmentsAndDistances = [];
     $data = $request -> all();
     $numOfRooms = $data["rooms"];
@@ -295,5 +300,5 @@ class ApartmentController extends Controller
       }
     }
     return view("pages.searchApartment", compact("apartmentsAndDistances"));
-  }
+  } */
 }

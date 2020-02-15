@@ -37,17 +37,22 @@
                     </li>
                     <li>
                         Quali servizi metti a disposizione?
+                        <select name="services[]" class="custom-select" multiple>
+                            @foreach ($services as $service)
+                                <option value="{{$service -> id}}">{{$service -> type}}</option>
+                            @endforeach
+                </select>
                         <ul>
                             <li>
                                 <input type="checkbox" id="wifi" name="services[]" value="wifi">
                                 <label for="wifi">Wi-Fi</label>
                             </li>
                             <li>
-                                <input type="checkbox" id="parking-slot" name="services[]" value="parking-slot">
+                                <input type="checkbox" id="parking-slot" name="services[]" value="parking_slot">
                                 <label for="parking-slot">posto auto</label>
                             </li>
                             <li>
-                                <input type="checkbox" id="swimming-pool" name="services[]" value="swimming-pool">
+                                <input type="checkbox" id="swimming-pool" name="services[]" value="swimming_pool">
                                 <label for="swimming-pool">piscina</label>
                             </li>
                             <li>
@@ -55,7 +60,7 @@
                                 <label for="sauna">sauna</label>
                             </li>
                             <li>
-                                <input type="checkbox" id="sea-view" name="services[]" value="sea-view">
+                                <input type="checkbox" id="sea-view" name="services[]" value="sea_view">
                                 <label for="sea-view">vista mare</label>
                             </li>
                             <li>
