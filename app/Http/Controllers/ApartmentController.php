@@ -210,7 +210,7 @@ class ApartmentController extends Controller
           }
         }
       }
-      return $numOfMatches == count($apartment->services);
+      return $numOfMatches == count($apartment->services) && $numOfMatches == count($services);
     } 
   }
 
