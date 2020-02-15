@@ -182,13 +182,14 @@ class ApartmentController extends Controller
       $apartmentsToShow = [];
       foreach($apartments as $apartment) {
         $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
-        if ($distance < 50) {
+        /* dd($distance); */
+        if ($distance < 1000) {
             $apartmentsToShow[] = $apartment;
+          }
         }
-      }
     // dd($distances);
     // dd($apartmentsToShow);
-    return view("pages.searchApartment", compact("apartmentsToShow"));
+    return view("pages.searchApartment", compact("apartmentsToShow" , "distance"));
   }
 
   public function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius) {

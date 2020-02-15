@@ -11058,5 +11058,38 @@ a.text-dark:focus {
   position: absolute;
   top: 150px;
   left: 150px;
+  transform: translate(55%, 50%);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+#mySearch input {
+  margin-bottom: 15px;
+  border: 1px solid #c7b9b9;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+#mySearch input:focus {
+  border-color: #008489;
+}
+
+#mySearch h3 {
+  color: #484848;
+  font-weight: bold;
+}
+
+#mySearch button {
+  align-self: flex-end;
+  background: #FF5A5F;
+}
+
+#mySearch button:active {
+  background: #df3c47;
 }
 
