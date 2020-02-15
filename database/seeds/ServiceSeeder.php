@@ -13,13 +13,18 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        factory(Service::class, 6)
-        ->create()
-        ->each(function($service){
-
-          $apartment = Apartment::inRandomOrder()->take(rand(10,20))->get();
-
-          $service->apartments()->attach($apartment);
-        });
+        $services = [
+            ["type" =>'wifi'],
+            ["type" =>'parking_slot'],
+            ["type" =>'swimming_pool'],
+            ["type" =>'sauna'],
+            ["type" =>'sea_view'],
+            ["type" =>'reception']
+    ];
+    
+    foreach($services as $service){
+      $newService = new Service;
+      $newService -> fill($service) -> save();
+    }
     }
 }
