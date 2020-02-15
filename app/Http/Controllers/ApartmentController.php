@@ -184,14 +184,16 @@ class ApartmentController extends Controller
       $apartmentsAndDistances = [];
       foreach($apartments as $apartment) {
         $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
-        if ($distance < 500000000) {
+        if ($distance < 50) {
           $apartmentsAndDistances[]  = array(
             "apartment" => $apartment, 
             "distance" => $distance
           );
         }
       }
-      session()->put('apartmentsAndDistances', $apartmentsAndDistances); 
+      session()->put('latFirstSearch', $data["lat"]);
+      session()->put('lonFirstSearch', $data["lon"]);
+      session()->put('apartmentsAndDistances', $apartmentsAndDistances);
       session()->save();
       return view("pages.searchApartment", compact("apartmentsAndDistances"));
     }
@@ -222,18 +224,21 @@ class ApartmentController extends Controller
     $apartments = Apartment::all();
     $apartmentsAndDistances = [];
       foreach($apartments as $apartment) {
-        $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
-        if ($distance < 500000000) {
+        $distance = $this->distance(session()->get('latFirstSearch'), 
+                                    session()->get("lonFirstSearch"), 
+                                    $apartment->lat, 
+                                    $apartment->lon, 6371);
+        if ($distance < $radius) {
           $apartmentsAndDistances[]  = array(
             "apartment" => $apartment, 
             "distance" => $distance
           );
         }
       }
-    if ($radius != 500000000)
+    if ($radius != 50)
     {
       // foreach sugli appartamenti ottenuti dalla ricerca della home page
-      foreach( as $aptmAndDist) {
+      foreach($apartmentsAndDistances as $aptmAndDist) {
         // se l'appartamento ha lo stesso numero di stanze e letti indicato dall'utente
         if(
           $aptmAndDist["apartment"]->rooms == $numOfRooms &&
