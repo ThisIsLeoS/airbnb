@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
-
-  public static $shownApartments = [];
+  public static $apartmentsAndDistances = [];
     /**
      * Display a listing of the resource.
      *
@@ -198,7 +197,7 @@ class ApartmentController extends Controller
     // dd($this);
     session()->put('apartmentsAndDistances', $apartmentsAndDistances); 
     session()->save();
-    dd($apartmentsAndDistances, session()->get('apartmentsAndDistances'));
+    // dd($apartmentsAndDistances, session()->get('apartmentsAndDistances'));
     return view("pages.searchApartment", compact("apartmentsAndDistances")/* => $apartmentsToShow,"distanceForApt" => $distanceForApt]*/);
   }
 
@@ -218,7 +217,7 @@ class ApartmentController extends Controller
   }
 
   public function apartmentAdvSearch(Request $request) {
-    $apartmentsAndDistances2 = [];
+    $apartmentsAndDistances = [];
     $data = $request -> all();
     // dd($data);
     // dd(session()->get('shownApartments'));
@@ -227,13 +226,13 @@ class ApartmentController extends Controller
     $numOfBeds = $data["beds"];
     $radius = $data["radius"];
     $services = $data["services"];
-    dd(session()->get('apartmentsAndDistances'));
+    // dd(session()->get('apartmentsAndDistances'));
     foreach(session()->get('apartmentsAndDistances') as $aptmAndDist) {
       if(
         $aptmAndDist["apartment"]->rooms == $numOfRooms &&
         $aptmAndDist["apartment"]->beds == $numOfBeds
       ) {
-        $apartmentsAndDistances2[] = array(
+        $apartmentsAndDistances[] = array(
           "apartment" => $aptmAndDist["apartment"],
           "distance" => $aptmAndDist["distance"]
         );
