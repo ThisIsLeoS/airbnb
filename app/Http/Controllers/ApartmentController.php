@@ -180,16 +180,18 @@ class ApartmentController extends Controller
       //   $longitudeTo = $apartment->lon;
       // dd($data);
       $apartmentsToShow = [];
+      $distanceForApt=[];
       foreach($apartments as $apartment) {
         $distance = $this->distance($data["lat"], $data["lon"], $apartment->lat, $apartment->lon, 6371);
-        /* dd($distance); */
         if ($distance < 1000) {
-            $apartmentsToShow[] = $apartment;
-          }
+          $apartmentsToShow[]  = $apartment;
+          $distanceForApt[] = $distance;
         }
+      }
+      dd($distanceForApt,$apartmentsToShow);
     // dd($distances);
     // dd($apartmentsToShow);
-    return view("pages.searchApartment", compact("apartmentsToShow" , "distance"));
+    return view("pages.searchApartment", ["apartmentsToShow" => $apartmentsToShow,"distanceForApt" => $distanceForApt]);
   }
 
   public function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius) {

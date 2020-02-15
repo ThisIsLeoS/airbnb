@@ -9,7 +9,7 @@
     <div class="col-12 myCards">
           
       @foreach ($apartmentsToShow as $apartment)
-      {{ $distance}}
+      
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
         <div class="card-body">
@@ -18,13 +18,16 @@
           <a href="{{route("apartment.show",$apartment-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
         </div>
       </div>
-          
-         
+      
+      
       @endforeach
       @else
-          <h2 class="text-center">"Non abbiamo trovato risultati per la tua ricerca"</h2>
+      <h2 class="text-center">"Non abbiamo trovato risultati per la tua ricerca"</h2>
       @endif
-
+      
+      @foreach ($distanceForApt as $dist)
+          {{$dist}}
+      @endforeach
     </div>
   </div>
 </div>
