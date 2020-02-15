@@ -43,8 +43,8 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
   
-  @if (count($apartmentsAndDistances) > 0)
-  <h2 class="text-center">"Abbiamo trovato {{ count($apartmentsAndDistances) }} risultati per la tua ricerca"</h2>
+  @if (count($filteredAptsAndDists) > 0)
+  <h2 class="text-center">"Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</h2>
   <div class="row">
     <div class="col-12 myCards">
       @php
@@ -55,14 +55,15 @@
         }
           return ($a['distance'] < $b['distance']) ? -1 : 1;
         }
-        uasort($apartmentsAndDistances, "compare_by_int_key");
+        uasort($filteredAptsAndDists, "compare_by_int_key");
       @endphp 
 
-      @foreach ($apartmentsAndDistances as $aptAndDist)
+      @foreach ($filteredAptsAndDists as $aptAndDist)
         <div class="card" style="width: 18rem;">
           <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Test</h5>
+            <p class="card-text"> {{$aptAndDist["apartment"]->id}}</p>
             <p class="card-text"> {{$aptAndDist["apartment"]->description}}</p>
             <p class="card-text"> {{$aptAndDist["distance"]}}</p>
             <a href="{{route("apartment.show",$aptAndDist["apartment"]-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
