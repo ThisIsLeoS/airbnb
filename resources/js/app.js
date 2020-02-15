@@ -43,7 +43,6 @@ const app = new Vue({
 
 
 
-
 function showMessage(){
   $('.sender').on('click', function () {
     /* console.log("sto cliccando") */

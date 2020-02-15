@@ -2,6 +2,46 @@
 @section('content')
     
 <div class="container-fluid">
+  <form action="{{route('apartment.adv.search')}}" class="range-field" method="post">
+    @csrf
+    @method("POST")
+  <label for="rooms">Numero Stanze</label>
+  <input type="number" id="rooms" name="rooms" min="1" max="4">
+  <label for="beds">Numero Letti</label>
+  <input type="number" id="beds" name="beds" min="1" max="4"><br>
+  <label for="radius">Numero Letti</label>
+  <input type="number" id="radius" name="radius" min="1" max="100"><br>
+  <ul>
+    <li>
+        <input type="checkbox" id="wifi" name="services[]" value="wifi">
+        <label for="wifi">Wi-Fi</label>
+    </li>
+    <li>
+        <input type="checkbox" id="parking-slot" name="services[]" value="parking-slot">
+        <label for="parking-slot">posto auto</label>
+    </li>
+    <li>
+        <input type="checkbox" id="swimming-pool" name="services[]" value="swimming-pool">
+        <label for="swimming-pool">piscina</label>
+    </li>
+    <li>
+        <input type="checkbox" id="sauna" name="services[]" value="sauna">
+        <label for="sauna">sauna</label>
+    </li>
+    <li>
+        <input type="checkbox" id="sea-view" name="services[]" value="sea-view">
+        <label for="sea-view">vista mare</label>
+    </li>
+    <li>
+        <input type="checkbox" id="reception" name="services[]" value="reception">
+        <label for="reception">reception</label>
+    </li>
+</ul>
+
+ 
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
   
   @if (count($apartmentsAndDistances) > 0)
   <h2 class="text-center">"Abbiamo trovato {{ count($apartmentsAndDistances) }} risultati per la tua ricerca"</h2>
