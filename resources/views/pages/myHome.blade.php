@@ -36,6 +36,8 @@
     <input id="search-municipality" type="text" name="" placeholder="Città">
     {{-- <input id="search-postalCode" type="text" name="" placeholder="CAP"> --}}
     <button class="btn btn-danger" name="button">Cerca</button>
+    <input id="address-to-search" type="text" name="" placeholder="indirizzo">
+    <button  name="button">cerca</button>
   </form>
 
 </div>

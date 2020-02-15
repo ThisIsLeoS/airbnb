@@ -49568,22 +49568,26 @@ function init() {
   $("#create-aptm-btn").click(function (event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
+    geocode($("#address").val(), "#create-aptm-form");
+  });
+  $("#mySearch button").click(function (event) {
+    event.preventDefault();
+    geocode($("#address-to-search").val(), "#mySearch");
+  });
+
+  function geocode(query, formId) {
     $.ajax({
-      "url": "https://api.tomtom.com/search/2/structuredGeocode.json/",
+      "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
       "method": "GET",
       "data": {
         "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
         "limit": "1",
         // opzione per farsi restituire solo 1 risultato
-        "streetName": "Via Milano",
-        "streetNumber": "15",
-        "municipality": "Genova",
-        "postalCode": "16126",
-        "countrySubdivision": "Liguria",
-        "countryCode": "IT"
+        // TODO: aggiugnere altri paesi?
+        "countrySet": "IT,FR"
       },
       "success": function success(data) {
-        $("#create-aptm-form") // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        $(formId) // al form vengono aggiunti i campi contenenti longitudine e latitudine
         .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
         .submit();
       },
@@ -49591,50 +49595,7 @@ function init() {
         alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
       }
     });
-  });
-  $("#mySearch button").click(function (event) {
-    event.preventDefault();
-    $.ajax({
-      "url": "https://api.tomtom.com/search/2/structuredGeocode.json/",
-      "method": "GET",
-      "data": {
-        "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
-        "limit": "10",
-        // opzione per farsi restituire solo 1 risultato
-        "streetName": $("#search-street").val(),
-        // "streetNumber": "15",
-        "municipality": $("#search-municipality").val(),
-        // "postalCode": $("#search-postalCode").val(),
-        // "countrySubdivision": "Liguria",
-        "countryCode": "IT"
-      },
-      "success": function success(data) {
-        // throw(data);
-        console.log(data); // TODO: da fare con while invece di for
-        // per ogni via restituita dall'API
-
-        var res;
-
-        for (var i = 0; i < data.results.length; ++i) {
-          // se la via ha la città uguale a quella inserita dall'utente
-          var city = $("#search-municipality").val();
-          city = city.charAt(0).toUpperCase() + city.slice(1); // throw (city);
-
-          if (data.results[i].address.municipality == city) {
-            res = data.results[i];
-            break;
-          }
-        }
-
-        $("#mySearch") // al form vengono aggiunti i campi contenenti longitudine e latitudine
-        .append("<input type='hidden' name='lat' value='" + res.position.lat + "'/>", "<input type='hidden' name='lon' value='" + res.position.lon + "'/>") // il form viene sottomesso
-        .submit();
-      },
-      "error": function error(iqXHR, textStatus, errorThrown) {
-        alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
-      }
-    });
-  });
+  }
 } //funzione per personalizzare la nav in base all'indirizzo
 
 
