@@ -32,12 +32,9 @@
     <h3>Ricerca alloggi e attività unici.</h3>
     @csrf
     @method('GET')
-    <input id="search-street" type="text" name="" placeholder="Via">
-    <input id="search-municipality" type="text" name="" placeholder="Città">
-    {{-- <input id="search-postalCode" type="text" name="" placeholder="CAP"> --}}
-    <button class="btn btn-danger" name="button">Cerca</button>
-    <input id="address-to-search" type="text" name="" placeholder="indirizzo">
-    <button  name="button">cerca</button>
+    <input id="address-to-search" type="text" name="" placeholder="Indirizzo">
+    <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
+    
   </form>
 
 </div>

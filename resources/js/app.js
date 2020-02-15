@@ -8,6 +8,8 @@
 
 require('./bootstrap');
 
+
+
 window.Vue = require('vue');
 
 /**
@@ -29,9 +31,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import * as $ from 'jquery';
+window.$ = window.jQuery = $;
+
+import 'jquery-ui/ui/widgets/datepicker.js';
+
 const app = new Vue({
     el: '#app',
 });
+
+
 
 
 
@@ -57,7 +66,7 @@ function init(){
   showMessage();
   navbar();
 
-  console.log($(document).height())
+ 
 
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
