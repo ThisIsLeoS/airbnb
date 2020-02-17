@@ -49506,6 +49506,8 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* import Vue from 'vue/types/umd'; */
+
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -49531,7 +49533,7 @@ window.$ = window.jQuery = $;
 import 'jquery-ui/ui/widgets/datepicker.js'; */
 
 var app = new Vue({
-  el: '#app'
+  el: '#myVue'
 });
 
 function showMessage() {
@@ -49578,6 +49580,11 @@ function init() {
     event.preventDefault();
     geocode($("#address-to-search").val(), "#mySearch");
   });
+  $("#mySearch #address-to-search").keyup(function () {
+    setTimeout(function () {
+      autoComplete($("#address-to-search").val());
+    }, 1000);
+  });
 
   function geocode(query, formId) {
     $.ajax({
@@ -49594,6 +49601,41 @@ function init() {
         $(formId) // al form vengono aggiunti i campi contenenti longitudine e latitudine
         .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
         .submit();
+      },
+      "error": function error(iqXHR, textStatus, errorThrown) {
+        alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
+      }
+    });
+  }
+
+  function autoComplete(query) {
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
+      "method": "GET",
+      "data": {
+        "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
+        "limit": "5",
+        // opzione per farsi restituire solo 1 risultato
+        // TODO: aggiugnere altri paesi?
+        "countrySet": "IT,FR"
+      },
+      "success": function success(data) {
+        console.log(data);
+
+        if (data.results.length !== 0) {
+          var myAutoComplete = $("<div class='myAutoComplete'>");
+          $("#mySearch").append(myAutoComplete);
+
+          for (var i = 0; i < data.results.length; i++) {
+            myAutoComplete.empty();
+
+            if (data.results[i].address.streetName) {
+              myAutoComplete.append("<div>" + data.results[i].address.streetName + " " + data.results[i].address.municipality + " " + data.results[i].address.countrySubdivision + "</div>");
+            } else {
+              myAutoComplete.append("<div class='myAutoComplete'>" + data.results[i].address.municipality + " " + data.results[i].address.countrySubdivision + "</div>");
+            }
+          }
+        }
       },
       "error": function error(iqXHR, textStatus, errorThrown) {
         alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
