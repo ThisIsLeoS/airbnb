@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
-  public static $filteredAptsAndDists = [];
+  public static $apartmentsAndDistances = [];
     /**
      * Display a listing of the resource.
      *
@@ -171,12 +171,10 @@ class ApartmentController extends Controller
     {
       $data = $request -> all();
       $filteredAptsAndDists = $this->getApartmentsAndDistances($data["lat"], $data["lon"], 50, Apartment::all());
-      session()->put([
-        'searchedAddressLat', $data["lat"],
-        'searchedAddresLon', $data["lon"],
-        'apartmentsAndDistances', $filteredAptsAndDists
-      ]);
-      session()->save();
+      $request->session()->put('searchedAddressLat', $data["lat"]);
+      $request->session()->put('searchedAddresLon', $data["lon"]);
+      $request->session()->put('apartmentsAndDistances', $filteredAptsAndDists);
+      $request->session()->save();
       return view("pages.searchApartment", compact("filteredAptsAndDists"));
     }
 
@@ -228,8 +226,8 @@ class ApartmentController extends Controller
     $filteredAptsAndDists = [];
     if ($radius != 50) {
       $aptsAndDists = $this->getApartmentsAndDistances(
-          session()->get("searchedAddressLat"), 
-          session()->get("searchedAddresLon"),
+          $request->session()->get("searchedAddressLat"), 
+          $request->session()->get("searchedAddresLon"),
           $radius,
           Apartment::all()
         );
@@ -241,7 +239,7 @@ class ApartmentController extends Controller
     }
     else
     {
-      foreach(session()->get('apartmentsAndDistances') as $aptAndDist) {
+      foreach($request->session()->get('apartmentsAndDistances') as $aptAndDist) {
         if($this->matchesFilters($aptAndDist["apartment"], $numOfRooms, $numOfBeds, $services)) {
           $filteredAptsAndDists[] = $aptAndDist;
         }
