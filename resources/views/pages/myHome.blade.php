@@ -33,6 +33,8 @@
     @csrf
     @method('GET')
     <input id="address-to-search" type="text" name="" placeholder="Indirizzo">
+    <div id="addressesList">
+    </div>
     <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
     
   </form>
