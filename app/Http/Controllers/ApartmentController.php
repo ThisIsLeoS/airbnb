@@ -131,15 +131,16 @@ class ApartmentController extends Controller
       } else {
         $services = [];
       }
+      if ($request -> hasfile("poster_img")) {
+          $file = $request -> file("poster_img");
+          $filename = $file -> getClientOriginalName();
+          $file -> move("images/AptImg", $filename);
+          $newAptImg = [
+              "poster_img" => $filename
+          ];
 
-      $file = $request -> file("poster_img");
-      $filename = $file -> getClientOriginalName();
-      $file -> move("images/AptImg", $filename);
-      $newAptImg = [
-          "poster_img" => $filename
-      ];
-
-      $apartment -> update($newAptImg);
+          $apartment -> update($newAptImg);
+      }
       $apartment -> services() -> sync($services);
       $apartment -> update($data);
 
