@@ -38,7 +38,7 @@
     </li>
 </ul>
 
-  <button id="advSearchBtn" type="submit" class="btn btn-primary">Submit</button>
+  <button id="advSearchBtn" type="button" class="btn btn-primary">Submit</button>
 </form>
   
   @if (count($filteredAptsAndDists) > 0)
@@ -74,4 +74,38 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("#advSearchBtn").click(function(event) {
+    console.log("prova");
+    var servicesArray = [];
+    $("input[name='services[]']:checked").each(function(){
+      servicesArray.push($(this).val());
+    });
+    $.ajax({
+      "url": "{{ route('apartment.adv.search') }}",
+      "method": "POST",  
+      "data": {
+        "rooms": $("input[name='rooms']").val(),
+        "beds": $("input[name='beds']").val(),
+        "radius": $("input[name='radius']").val(),
+        "services": servicesArray
+      },
+      "headers": {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      "success": function (data) {
+        console.log(data);
+        console.log(data[0]);
+      },
+      "error": function (iqXHR, textStatus, errorThrown) {
+        alert(
+          "iqXHR.status: " + iqXHR.status + "\n" +
+          "textStatus: " + textStatus + "\n" +
+          "errorThrown: " + errorThrown
+        );
+      }
+    });
+  });
+</script>
 @endsection
