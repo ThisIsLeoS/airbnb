@@ -1536,7 +1536,7 @@ a.ui-button:active,
   transform: scale(1.1);
 }
 
-.detail_apt .col-6 {
+.detail_apt .serviceApt {
   padding: 20px;
   border: 1px solid rgba(128, 128, 128, 0.363);
   display: flex;
@@ -1550,11 +1550,21 @@ a.ui-button:active,
   height: 50vh;
 }
 
+.imgUser {
+  width: 50%;
+  border-radius: 100%;
+}
+
 .avatar {
   border: 0.3rem solid rgba(255, 255, 255, 0.3);
   margin-top: -6rem;
   margin-bottom: 1rem;
   max-width: 9rem;
+}
+
+button #showMyApt {
+  color: grey;
+  text-decoration: none;
 }
 
 .nav_home {
@@ -12574,10 +12584,9 @@ a.text-dark:focus {
 }
 
 #mySearch {
-  position: relative;
   position: absolute;
-  top: 150px;
-  left: 150px;
+  top: 10%;
+  left: 10%;
   transform: translate(55%, 50%);
   background: white;
   display: flex;
@@ -12586,6 +12595,7 @@ a.text-dark:focus {
   align-content: space-around;
   padding: 30px;
   border-radius: 5px;
+  width: 20%;
 }
 
 #mySearch input {
@@ -12611,5 +12621,9 @@ a.text-dark:focus {
 
 #mySearch button:active {
   background: #df3c47;
+}
+
+#addressesList {
+  position: relative;
 }
 

@@ -10,6 +10,7 @@ use App\Image;
 $factory->define(Apartment::class, function (Faker $faker) {
     $myPict = array("/img/img1.jpg", "/img/img2.jpg","/img/img3.jpg", "/img/img4.jpg","/img/img5.jpg");
     return [
+        "title" => $faker -> company,
         "description" => $faker -> sentence,
         "rooms" => rand(1,4),
         "beds"=> rand(1,4) ,

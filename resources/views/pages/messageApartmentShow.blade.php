@@ -9,7 +9,7 @@
   @foreach ($user -> apartments as $apartment)
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h4 class="card-title">{{ $apartment -> address }}</h4>
+              <h4 class="card-title">{{ $apartment -> title }}</h4>
               @foreach ($apartment -> messages as $message)
                 <div class="d-flex flex-column">
                   <span class="m-2 btn btn-primary sender">{{$message -> sender}} </span>

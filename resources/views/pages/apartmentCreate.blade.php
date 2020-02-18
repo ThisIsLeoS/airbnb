@@ -12,6 +12,10 @@
                 </h1>
                 <ol>
                     <li>
+                         <label for="title">Inserisci una breve titolo</label>
+                        <input type="text" id="title" name="title">
+                    </li>
+                    <li>
                          <label for="description">Inserisci una breve descrizione del tuo appartamento</label>
                         <input type="text" id="description" name="description">
                     </li>

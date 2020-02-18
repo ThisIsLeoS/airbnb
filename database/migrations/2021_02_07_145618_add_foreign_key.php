@@ -32,9 +32,7 @@ class AddForeignKey extends Migration
             ->references("id")
             ->on("services");
         });
-
-
-
+        
         Schema::table('messages', function (Blueprint $table) {
             $table -> bigInteger("apartment_id")->unsigned()->index();
             $table -> foreign("apartment_id","apartment_message_id")->references("id")->on("apartments");
@@ -44,6 +42,13 @@ class AddForeignKey extends Migration
             $table -> bigInteger("apartment_id")->unsigned()->index();
             $table -> foreign("apartment_id","apartment_images_id")->references("id")->on("apartments");
         });
+
+          Schema::table('views', function (Blueprint $table) {
+            $table -> bigInteger('apartment_id') -> unsigned() -> index();
+            $table -> foreign('apartment_id', 'views_apartments_id')
+                   -> references('id')
+                   -> on('apartments');
+         });
     }
 
     /**
@@ -75,6 +80,11 @@ class AddForeignKey extends Migration
             $table -> dropForeign("apartment_images_id");
             $table -> dropColumn("apartment_id");
 
+        });
+
+         Schema::table('views', function (Blueprint $table) {
+              $table -> dropForeign('views_apartments_id');
+              $table -> dropColumn('apartment_id');
         });
 
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Apartment extends Model
 {
     protected $fillable = [
-
+        "title",
         "description",
         "rooms",
         "beds",
@@ -16,7 +16,6 @@ class Apartment extends Model
         "address",
         "lat",
         "lon",
-        // "views",
         "poster_img"
 
     ];
@@ -27,6 +26,10 @@ class Apartment extends Model
 
     public function user(){
         return $this -> belongsTo(User::class);
+    }
+
+     public function views(){
+        return $this -> hasMany(View::class);
     }
 
     public function images(){

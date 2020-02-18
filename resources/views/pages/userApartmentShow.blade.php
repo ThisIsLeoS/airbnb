@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h4 class="m-3">Gestisci i tuoi appartamenti</h4>
+        <h4 class="m-3 text-center">Gestisci i tuoi appartamenti</h4>
 
       </div>
 
@@ -23,11 +23,12 @@
 
         <div class="card" style="width: 18rem;">
           <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">{{$apartment -> address}}</h4>
+          <div class="card-body ">
+            <h4 class="card-title">{{$apartment -> title}}</h4>
             <p class="card-text">{{$apartment -> description}}</p>
-            <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="mb-1 btn btn-primary"><i class="fas fa-pen"> Modifica appartamento </i></a>
-            <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class="btn btn-primary"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
+            <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="m-2 btn btn-primary"><i class="fas fa-pen"> Modifica appartamento </i></a>
+            <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-primary"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
+            <a href="{{-- {{ route('user.delete.apartment',  $apartment-> id) }} --}}" class="m-2 btn btn-primary"><i class="fas fa-trash-alt"> Statistiche appartamento </i></a>
           </div>
         </div>
 

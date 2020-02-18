@@ -30,19 +30,19 @@
 <div class="container-fluid">
     <h1>Titolo stanza </h1>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <h4>{{$apartment -> description}}</h4>
             <div class="row detail_apt">
-                <div class="col-6">
+                <div class="col-12 col-md-6 serviceApt">
                     <i class="fas fa-building"></i><p>Stanze disponibili : {{$apartment -> rooms}}</p>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 serviceApt">
                     <i class="fas fa-ruler-combined"></i><p>Dimensione : {{$apartment -> square_feet}} mq<sup>2</sup></p>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 serviceApt">
                     <i class="fas fa-bed" style="color:black"></i> <p>Letti disponibili : {{$apartment -> beds}}</p>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 serviceApt">
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
@@ -57,19 +57,42 @@
         @if (Auth::user())
           {{-- Una volta accertatomi che è un utente loggato controllo se quell'appartamento è effettivamente suo --}} 
           @if (Auth::user() -> id == $apartment -> user -> id)
-            <div class="col-6">
+            <div class="col-12 col-md-6">
               il Proprietario di questo appartamento sei tu
+              <div>
+                @if (Auth::user() -> profile_img )
+                  <img class="imgUser"  src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true">
+                  @else
+                  <img class="imgUser"  src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
+                  @endif
+              </div>
             </div>
             {{-- se non è suo mostro il nome del proprietario --}}
           @else
-            <div class="col-6">
+            <div class="col-12 col-md-6">
               il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+              <div>
+
+                @if ($apartment -> user -> profile_img )
+                  <img class="imgUser"  src="{{asset('images/UserProfileImg/'.$apartment -> user -> profile_img)}}" alt=""  data-holder-rendered="true">
+                  @else
+                  <img class="imgUser" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
+                  @endif
+              </div>
             </div> 
           @endif
         {{-- Se siamo di fronte ad un GUEST allora mostro tutto normalmente --}}    
         @else
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+            <div>
+                @if ($apartment -> user -> profile_img )
+                  <img class="imgUser"  src="{{asset('images/UserProfileImg/'.$apartment -> user -> profile_img)}}" alt=""  data-holder-rendered="true">
+                  @else
+                  <img class="imgUser" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
+                @endif
+              </div>
+           
           </div> 
         @endif
         

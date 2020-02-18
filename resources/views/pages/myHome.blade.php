@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -26,19 +26,19 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-<div>
-  <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get"> 
-    <h3>Ricerca alloggi e attività unici.</h3>
-    @csrf
-    @method('GET')
-    <input id="address-to-search" type="text" name="" placeholder="Indirizzo">
-    <div id="addressesList">
-    </div>
-    <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
-    
-  </form>
-
+  <div>
+    <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get"> 
+      <h3>Ricerca alloggi e attività unici.</h3>
+      @csrf
+      @method('GET')
+      <input id="address-to-search" type="text" name="" placeholder="Indirizzo">
+      <div id="addressesList">
+      </div>
+      <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
+      
+    </form>
+  
+  </div>
 </div>
 
 <div class="container-fluid">
@@ -49,7 +49,7 @@
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Test</h5>
+          <h5 class="card-title">{{$apt -> title}}</h5>
           <p class="card-text">{{$apt -> description}}</p>
         <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
         </div>

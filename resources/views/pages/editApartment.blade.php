@@ -5,6 +5,8 @@
   <form  action="{{ route('apartment.update', $apartment -> id ) }}" method="post">
     @csrf
     @method('POST')
+    <label for="title">Descrizione</label>
+    <input type="text" name="title" value="{{ $apartment -> title }}"><br>
     <label for="description">Descrizione</label>
     <input type="text" name="description" value="{{ $apartment -> description }}"><br>
     <label for="rooms">Stanze</label>

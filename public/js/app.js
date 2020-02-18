@@ -49580,11 +49580,29 @@ function init() {
     event.preventDefault();
     geocode($("#address-to-search").val(), "#mySearch");
   });
-  $("#mySearch #address-to-search").keyup(function () {
-    setTimeout(function () {
+  $("#mySearch #address-to-search").keyup(delay(function () {
+    $("#addressesList").empty();
+
+    if ($("#address-to-search").val().length >= 3) {
       autoComplete($("#address-to-search").val());
-    }, 1000);
+    }
+  }, 500));
+  $(document).on("click", "li", function () {
+    $("#address-to-search").val($(this).text());
+    $("#addressesList").fadeOut();
   });
+
+  function delay(callback, ms) {
+    var timer = 0;
+    return function () {
+      var context = this,
+          args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        callback.apply(context, args);
+      }, ms || 0);
+    };
+  }
 
   function geocode(query, formId) {
     $.ajax({
@@ -49617,24 +49635,20 @@ function init() {
         "limit": "5",
         // opzione per farsi restituire solo 1 risultato
         // TODO: aggiugnere altri paesi?
-        "countrySet": "IT,FR"
+        "countrySet": "IT"
       },
       "success": function success(data) {
         console.log(data);
 
         if (data.results.length !== 0) {
-          var myAutoComplete = $("<div class='myAutoComplete'>");
-          $("#mySearch").append(myAutoComplete);
+          $("#addressesList").fadeIn();
+          $("#addressesList").append('<ul class="dropdown-menu" style="display:block; position:absolute">');
 
           for (var i = 0; i < data.results.length; i++) {
-            myAutoComplete.empty();
-
-            if (data.results[i].address.streetName) {
-              myAutoComplete.append("<div>" + data.results[i].address.streetName + " " + data.results[i].address.municipality + " " + data.results[i].address.countrySubdivision + "</div>");
-            } else {
-              myAutoComplete.append("<div class='myAutoComplete'>" + data.results[i].address.municipality + " " + data.results[i].address.countrySubdivision + "</div>");
-            }
+            $("#addressesList ul").append("<li>" + data.results[i].address.freeformAddress + "</li>");
           }
+
+          $("#addressesList").append("</ul>");
         }
       },
       "error": function error(iqXHR, textStatus, errorThrown) {
@@ -49642,8 +49656,37 @@ function init() {
       }
     });
   }
-} //funzione per personalizzare la nav in base all'indirizzo
+}
 
+$("#searchByFiltersForm").submit(function (event) {
+  console.log("prova");
+  event.preventDefault();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  }); // throw ($("input[name='services[]']:checked").serialize());
+
+  $.ajax({
+    "url": '/apartament/search',
+    "method": "POST",
+    contentType: "application/json",
+    dataType: "json",
+    "data": {
+      "rooms": $("input[name='rooms']").val(),
+      "beds": $("input[name='beds']").val(),
+      "radius": $("input[name='radius']").val(),
+      "services": $("input[name='services[]']:checked").serialize()
+    },
+    "success": function success(data) {
+      console.log(data);
+      return false;
+    },
+    "error": function error(iqXHR, textStatus, errorThrown) {
+      alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
+    }
+  });
+}); //funzione per personalizzare la nav in base all'indirizzo
 
 function navbar() {
   console.log(window.location.href);
