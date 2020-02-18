@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <form  action="{{ route('apartment.update', $apartment -> id ) }}" method="post">
+  <form  action="{{ route('apartment.update', $apartment -> id ) }}" method="post" enctype="multipart/form-data">>
     @csrf
     @method('POST')
     <label for="title">Descrizione</label>
@@ -25,7 +25,8 @@
         @endif>{{ $service -> type}}</option>
 
       @endforeach
-    </select><br><br>
+    </select><br>
+    <input type="file" name="poster_img" value="{{ $apartment -> poster_img }}"><br>
     <input type="submit" name="submit" value="MODIFICA">
   </form>
 

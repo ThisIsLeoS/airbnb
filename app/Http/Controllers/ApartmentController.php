@@ -59,9 +59,9 @@ class ApartmentController extends Controller
 
         if (isset($data["services"]))
         {
-          // all'appartamento vengono "agganciati" i servizi    
+          // all'appartamento vengono "agganciati" i servizi
           $services = Service::find($data["services"]);
-          $apt -> services() -> attach($services);  
+          $apt -> services() -> attach($services);
         }
         else {
           $apt->services =[];
@@ -125,14 +125,24 @@ class ApartmentController extends Controller
     {
       $data = $request -> all();
       $apartment = Apartment::findOrFail($id);
-      $apartment -> update($data);
       if (isset($data['services'])) {
         $services = Service::find($data['services']);
         $apartment -> services() -> attach($services);
       } else {
         $services = [];
       }
+      if ($request -> hasfile("poster_img")) {
+          $file = $request -> file("poster_img");
+          $filename = $file -> getClientOriginalName();
+          $file -> move("images/AptImg", $filename);
+          $newAptImg = [
+              "poster_img" => $filename
+          ];
+
+          $apartment -> update($newAptImg);
+      }
       $apartment -> services() -> sync($services);
+      $apartment -> update($data);
 
       return redirect() -> route('userApartment.show', Auth::user()->id);
     }
@@ -152,14 +162,14 @@ class ApartmentController extends Controller
       $apartment -> delete();
       return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
-    
+
     public function getApartmentsAndDistances($startLat, $startLon, $radius, $apartments) {
       $filteredAptsAndDists = [];
       foreach($apartments as $apartment) {
         $distance = $this->distance($startLat, $startLon, $apartment->lat, $apartment->lon, 6371);
         if ($distance < $radius) {
           $filteredAptsAndDists[]  = array(
-            "apartment" => $apartment, 
+            "apartment" => $apartment,
             "distance" => $distance
           );
         }
@@ -201,7 +211,7 @@ class ApartmentController extends Controller
         $numOfMatches = 0;
         // per ogni servizio tra quelli passati in input
         foreach ($services as $service) {
-          // se il servizio è presente tra servizi dell'appartamento        
+          // se il servizio è presente tra servizi dell'appartamento
           foreach($apartment->services as $aptmService) {
             if ($service === $aptmService->type) {
               $numOfMatches++;
@@ -212,7 +222,7 @@ class ApartmentController extends Controller
         if ($numOfMatches === count($services)) $servicesMatch = true;
       }
       return $servicesMatch;
-    } 
+    }
   }
 
   public function apartmentAdvSearch(Request $request) {
@@ -226,7 +236,7 @@ class ApartmentController extends Controller
     $filteredAptsAndDists = [];
     if ($radius != 50) {
       $aptsAndDists = $this->getApartmentsAndDistances(
-          $request->session()->get("searchedAddressLat"), 
+          $request->session()->get("searchedAddressLat"),
           $request->session()->get("searchedAddresLon"),
           $radius,
           Apartment::all()
