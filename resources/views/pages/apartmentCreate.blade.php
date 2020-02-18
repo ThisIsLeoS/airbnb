@@ -33,7 +33,6 @@
                             <input name="services[]" type="checkbox" value="{{$service -> id}}">{{$service -> type}}
                         @endforeach
                         </div>
-                       
 
                         
                         <button id="create-aptm-btn">Aggiungi appartamento</button>
