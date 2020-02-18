@@ -61,11 +61,11 @@ class ApartmentController extends Controller
         {
           // all'appartamento vengono "agganciati" i servizi
           $services = Service::find($data["services"]);
-          $apt -> services() -> attach($services);
         }
         else {
           $apt->services =[];
         }
+        $apt -> services() -> sync($services);
 
         // l'appartamento viene salvato nel DB
         return redirect()->route("userApartment.show", $userId);
