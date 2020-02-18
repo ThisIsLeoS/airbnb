@@ -2,7 +2,7 @@
 @section('content')
     
 <div class="container-fluid">
-  <form action="{{route('apartment.adv.search')}}" class="range-field" method="post">
+  <form action="{{route('apartment.adv.search')}}" id="searchByFiltersForm" class="range-field" method="post">
     @csrf
     @method("POST")
   <label for="rooms">Numero Stanze</label>
@@ -38,9 +38,7 @@
     </li>
 </ul>
 
- 
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="advSearchBtn" type="submit" class="btn btn-primary">Submit</button>
 </form>
   
   @if (count($filteredAptsAndDists) > 0)
@@ -76,6 +74,4 @@
     </div>
   </div>
 </div>
-
 @endsection
-

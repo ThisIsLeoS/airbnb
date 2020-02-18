@@ -246,5 +246,6 @@ class ApartmentController extends Controller
       }
     }
     return view("pages.searchApartment", compact("filteredAptsAndDists"));
+    // return response()->json($filteredAptsAndDists, 200);
   }
 }

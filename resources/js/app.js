@@ -192,11 +192,39 @@ function init(){
   }
 }
 
-
-
- 
-
-
+  $("#searchByFiltersForm").submit(function(event) {
+    console.log("prova");
+    event.preventDefault();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    // throw ($("input[name='services[]']:checked").serialize());
+    $.ajax({
+      "url": '/apartament/search',
+      "method": "POST",
+        contentType: "application/json",
+        dataType: "json",      
+        "data": {
+        "rooms": $("input[name='rooms']").val(),
+        "beds": $("input[name='beds']").val(),
+        "radius": $("input[name='radius']").val(),
+        "services": $("input[name='services[]']:checked").serialize()
+      },
+      "success": function (data) {
+        console.log(data);
+        return false;
+      },
+      "error": function (iqXHR, textStatus, errorThrown) {
+        alert(
+          "iqXHR.status: " + iqXHR.status + "\n" +
+          "textStatus: " + textStatus + "\n" +
+          "errorThrown: " + errorThrown
+        );
+      }
+    });
+  });
 
 //funzione per personalizzare la nav in base all'indirizzo
 function navbar() {
