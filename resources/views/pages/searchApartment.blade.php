@@ -4,8 +4,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12  mt-5 mb-5 col-md-8 offset-md-2">
-
-
       <form  action="{{route('apartment.adv.search')}}" id="searchByFiltersForm" class="range-field " method="post">
         @csrf
         @method("POST")
@@ -21,7 +19,6 @@
               <input type="number" id="beds" name="beds" min="1" max="4">
               <span class="text-center ml-5 m">Raggio di ricerca: <span class="ml-2" id="valOfRadius"></span> km</span>
               <input id="radius" name="radius" type="range" min="1" max="200" value="50" class="slider ml-2">
-
             </div>
             <div class="mt-3 text-center">
               <p>Seleziona i servizi che desideri:</p>
@@ -41,9 +38,7 @@
             <button id="advSearchBtn" type="button" class="btn btn-primary">Filtra</button>
           </div>
         </div>
-
-
-    </form>
+      </form>
     </div>
   </div>
   <h3 class="text-center">Appartamenti Sponsorizzati</h3>
