@@ -140,7 +140,7 @@ class ApartmentController extends Controller
       } else {
         $services = [];
       }
-    
+      if ($request -> hasfile("poster_img")) {
           $file = $request -> file("poster_img");
           $extension = $file -> getClientOriginalExtension();
           $filename = time().'.'.$extension;
@@ -148,11 +148,13 @@ class ApartmentController extends Controller
           $newAptImg = [
               "poster_img" => $filename
           ];
-
-          $apartment -> update($newAptImg);
-
+      }
       $apartment -> services() -> sync($services);
       $apartment -> update($data);
+      if ($request -> hasfile("poster_img")) {
+        $apartment -> update($newAptImg);
+      }
+
 
       return redirect() -> route('userApartment.show', Auth::user()->id);
     }
