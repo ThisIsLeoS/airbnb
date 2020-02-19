@@ -1666,6 +1666,15 @@ button #showMyApt {
   display: inline-block;
 }
 
+.stats {
+  background-color: orange !important;
+  color: white !important;
+}
+
+.btn-info {
+  color: white !important;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

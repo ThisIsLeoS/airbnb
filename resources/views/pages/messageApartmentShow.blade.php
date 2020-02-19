@@ -3,7 +3,7 @@
 @section("content")
   <div class="container">
     <div class="row text-center">
-      <div class="col-12 mt-3 myCards flex-column">
+      <div class="col-12 mt-3 myCards flex-column border noGutter rounded">
         <div class="card-header">
           <h3>I tuoi messaggi</h3>
         </div>
