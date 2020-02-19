@@ -27,7 +27,7 @@
     <span class="sr-only">Next</span>
   </a>
   <div class="d-flex">
-    <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get"> 
+    <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get">
       <h3>Ricerca alloggi</h3>
       @csrf
       @method('GET')
@@ -35,9 +35,9 @@
       <div id="addressesList">
       </div>
       <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
-      
+
     </form>
-  
+
   </div>
 </div>
 
@@ -47,7 +47,11 @@
       @foreach ($apartments as $apt)
 
       <div class="card homeCard">
-        <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
+        @if ($apt -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
+          <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
+        @else
+          <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
+        @endif
         <div class="card-body">
           <h5 class="card-title">{{$apt -> title}}</h5>
           <p class="card-text">{{$apt -> description}}</p>
