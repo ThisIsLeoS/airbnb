@@ -57,6 +57,15 @@ class ApartmentController extends Controller
         // l'appartamento viene salvato nel DB
         $apt->save();
 
+        $file = $request -> file("poster_img");
+        $filename = $file -> getClientOriginalName();
+        $file -> move("images/AptImg", $filename);
+        $newAptImg = [
+            "poster_img" => $filename
+        ];
+
+        $apt -> update($newAptImg);
+
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
@@ -131,16 +140,17 @@ class ApartmentController extends Controller
       } else {
         $services = [];
       }
-      if ($request -> hasfile("poster_img")) {
+    
           $file = $request -> file("poster_img");
-          $filename = $file -> getClientOriginalName();
+          $extension = $file -> getClientOriginalExtension();
+          $filename = time().'.'.$extension;
           $file -> move("images/AptImg", $filename);
           $newAptImg = [
               "poster_img" => $filename
           ];
 
           $apartment -> update($newAptImg);
-      }
+
       $apartment -> services() -> sync($services);
       $apartment -> update($data);
 

@@ -50,14 +50,14 @@ class UserController extends Controller
     public function show($id)
     {
       $user = User::findOrFail($id);
-       
+
       if ($user == Auth::user()){
         return view('pages.userShow', compact('user'));
       }else{
           return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
       }
 
-      
+
     }
 
     public function userApartmentShow($id)
@@ -69,7 +69,7 @@ class UserController extends Controller
              /* return view("pages.unauthorized"); */
             return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
         }
-      
+
     }
 
     /**

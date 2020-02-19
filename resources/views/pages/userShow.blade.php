@@ -8,11 +8,11 @@
         <img class="card-img-top" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/oslo.jpg" alt="Bologna">
         <div class="card-body text-center">
            @if (Auth::user() -> profile_img )
-                  <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true">
+                  {{-- <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true"> --}}
                   @else
                   <img class="avatar rounded-circle" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
                   @endif
-          
+
           <h6 class="card-text">Data di nascita: {{Auth::user() -> date_of_birth}}</h6>
           <p class="card-text">Email: {{Auth::user() -> email}} </p>
           <p class="card-text">Numero Appartamenti su BoolBnb: {{$user -> apartments() -> count()}} </p>

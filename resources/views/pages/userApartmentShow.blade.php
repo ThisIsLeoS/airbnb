@@ -20,15 +20,14 @@
     <div class="row">
       <div class="col-12 myCards">
         @foreach ($user->apartments as $apartment)
-        {{-- <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true"> --}}
-           
+        <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true">
+
         <div class="card" style="width: 18rem;">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
             <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
           @else
-            <img class="card-img-top" src="{{URL::to('/images/UserProfileImg/'.$apartment -> poster_img)}}" alt="Card image cap">
+            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
           @endif
-          
           <div class="card-body ">
             <h4 class="card-title">{{$apartment -> title}}</h4>
             <p class="card-text">{{$apartment -> description}}</p>

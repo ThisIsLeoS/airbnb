@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form id="create-aptm-form" action="{{ route("apartment.store", Auth::user()->id) }}" method="POST">
+            <form id="create-aptm-form" action="{{ route("apartment.store", Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
                 <h3 class="text-center">
@@ -25,19 +25,21 @@
                     <input type="number" id="beds" min="1" max="4" name="beds">
                     <label for="bathrooms" >Bagni</label>
                     <input type="number" id="bathrooms" min="1" max="2" name="bathrooms">
+                    <label for="poster_img" >Carica Immagine</label>
+                    <input type="file" id="photo"  name="poster_img">
                     Quali servizi metti a disposizione?
                     {{-- <select name="services[]" class="custom-select" multiple> --}}
                     <div>
-                        
+
                        @foreach ($services as $service)
                             <input name="services[]" type="checkbox" value="{{$service -> id}}">{{$service -> type}}
                         @endforeach
                         </div>
 
-                        
+
                         <button id="create-aptm-btn">Aggiungi appartamento</button>
                     </form>
-                </div>  
+                </div>
     </div>
 </div>
 @endsection
