@@ -28,7 +28,7 @@
   </a>
   <div>
     <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get"> 
-      <h3>Ricerca alloggi e attività unici.</h3>
+      <h3>Ricerca alloggi</h3>
       @csrf
       @method('GET')
       <input id="address-to-search" type="text" name="" placeholder="Indirizzo">

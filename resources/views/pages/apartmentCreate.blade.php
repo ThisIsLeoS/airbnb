@@ -27,17 +27,15 @@
                     <input type="number" id="bathrooms" min="1" max="2" name="bathrooms">
                     Quali servizi metti a disposizione?
                     {{-- <select name="services[]" class="custom-select" multiple> --}}
-                    <div>
-                        
-                       @foreach ($services as $service)
-                            <input name="services[]" type="checkbox" value="{{$service -> id}}">{{$service -> type}}
-                        @endforeach
+                        <div>
+                            @foreach ($services as $service)
+                                <input name="services[]" type="checkbox" value="{{$service -> id}}">{{$service -> type}}
+                            @endforeach
                         </div>
-
-                        
-                        <button id="create-aptm-btn">Aggiungi appartamento</button>
-                    </form>
-                </div>  
+                    <button id="create-aptm-btn">Aggiungi appartamento</button>
+                </div> 
+            </form>
+        </div>  
     </div>
 </div>
 @endsection
