@@ -32,6 +32,10 @@
     width:50%;
 }
 
+.homeCard{
+    width: 18rem;
+}
+
 .myCards{
     display:flex;
     flex-wrap: wrap;
@@ -85,3 +89,99 @@
 #addressesList {
     position: relative;
 }
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgb(53, 130, 194);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgb(53, 130, 194);
+  cursor: pointer;
+}
+
+/* .my_form_style{
+    border:1px solid rgb(209, 198, 198);
+    border-radius:10px;
+    padding:20px;
+    h3{
+       background-color: rgba(0,0,0,.03);
+    }
+} */
+
+
+
+.card{
+    border:1px solid grey;
+    #valOfRadius{
+        color:rgb(0, 119, 255);
+        font-weight: bold;
+    }
+    label{
+        text-transform: capitalize;
+    }
+}
+
+//media query
+@media (max-width: 1200px) {
+    #mySearch{
+        width:30%;
+     }
+ }
+
+ @media (max-width: 992px) { 
+     
+    #mySearch{
+        width:50%;
+        transform: translate(30%,50%);
+     }
+ }
+
+ @media (max-width: 768px) { 
+     #mySearch{
+        width:50%;
+        transform: translate(30%, 20%);
+     }
+     .showFooter{
+         display:none !important;
+     }
+     
+  }
+
+  @media (max-width: 576px) { 
+     #mySearch{
+        width: 62%;
+        transform: translate(16%, 5%);
+     } 
+
+     .homeCard{
+        width: 22rem;
+    }
+  } 
