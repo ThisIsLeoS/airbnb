@@ -268,4 +268,10 @@ class ApartmentController extends Controller
     return response()->json($filteredAptsAndDists, 200);
     /* return response()->json(compact("filteredAptsAndDists")); si può fare anche così ti restituisce sempre l'oggetto */
   }
+
+  public function apartmentStatistics($id){
+    $apartment = Apartment::findOrFail($id);
+
+    return view("pages.apartmentStats" , compact("apartment"));
+  }
 }

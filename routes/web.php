@@ -32,6 +32,7 @@ Route::get('/apartament/{id}/edit', 'ApartmentController@edit') -> name('apartme
 Route::post('/apartament/{id}/update', 'ApartmentController@update') -> name('apartment.update');
 Route::get('/apartment/search', "ApartmentController@apartmentSearch") ->name('apartment.search');
 Route::post('/apartament/search', 'ApartmentController@apartmentAdvSearch') -> name('apartment.adv.search');
+Route::get('/apartament/{id}/statistics', 'ApartmentController@apartmentStatistics') -> name('apartment.stats');
 /*function(){return view('pages.searchApartment');}*/
 
 
