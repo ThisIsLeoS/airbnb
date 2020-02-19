@@ -53,7 +53,7 @@ var unique = function(origArr) {
             labels : unique(created_at),
             datasets: [{
                 label: 'Messaggi',
-                data: [{{$apartment-> messages()->count()}}],
+                data: [{{$apartment-> messages()->count()}}],//il problema è qui , io gli chiedo il totale dei messaggi mentre dovrei chiedergli il count dei messaggi raggruppati per created_at
                 backgroundColor: [
                     'rgba(99,180,255,0.21)'
                 ],
