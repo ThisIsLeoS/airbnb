@@ -136,16 +136,21 @@ class ApartmentController extends Controller
       } else {
         $services = [];
       }
-      $file = $request -> file("poster_img");
-      $extension = $file -> getClientOriginalExtension();
-      $filename = time().'.'.$extension;
-      $file -> move("images/AptImg", $filename);
-      $newAptImg = [
-          "poster_img" => $filename
-      ];
-      $apartment -> update($newAptImg);
+      if ($request -> hasfile("poster_img")) {
+          $file = $request -> file("poster_img");
+          $extension = $file -> getClientOriginalExtension();
+          $filename = time().'.'.$extension;
+          $file -> move("images/AptImg", $filename);
+          $newAptImg = [
+              "poster_img" => $filename
+          ];
+      }
       $apartment -> services() -> sync($services);
       $apartment -> update($data);
+      if ($request -> hasfile("poster_img")) {
+        $apartment -> update($newAptImg);
+      }
+
 
       return redirect() -> route('userApartment.show', Auth::user()->id);
     }
@@ -224,7 +229,7 @@ class ApartmentController extends Controller
         }
         if ($numOfMatches === count($services)) $servicesMatch = true;
       }
-      
+
       return $servicesMatch;
     }
   }
