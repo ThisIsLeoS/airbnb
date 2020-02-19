@@ -32,6 +32,10 @@
     width:50%;
 }
 
+.homeCard{
+    width: 18rem;
+}
+
 .myCards{
     display:flex;
     flex-wrap: wrap;
@@ -132,6 +136,8 @@
     }
 } */
 
+
+
 .card{
     border:1px solid grey;
     #valOfRadius{
@@ -142,3 +148,40 @@
         text-transform: capitalize;
     }
 }
+
+//media query
+@media (max-width: 1200px) {
+    #mySearch{
+        width:30%;
+     }
+ }
+
+ @media (max-width: 992px) { 
+     
+    #mySearch{
+        width:50%;
+        transform: translate(30%,50%);
+     }
+ }
+
+ @media (max-width: 768px) { 
+     #mySearch{
+        width:50%;
+        transform: translate(30%, 20%);
+     }
+     .showFooter{
+         display:none !important;
+     }
+     
+  }
+
+  @media (max-width: 576px) { 
+     #mySearch{
+        width: 62%;
+        transform: translate(16%, 5%);
+     } 
+
+     .homeCard{
+        width: 22rem;
+    }
+  } 

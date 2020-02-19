@@ -26,7 +26,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-  <div>
+  <div class="d-flex">
     <form id="mySearch" class="shadow" action=" {{ route('apartment.search') }}" method="get"> 
       <h3>Ricerca alloggi</h3>
       @csrf
@@ -46,7 +46,7 @@
     <div class="col-12 myCards">
       @foreach ($apartments as $apt)
 
-      <div class="card" style="width: 18rem;">
+      <div class="card homeCard">
         <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{$apt -> title}}</h5>
