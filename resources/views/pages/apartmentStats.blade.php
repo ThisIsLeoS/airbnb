@@ -7,10 +7,19 @@
 
             <div class="wrapper mt-5">
                 <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
+                {{$apartment-> title}}
                 {{-- {{$apartment-> message -> sender}} --}}
+                <script>
+
+                    var created_at = []; 
+                </script>
+               
                 @foreach ($apartment -> messages as $message)
                     {{$message -> sender}}
                     {{$message -> created_at}}
+                    <script>
+                        created_at.push("{{$message -> created_at}}")
+                    </script>
                 @endforeach
                 <canvas id="myChart"></canvas>
             </div>
@@ -20,11 +29,12 @@
 
 
 <script>
+    console.log(created_at)
      var ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels : moment.months(),
+            labels : created_at,
             datasets: [{
                 label: 'Messaggi',
                 data: [{{$apartment-> messages()->count()}}],
