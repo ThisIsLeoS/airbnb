@@ -7,20 +7,17 @@
 
             <div class="wrapper mt-5">
                 <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
-                {{$apartment-> title}}
-                {{-- {{$apartment-> message -> sender}} --}}
                 <script>
-
-                    var created_at = []; 
+                var created_at = []; 
                 </script>
-               
-                @foreach ($apartment -> messages as $message)
-                    {{$message -> sender}}
-                    {{$message -> created_at}}
-                    <script>
-                        created_at.push("{{$message -> created_at}}")
-                    </script>
-                @endforeach
+               <div class="d-none">
+                   @foreach ($apartment -> messages as $message)
+                       {{$message -> created_at}}
+                       <script>
+                           created_at.push("{{$message -> created_at}}")
+                       </script>
+                   @endforeach
+               </div>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -29,12 +26,31 @@
 
 
 <script>
-    console.log(created_at)
-     var ctx = document.getElementById('myChart').getContext('2d');
+    //funzione per far restituire un elemento da un array 
+var unique = function(origArr) {
+        var newArr = [],
+        origLen = origArr.length,
+        found, x, y;
+        for (x = 0; x < origLen; x++) {
+        found = undefined;
+        for (y = 0; y < newArr.length; y++) {
+        if (origArr[x] === newArr[y]) {
+        found = true;
+        break;
+        }
+    }
+    if (!found) {
+    newArr.push(origArr[x]);
+    }
+}
+    return newArr;
+}
+    console.log(unique(created_at))
+    var ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels : created_at,
+            labels : unique(created_at),
             datasets: [{
                 label: 'Messaggi',
                 data: [{{$apartment-> messages()->count()}}],
