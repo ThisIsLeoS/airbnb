@@ -13,7 +13,7 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// @import '~jquery-ui/themes/base/all.css';
+@import '~jquery-ui/themes/base/all.css';
 
 .noGutter{
     padding:0;
@@ -125,6 +125,11 @@
   border-radius: 50%;
   background: rgb(53, 130, 194);
   cursor: pointer;
+}
+
+.sponsorApt{
+    height:250px;
+    background:rgba(255, 230, 0, 0.603);
 }
 
 /* .my_form_style{

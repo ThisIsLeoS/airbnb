@@ -41,10 +41,13 @@
       </form>
     </div>
   </div>
-  <h3 class="text-center">Appartamenti Sponsorizzati</h3>
-  <div>{{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}</div>
+  <h4><strong> Alloggi Airbnb Plus</strong></h4>
+  <h5>Una selezione di alloggi verificati per qualità e design.</h5>
+  
+  <div class="col-12 myCards sponsorApt mb-3">{{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}
+  </div>
   @if (count($filteredAptsAndDists) > 0)
-  <h3 class="text-center">"Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</h3>
+  <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
   <div class="row">
     <div class="col-12 myCards">
       @php
@@ -58,6 +61,17 @@
         uasort($filteredAptsAndDists, "compare_by_int_key");
       @endphp
 
+      {{-- HBars --}}
+      <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+      <script id="templateHb" type="text/x-handlebars-template">
+          <div class="test">
+            <p>@{{title}}</p>
+          </div>
+        </script>
+      <div class="aptFilteredOutput">
+        
+      </div>  
+      {{-- HBars --}}
       @foreach ($filteredAptsAndDists as $aptAndDist)
         <div class="card" style="width: 18rem;">
           @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
@@ -75,7 +89,7 @@
         </div>
       @endforeach
       @else
-      <h2 class="text-center">"Non abbiamo trovato risultati per la tua ricerca"</h2>
+      <h4><strong> "Non abbiamo trovato risultati per la tua ricerca"</strong></h4>
       @endif
     </div>
   </div>
@@ -85,9 +99,49 @@
   var slider = document.getElementById("radius");
   var output = document.getElementById("valOfRadius");
   output.innerHTML = slider.value;
-  slider.oninput = function() {
+    slider.oninput = function() {
   output.innerHTML = this.value;
   }
+
+  function printAptFiltered(data) {
+/*PRIMA PROVA
+
+     var target = $(".aptFilteredOutput")
+    var template = $("#templateHb").html();
+    var compiled = Handlebars.compile(template);
+    for(var i = 0; i<data.lenght;i++){
+      var apts = data[i];
+      var compiledApt = compiled(apts)
+      target.append(compiledApt);
+    } */
+
+    /* SECONDA PROVA questa funziona se dall'altra parte usi la compact ma non stampa in pagina
+    var sorgente = $("#templateHb").html();
+    var template = Handlebars.compile(sorgente);
+    var target = $("#aptFilteredOutput").html("");
+
+    var apt, html;
+
+    var apts = data.filteredAptsAndDists;
+    console.log(apts)
+
+    apts.forEach(oggetto => {
+
+        apt = {
+            title: oggetto.title
+        }
+
+        html = template(apt);
+        console.log(html)
+
+        target.append(html);
+
+    });
+     */
+  };
+
+   
+
 
   $("#advSearchBtn").click(function(event) {
     console.log("prova");
@@ -99,23 +153,24 @@
       "url": "{{ route('apartment.adv.search') }}",
       "method": "POST",
       "data": {
-        "rooms": $("input[name='rooms']").val(),
-        "beds": $("input[name='beds']").val(),
-        "radius": $("input[name='radius']").val(),
-        "services": servicesArray
+      "rooms": $("input[name='rooms']").val(),
+      "beds": $("input[name='beds']").val(),
+      "radius": $("input[name='radius']").val(),
+      "services": servicesArray
       },
       "headers": {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       "success": function (data) {
-        /* console.log(data); */
+      /* console.log(data); */
         console.log(data[0]);
+        /* printAptFiltered(data); */
       },
       "error": function (iqXHR, textStatus, errorThrown) {
         alert(
-          "iqXHR.status: " + iqXHR.status + "\n" +
-          "textStatus: " + textStatus + "\n" +
-          "errorThrown: " + errorThrown
+        "iqXHR.status: " + iqXHR.status + "\n" +
+        "textStatus: " + textStatus + "\n" +
+        "errorThrown: " + errorThrown
         );
       }
     });

@@ -266,5 +266,6 @@ class ApartmentController extends Controller
     }
     // return view("pages.searchApartment", compact("filteredAptsAndDists"));
     return response()->json($filteredAptsAndDists, 200);
+    /* return response()->json(compact("filteredAptsAndDists")); si può fare anche così ti restituisce sempre l'oggetto */
   }
 }
