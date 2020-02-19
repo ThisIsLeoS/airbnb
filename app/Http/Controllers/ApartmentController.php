@@ -31,9 +31,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-
-        $services = Service::all();
-        return view("pages.apartmentCreate" , compact("services"));
+      $services = Service::all();
+      return view("pages.apartmentCreate" , compact("services"));
     }
 
     /**
@@ -56,16 +55,13 @@ class ApartmentController extends Controller
 
         // l'appartamento viene salvato nel DB
         $apt->save();
-
         $file = $request -> file("poster_img");
         $filename = $file -> getClientOriginalName();
         $file -> move("images/AptImg", $filename);
         $newAptImg = [
             "poster_img" => $filename
         ];
-
         $apt -> update($newAptImg);
-
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
@@ -99,8 +95,8 @@ class ApartmentController extends Controller
 
       if ($user == Auth::user()){
         return view('pages.messageApartmentShow', compact('user'));
-      }else{
-          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+      } else{
+        return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
       }
 
     }
@@ -118,8 +114,8 @@ class ApartmentController extends Controller
       $services = Service::all();
       if (Auth::user()-> id == $apartment -> user -> id){
         return view('pages.editApartment', compact('apartment', 'services'));
-      }else{
-          return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+      } else{
+        return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
       }
     }
 
@@ -140,17 +136,14 @@ class ApartmentController extends Controller
       } else {
         $services = [];
       }
-    
-          $file = $request -> file("poster_img");
-          $extension = $file -> getClientOriginalExtension();
-          $filename = time().'.'.$extension;
-          $file -> move("images/AptImg", $filename);
-          $newAptImg = [
-              "poster_img" => $filename
-          ];
-
-          $apartment -> update($newAptImg);
-
+      $file = $request -> file("poster_img");
+      $extension = $file -> getClientOriginalExtension();
+      $filename = time().'.'.$extension;
+      $file -> move("images/AptImg", $filename);
+      $newAptImg = [
+          "poster_img" => $filename
+      ];
+      $apartment -> update($newAptImg);
       $apartment -> services() -> sync($services);
       $apartment -> update($data);
 
@@ -166,7 +159,6 @@ class ApartmentController extends Controller
     public function userApartmentDelete($id)
     {
       $apartment = Apartment::findOrFail($id);
-
       $apartment -> services() -> detach();
       $apartment -> messages() -> delete();
       $apartment -> delete();
@@ -208,6 +200,7 @@ class ApartmentController extends Controller
       pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
     $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
     $angle = atan2(sqrt($a), $b);
+
     return $angle * $earthRadius;
   }
 
@@ -231,6 +224,7 @@ class ApartmentController extends Controller
         }
         if ($numOfMatches === count($services)) $servicesMatch = true;
       }
+      
       return $servicesMatch;
     }
   }
