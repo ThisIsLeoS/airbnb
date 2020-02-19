@@ -37097,9 +37097,13 @@ function showMessage() {
   $('.sender').on('click', function () {
     /* console.log("sto cliccando") */
     if ($(this).siblings(".body_message").hasClass("d-none")) {
+      $(this).find("i").removeClass("fa-caret-down");
+      $(this).find("i").removeClass("d-none");
       $(this).siblings(".body_message").fadeIn();
       $(this).siblings(".body_message").toggleClass("d-none");
     } else {
+      $(this).find("i").addClass("fa-caret-down");
+      $(this).find(".fa-caret-up").addClass("d-none");
       $(this).siblings(".body_message").fadeOut();
       $(this).siblings(".body_message").toggleClass("d-none");
     }
@@ -37341,8 +37345,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\unieuro\Documents\GitHub\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

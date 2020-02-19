@@ -50,10 +50,9 @@ class UserController extends Controller
     public function show($id)
     {
       $user = User::findOrFail($id);
-
       if ($user == Auth::user()){
         return view('pages.userShow', compact('user'));
-      }else{
+      } else{
           return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
       }
 
@@ -65,8 +64,7 @@ class UserController extends Controller
       $user = User::findOrFail($id);
         if ($user == Auth::user()){
             return view('pages.userApartmentShow', compact('user'));
-        }else{
-             /* return view("pages.unauthorized"); */
+        } else{
             return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
         }
 
@@ -109,14 +107,10 @@ class UserController extends Controller
     public function setUserImage(Request $request){
         $file = $request -> file("profile_img");
         $filename = $file -> getClientOriginalName();
-        /* dd($filename); */
-
         $file -> move("images/UserProfileImg", $filename);
-
         $newUserImg = [
             "profile_img" => $filename
         ];
-
         Auth::user() -> update($newUserImg);
 
         return redirect() -> back();

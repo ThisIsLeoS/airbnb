@@ -35,35 +35,30 @@
       <div id="addressesList">
       </div>
       <button class="btn btn-danger" name="button" placeholder="indirizzo">Cerca</button>
-
     </form>
-
   </div>
 </div>
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 myCards">
       @foreach ($apartments as $apt)
-
-      <div class="card homeCard">
-        @if ($apt -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
-          <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
-        @else
-          <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
-        @endif
-        <div class="card-body">
-          <h5 class="card-title">{{$apt -> title}}</h5>
-          <p class="card-text">{{$apt -> description}}</p>
-        <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
+        <div class="card homeCard">
+          @if ($apt -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
+            <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
+          @else
+            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
+          @endif
+          <div class="card-body">
+            <h5 class="card-title">{{$apt -> title}}</h5>
+            <p class="card-text">{{$apt -> description}}</p>
+          <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
+          </div>
         </div>
-      </div>
-
-@endforeach
+      @endforeach
     </div>
   </div>
 </div>
 <div class="col-12 justify-content-center">
-    {{ $apartments->links() }}
-  </div>
+  {{ $apartments->links() }}
+</div>
 @endsection
