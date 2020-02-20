@@ -46,7 +46,7 @@
 
   <div class="col-12 myCards sponsorApt mb-3">{{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}
   </div>
-  @if (count($filteredAptsAndDists) > 0)
+  @if (count($filteredAptsAndDists) >= 0)
   <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
   <div id="deleteHtml" class="row">
     <div class="col-12 myCards">
@@ -61,19 +61,10 @@
         uasort($filteredAptsAndDists, "compare_by_int_key");
       @endphp
 
-      {{-- HBars --}}
-
-      <script id="templateHb" type="text/x-handlebars-template">
-          <div class="test">
-            <p>@{{id}}</p>
-            <p>@{{title}}</p>
-            <p>@{{distance}}</p>
-          </div>
-      </script>
       <div class="aptFilteredOutput">
-
+        <p>PROVA</p>
       </div>
-      {{-- HBars --}}
+
       @foreach ($filteredAptsAndDists as $aptAndDist)
         <div class="card" style="width: 18rem;">
           @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
@@ -152,6 +143,7 @@
 
 
   $("#advSearchBtn").click(function(event) {
+    $(".aptFilteredOutput").empty();
     console.log("prova");
     var servicesArray = [];
     $("input[name='services[]']:checked").each(function(){
@@ -170,7 +162,7 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       "success": function (data) {
-      /* console.log(data); */
+      console.log(data);
         // console.log('data',data[0].apartment['title']);
         printAptFiltered(data);
       },
@@ -184,4 +176,16 @@
     });
   });
 </script>
+
+ {{-- HBars --}}
+
+<script id="templateHb" type="text/x-handlebars-template">
+  <div class="test">
+    <p>@{{id}}</p>
+    <p>@{{title}}</p>
+    <p>@{{distance}}</p>
+  </div>
+</script>
+
+{{-- HBars --}}
 @endsection
