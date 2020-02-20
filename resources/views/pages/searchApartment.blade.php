@@ -43,12 +43,12 @@
   </div>
   <h4><strong> Alloggi Airbnb Plus</strong></h4>
   <h5>Una selezione di alloggi verificati per qualità e design.</h5>
-  
+
   <div class="col-12 myCards sponsorApt mb-3">{{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}
   </div>
   @if (count($filteredAptsAndDists) > 0)
   <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
-  <div class="row">
+  <div id="deleteHtml" class="row">
     <div class="col-12 myCards">
       @php
         // l'array viene ordinato in base alla distanza
@@ -62,15 +62,17 @@
       @endphp
 
       {{-- HBars --}}
-      <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
       <script id="templateHb" type="text/x-handlebars-template">
           <div class="test">
+            <p>@{{id}}</p>
             <p>@{{title}}</p>
+            <p>@{{distance}}</p>
           </div>
-        </script>
+      </script>
       <div class="aptFilteredOutput">
-        
-      </div>  
+
+      </div>
       {{-- HBars --}}
       @foreach ($filteredAptsAndDists as $aptAndDist)
         <div class="card" style="width: 18rem;">
@@ -104,16 +106,22 @@
   }
 
   function printAptFiltered(data) {
-/*PRIMA PROVA
-
-     var target = $(".aptFilteredOutput")
+// PRIMA PROVA
+    // var elem = data[0];
+    // console.log('elem',elem);
+    var target = $(".aptFilteredOutput");
     var template = $("#templateHb").html();
     var compiled = Handlebars.compile(template);
-    for(var i = 0; i<data.lenght;i++){
-      var apts = data[i];
+    for(var i = 0; i<data.length;i++){
+      var apts = data[i].apartment;
+      var dist = data[i];
+      console.log('apts',apts);
+      console.log('dist',dist);
       var compiledApt = compiled(apts)
-      target.append(compiledApt);
-    } */
+      var compiledDist = compiled(dist);
+      target.append(compiledApt,compiledDist);
+    }
+
 
     /* SECONDA PROVA questa funziona se dall'altra parte usi la compact ma non stampa in pagina
     var sorgente = $("#templateHb").html();
@@ -138,9 +146,9 @@
 
     });
      */
-  };
+  }
 
-   
+
 
 
   $("#advSearchBtn").click(function(event) {
@@ -163,8 +171,8 @@
       },
       "success": function (data) {
       /* console.log(data); */
-        console.log(data[0]);
-        /* printAptFiltered(data); */
+        // console.log('data',data[0].apartment['title']);
+        printAptFiltered(data);
       },
       "error": function (iqXHR, textStatus, errorThrown) {
         alert(

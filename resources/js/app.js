@@ -62,7 +62,7 @@ function showMessage(){
   })
 }
 
- 
+
 
 
 
@@ -75,23 +75,23 @@ function init(){
 
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
-    
+
     $("footer").toggleClass("d-none");
     if ($("footer").hasClass("d-none") == false) {
       $(this).html("<i class='fas fa-times mr-2'></i> Chiudi")
       $("main").addClass("my_margin_bottom")
-     
+
 
         window.scrollBy({
           top: 1000,
           left: 0,
           behavior: 'smooth'
         });
-     
+
     } else {
       $("main").removeClass("my_margin_bottom")
       $(this).html("<i class='fas fa-info-circle mr-2'></i> Termini,privacy e altro");
-      
+
     }
   })
 
@@ -103,7 +103,7 @@ function init(){
   });
 
   $("#mySearch button").click(function(event) {
-    event.preventDefault();    
+    event.preventDefault();
     geocode($("#address-to-search").val(), "#mySearch");
   });
 
@@ -114,12 +114,12 @@ function init(){
       }
     }, 500)
   );
-  
+
   $(document).on("click", "li", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
   });
-  
+
   function delay(callback, ms) {
     var timer = 0;
     return function () {
@@ -161,7 +161,7 @@ function init(){
       }
     });
   }
-  
+
   function autoComplete(query) {
       $.ajax({
         "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
@@ -198,6 +198,7 @@ function init(){
 
   $("#searchByFiltersForm").submit(function(event) {
     console.log("prova");
+
     event.preventDefault();
     $.ajaxSetup({
       headers: {
@@ -209,7 +210,7 @@ function init(){
       "url": '/apartament/search',
       "method": "POST",
         contentType: "application/json",
-        dataType: "json",      
+        dataType: "json",
         "data": {
         "rooms": $("input[name='rooms']").val(),
         "beds": $("input[name='beds']").val(),
@@ -217,6 +218,7 @@ function init(){
         "services": $("input[name='services[]']:checked").serialize()
       },
       "success": function (data) {
+        $('.aptFilteredOutput').empty();
         console.log(data);
         return false;
       },
@@ -236,7 +238,7 @@ function navbar() {
 
   var url = window.location.href;
 
-  
+
   var page3000 = "http://localhost:3000/";
   var page3000_1 = "http://localhost:3000/?page=1";
   var page3000_2 = "http://localhost:3000/?page=2";

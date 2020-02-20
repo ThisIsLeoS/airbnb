@@ -9,6 +9,8 @@
 
     <title>LAM B&B</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
     <!-- JS: MOMENT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <!-- JS: CHART-JS -->
@@ -17,11 +19,11 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
     <!-- INCLUDO LIBRERIA PER LOCALITA' ITALIA -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/it.js"></script>
-    
+
 
     <!-- Scripts -->
-    
-    
+
+
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->

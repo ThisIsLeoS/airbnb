@@ -7,7 +7,7 @@
             <div class="wrapper mt-5">
                 <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
                 <script>
-                var created_at = []; 
+                var created_at = [];
                 var messageCount = [];
                 </script>
                 <div class="d-none">
@@ -66,7 +66,7 @@ var unique = function(origArr) {
                 borderColor: [
                     'rgba(99,180,255,1)'
                 ],
-                
+
                 borderWidth: 1
             }]
         },
@@ -78,7 +78,7 @@ var unique = function(origArr) {
                     fontStyle : "bold"
                 }
             },
-            
+
             scales: {
                 yAxes: [{
                     ticks: {
