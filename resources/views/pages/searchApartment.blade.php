@@ -162,7 +162,7 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       "success": function (data) {
-      console.log(data);
+        console.log(data);
         // console.log('data',data[0].apartment['title']);
         printAptFiltered(data);
       },

@@ -9,7 +9,7 @@ use App\Service;
 use App\Message;
 use App\Http\Requests\ApartmentRequest;
 use Illuminate\Support\Facades\Auth;
-
+use Braintree;
 
 class ApartmentController extends Controller
 {
@@ -280,5 +280,41 @@ class ApartmentController extends Controller
 
 
     return view("pages.apartmentStats" , compact("apartment" ,"messagesCount"));
+  }
+
+  public function sendTokenToClient() {
+    $gateway = new Braintree\gateway([
+      'environment' => config('services.braintree.environment'),
+      'merchantId' => config('services.braintree.merchantId'),
+      'publicKey' => config('services.braintree.publicKey'),
+      'privateKey' => config('services.braintree.privateKey')
+    ]);
+
+    $clientToken = $gateway->clientToken()->generate([
+      /* TODO? (see section "Generate a client token" in this page: 
+      https://developers.braintreepayments.com/start/hello-server/php) */
+      // "customerId" => $aCustomerId
+    ]);
+
+    return view("pages.apartmentSponsor", compact("clientToken"));
+  }
+
+   public function sendNonceToServer(Request $request) {
+    $nonceFromTheClient = $_POST["nonce"];
+    $gateway = new Braintree\gateway([
+      'environment' => config('services.braintree.environment'),
+      'merchantId' => config('services.braintree.merchantId'),
+      'publicKey' => config('services.braintree.publicKey'),
+      'privateKey' => config('services.braintree.privateKey')
+    ]);
+    $result = $gateway->transaction()->sale([
+      'amount' => '10.00',
+      'paymentMethodNonce' => $nonceFromTheClient,
+       // 'deviceData' => $deviceDataFromTheClient,
+      'options' => [
+      'submitForSettlement' => True
+      ]
+    ]);
+    return $result; 
   }
 }
