@@ -193,7 +193,8 @@ class ApartmentController extends Controller
       $request->session()->put('searchedAddresLon', $data["lon"]);
       $request->session()->put('apartmentsAndDistances', $filteredAptsAndDists);
       $request->session()->save();
-      return view("pages.searchApartment", compact("filteredAptsAndDists"));
+      $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
+      return view("pages.searchApartment", compact("html"));
     }
 
   public function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius) {
@@ -266,7 +267,8 @@ class ApartmentController extends Controller
       }
     }
     // return view("pages.searchApartment", compact("filteredAptsAndDists"));
-    return response()->json($filteredAptsAndDists, 200);
+     $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
+    return response()->json($html, 200);
     /* return response()->json(compact("filteredAptsAndDists")); si può fare anche così ti restituisce sempre l'oggetto */
   }
 
