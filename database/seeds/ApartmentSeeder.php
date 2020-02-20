@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Apartment;
 use App\Service;
 use App\User;
+use App\Sponsorship;
 
 
 
@@ -27,6 +28,9 @@ class ApartmentSeeder extends Seeder
 
             $services = Service::inRandomOrder() -> take(rand(0,6)) -> get();
             $apartment -> services() -> attach($services);
+
+            $sponsorships = Sponsorship::inRandomOrder() -> take(rand(0,3)) -> get();
+            $apartment -> sponsorships() -> attach($sponsorships);
         });
     }
 }

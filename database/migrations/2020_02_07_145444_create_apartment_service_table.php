@@ -15,7 +15,6 @@ class CreateApartmentServiceTable extends Migration
     {
         Schema::create('apartment_service', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
         });
     }
 
