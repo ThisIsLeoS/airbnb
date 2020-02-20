@@ -4,27 +4,26 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-
             <div class="wrapper mt-5">
-            <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
+                <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
                 <script>
                 var created_at = []; 
                 var messageCount = [];
                 </script>
-               <div class="d-none">
-                @foreach ($messagesCount as $messageCount)
-                    {{$messageCount -> count}}
-                    <script>
-                           messageCount.push("{{$messageCount -> count}}")
-                       </script>
-                @endforeach
-                   @foreach ($apartment -> messages as $message)
-                       {{$message -> created_at}}
-                       <script>
-                           created_at.push("{{$message -> created_at}}")
-                       </script>
-                   @endforeach
-               </div>
+                <div class="d-none">
+                    @foreach ($messagesCount as $messageCount)
+                        {{$messageCount -> count}}
+                        <script>
+                            messageCount.push("{{$messageCount -> count}}")
+                        </script>
+                    @endforeach
+                    @foreach ($apartment -> messages as $message)
+                        {{$message -> created_at}}
+                        <script>
+                            created_at.push("{{$message -> created_at}}")
+                        </script>
+                    @endforeach
+                </div>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -33,7 +32,7 @@
 
 
 <script>
-    //funzione per far restituire un elemento da un array 
+    //funzione per far restituire un array con elementi NON ripetuti
 var unique = function(origArr) {
         var newArr = [],
         origLen = origArr.length,
