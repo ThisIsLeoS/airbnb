@@ -48,7 +48,7 @@
   </div>
   @if (count($filteredAptsAndDists) >= 0)
   <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
-  <div id="deleteHtml" class="row">
+  <div  class="row">
     <div class="col-12 myCards">
       @php
         // l'array viene ordinato in base alla distanza
@@ -61,9 +61,6 @@
         uasort($filteredAptsAndDists, "compare_by_int_key");
       @endphp
 
-      <div class="aptFilteredOutput">
-        <p>PROVA</p>
-      </div>
 
       @foreach ($filteredAptsAndDists as $aptAndDist)
         <div class="card" style="width: 18rem;">
@@ -162,7 +159,7 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       "success": function (data) {
-        console.log(data);
+      console.log(data);
         // console.log('data',data[0].apartment['title']);
         printAptFiltered(data);
       },
