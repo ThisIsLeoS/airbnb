@@ -20,7 +20,7 @@
                     @foreach ($apartment -> messages as $message)
                         {{$message -> created_at}}
                         <script>
-                            created_at.push("{{$message -> created_at}}")
+                            created_at.push("{{$message -> created_at ->format('d-m-Y')}}")
                         </script>
                     @endforeach
                 </div>
@@ -64,7 +64,6 @@ var unique = function(origArr) {
                     'rgba(99,180,255,0.21)'
                 ],
                 borderColor: [
-                    
                     'rgba(99,180,255,1)'
                 ],
                 
