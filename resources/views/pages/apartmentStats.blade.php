@@ -6,11 +6,18 @@
         <div class="col-12">
 
             <div class="wrapper mt-5">
-                <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
+            <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
                 <script>
                 var created_at = []; 
+                var messageCount = [];
                 </script>
                <div class="d-none">
+                @foreach ($messagesCount as $messageCount)
+                    {{$messageCount -> count}}
+                    <script>
+                           messageCount.push("{{$messageCount -> count}}")
+                       </script>
+                @endforeach
                    @foreach ($apartment -> messages as $message)
                        {{$message -> created_at}}
                        <script>
@@ -53,7 +60,7 @@ var unique = function(origArr) {
             labels : unique(created_at),
             datasets: [{
                 label: 'Messaggi',
-                data: [{{$apartment-> messages()->count()}}],//il problema è qui , io gli chiedo il totale dei messaggi mentre dovrei chiedergli il count dei messaggi raggruppati per created_at
+                data: messageCount,
                 backgroundColor: [
                     'rgba(99,180,255,0.21)'
                 ],

@@ -166,6 +166,7 @@ class ApartmentController extends Controller
       $apartment = Apartment::findOrFail($id);
       $apartment -> services() -> detach();
       $apartment -> messages() -> delete();
+      $apartment -> views() -> delete();
       $apartment -> delete();
       return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
@@ -272,6 +273,12 @@ class ApartmentController extends Controller
   public function apartmentStatistics($id){
     $apartment = Apartment::findOrFail($id);
 
-    return view("pages.apartmentStats" , compact("apartment"));
+    $messagesCount = $apartment->messages()
+    ->selectRaw('count(*) as count, date(created_at) as created_date')
+    ->groupBy('created_date')
+    ->get();
+
+
+    return view("pages.apartmentStats" , compact("apartment" ,"messagesCount"));
   }
 }
