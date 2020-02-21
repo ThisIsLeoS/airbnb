@@ -1,3 +1,15 @@
+@foreach ($sponsorships as $sponsorship)
+  @foreach ($sponsorship->apartments as $apartment)
+    {{ $apartment->id }}
+  @endforeach
+@endforeach
+
+<h4><strong> Alloggi Airbnb Plus</strong></h4>
+  <h5>Una selezione di alloggi verificati per qualità e design.</h5>
+  <div class="col-12 myCards sponsorApt mb-3">
+    
+    {{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}
+  </div>
 @if (count($filteredAptsAndDists) > 0)
   <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
   <div  class="row">

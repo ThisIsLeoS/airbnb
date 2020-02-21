@@ -11,6 +11,7 @@ use App\Sponsorship;
 use App\Http\Requests\ApartmentRequest;
 use Illuminate\Support\Facades\Auth;
 use Braintree;
+use DateTime;
 
 class ApartmentController extends Controller
 {
@@ -176,10 +177,10 @@ class ApartmentController extends Controller
       return redirect() -> back() ->with('message', 'Appartamento Eliminato');
     }
 
-    public function getApartmentsAndDistances($startLat, $startLon, $radius, $apartments) {
+    public function getApartmentsAndDistances($startTimeLat, $startTimeLon, $radius, $apartments) {
       $filteredAptsAndDists = [];
       foreach($apartments as $apartment) {
-        $distance = $this->distance($startLat, $startLon, $apartment->lat, $apartment->lon, 6371);
+        $distance = $this->distance($startTimeLat, $startTimeLon, $apartment->lat, $apartment->lon, 6371);
         if ($distance < $radius) {
           $filteredAptsAndDists[]  = array(
             "apartment" => $apartment,
@@ -193,12 +194,14 @@ class ApartmentController extends Controller
     public function apartmentSearch(Request $request)
     {
       $data = $request -> all();
+      $sponsorships = Sponsorship::all();
+      // dd($sponsorships);
       $filteredAptsAndDists = $this->getApartmentsAndDistances($data["lat"], $data["lon"], 50, Apartment::all());
       $request->session()->put('searchedAddressLat', $data["lat"]);
       $request->session()->put('searchedAddresLon', $data["lon"]);
       $request->session()->put('apartmentsAndDistances', $filteredAptsAndDists);
       $request->session()->save();
-      $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
+      $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists', "sponsorships"))->render();
       return view("pages.searchApartment", compact("html"));
     }
 
@@ -310,28 +313,105 @@ class ApartmentController extends Controller
   }
 
    public function sendNonceToServer(Request $request) {
-    $data = $request -> all(); 
+    // $data = $request -> all(); 
     
-    $nonceFromTheClient = $_POST["nonce"];
-    $gateway = new Braintree\gateway([
-      'environment' => config('services.braintree.environment'),
-      'merchantId' => config('services.braintree.merchantId'),
-      'publicKey' => config('services.braintree.publicKey'),
-      'privateKey' => config('services.braintree.privateKey')
-    ]);
-    $result = $gateway->transaction()->sale([
-      'amount' => '10.00',
-      'paymentMethodNonce' => $nonceFromTheClient,
-       // 'deviceData' => $deviceDataFromTheClient,
-      'options' => [
-      'submitForSettlement' => True
-      ]
-    ]);
+    // $nonceFromTheClient = $_POST["nonce"];
+    // $gateway = new Braintree\gateway([
+    //   'environment' => config('services.braintree.environment'),
+    //   'merchantId' => config('services.braintree.merchantId'),
+    //   'publicKey' => config('services.braintree.publicKey'),
+    //   'privateKey' => config('services.braintree.privateKey')
+    // ]);
+    // $result = $gateway->transaction()->sale([
+    //   'amount' => '10.00',
+    //   'paymentMethodNonce' => $nonceFromTheClient,
+    //    // 'deviceData' => $deviceDataFromTheClient,
+    //   'options' => [
+    //   'submitForSettlement' => True
+    //   ]
+    // ]);
 
 
 
-    if ($result->success){
-      $sponsorships = Sponsorship::all();
-    return $result; 
+    // if ($result->success){
+    //   $sponsorships = Sponsorship::all();
+    // return $result; 
+    // }
+    $apartment = Apartment::findOrFail($request->aptId);
+    // if($apartment->sponsored == 0) {
+        $gateway = new Braintree\Gateway([
+          'environment' => config('services.braintree.environment'),
+          'merchantId' => config('services.braintree.merchantId'),
+          'publicKey' => config('services.braintree.publicKey'),
+          'privateKey' => config('services.braintree.privateKey')
+        ]);
+        $amount = $request->plan;
+        $nonce = $request->nonce;
+        $result = $gateway->transaction()->sale([
+            'amount' => $amount,
+            'paymentMethodNonce' => $nonce,
+            // 'customer' => [
+            //     'firstName' => 'Tony',
+            //     'lastName' => 'Stark',
+            //     'email' => 'tony@avengers.com',
+            // ],
+            'options' => [
+                'submitForSettlement' => true
+            ]
+        ]);
+        if ($result->success) {
+
+            // $transaction = $result->transaction;
+            // header("Location: transaction.php?id=" . $transaction->id);
+            // Sponsorizzare appartamento
+            $sponsorships = Sponsorship::all();
+            // $apSponsor = $apartment -> sponsored; 
+            // $apSponsor=[
+            //     "sponsored" => 1
+            // ];
+            // $apartment -> update($apSponsor);
+            foreach ($sponsorships as $sponsorship) {
+
+                if($sponsorship->price == $amount){
+
+                    if($amount == "2.99"){
+                        $startTime = new DateTime();                  
+
+                        $endTime = date("Y-m-d H:i:s", time() + 86400);
+
+                        $apartment -> sponsorships() -> attach($sponsorship, ["start_time" => $startTime, "end_time" => $endTime]);
+                        
+                    } else if ($amount == "5.99") {
+                        $startTime = new DateTime();
+                        $endTime = date("Y-m-d H:i:s", time() + 259200);
+                        $apartment -> sponsorships() -> attach($sponsorship,["start_time" => $startTime, "end_time" => $endTime]);
+                    } else if ($amount == "9.99") {
+                        $startTime = new DateTime();
+                        $endTime = date("Y-m-d H:i:s", time() + 518400);
+                        $apartment -> sponsorships() -> attach($sponsorship,["start_time" => $startTime, "end_time" => $endTime]);
+                    }
+                }
+            }
+            $message = "il pagamento è andato a buon fine";
+            // return back()->with('message', 'Transaction successful');
+            return view("pages.paymentResult", compact("message")).header("Refresh:4; url =" . route('userApartment.show', Auth::user()->id, false));
+        } else {
+            // $errorString = "C'è stato un errore";
+            //foreach ($result->errors->deepAll() as $error) {
+                // $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+            // }
+            $message = "il pagamento NON è andato a buon fine";
+
+            // return back()->with('message', 'Transaction UNsuccessful');
+            return view("pages.paymentResult", compact("message"));
+
+            
+            // return back()->withErrors('An error occurred with the message: ', "c'è stato un errore");
+        }
+    // } else {
+    //     return back()->withErrors('Hai già una sponsorizzazione attiva');
+    // }
+        
+        
   }
 }

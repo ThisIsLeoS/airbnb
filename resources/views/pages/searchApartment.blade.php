@@ -41,11 +41,7 @@
       </form>
     </div>
   </div>
-  <h4><strong> Alloggi Airbnb Plus</strong></h4>
-  <h5>Una selezione di alloggi verificati per qualità e design.</h5>
-
-  <div class="col-12 myCards sponsorApt mb-3">{{-- Qui andranno sempre e cmq tutti gli appartamenti sponsorizzati a prescindere dai filtri imposti dalla ricerca , sono quindi elementi statici  --}}
-  </div>
+  
   <div id="found-apartments">
       {!! $html !!}
   </div>

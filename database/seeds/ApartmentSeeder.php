@@ -29,8 +29,11 @@ class ApartmentSeeder extends Seeder
             $services = Service::inRandomOrder() -> take(rand(0,6)) -> get();
             $apartment -> services() -> attach($services);
 
-            $sponsorships = Sponsorship::inRandomOrder() -> take(rand(0,3)) -> get();
-            $apartment -> sponsorships() -> attach($sponsorships);
+            $sponsorships = Sponsorship::inRandomOrder() -> take(rand(0,1)) -> get();
+            $start = new DateTime();
+            $end = date("Y-m-d H:i:s", time() + 86400);
+
+            $apartment -> sponsorships() -> attach($sponsorships,["start_time" => $start, "end_time" => $end]);
         });
     }
 }

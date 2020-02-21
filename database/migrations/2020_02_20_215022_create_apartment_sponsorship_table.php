@@ -15,6 +15,8 @@ class CreateApartmentSponsorshipTable extends Migration
     {
         Schema::create('apartment_sponsorship', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
         });
     }
 
