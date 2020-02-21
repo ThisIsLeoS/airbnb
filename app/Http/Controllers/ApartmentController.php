@@ -7,6 +7,7 @@ use App\Apartment;
 use App\User;
 use App\Service;
 use App\Message;
+use App\Sponsorship;
 use App\Http\Requests\ApartmentRequest;
 use Illuminate\Support\Facades\Auth;
 use Braintree;
@@ -289,6 +290,9 @@ class ApartmentController extends Controller
   }
 
   public function sendTokenToClient($aptId) {
+
+
+
     $gateway = new Braintree\gateway([
       'environment' => config('services.braintree.environment'),
       'merchantId' => config('services.braintree.merchantId'),
@@ -307,7 +311,7 @@ class ApartmentController extends Controller
 
    public function sendNonceToServer(Request $request) {
     $data = $request -> all(); 
-    return $data;
+    
     $nonceFromTheClient = $_POST["nonce"];
     $gateway = new Braintree\gateway([
       'environment' => config('services.braintree.environment'),
@@ -324,7 +328,10 @@ class ApartmentController extends Controller
       ]
     ]);
 
-    // if result->success
+
+
+    if ($result->success){
+      $sponsorships = Sponsorship::all();
     return $result; 
   }
 }
