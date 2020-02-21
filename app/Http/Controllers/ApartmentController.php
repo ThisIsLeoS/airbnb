@@ -55,13 +55,14 @@ class ApartmentController extends Controller
 
         // l'appartamento viene salvato nel DB
         $apt->save();
-        $file = $request -> file("poster_img");
-        $filename = $file -> getClientOriginalName();
-        $file -> move("images/AptImg", $filename);
-        $newAptImg = [
-            "poster_img" => $filename
-        ];
-        $apt -> update($newAptImg);
+        if ($request -> hasfile("poster_img")) {
+          $file = $request -> file("poster_img");
+          $filename = $file -> getClientOriginalName();
+          $file -> move("images/AptImg", $filename);
+          $newAptImg = [
+              "poster_img" => $filename
+          ];
+        }
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
@@ -71,6 +72,9 @@ class ApartmentController extends Controller
           $apt->services =[];
         }
         $apt -> services() -> sync($services);
+        if ($request -> hasfile("poster_img")) {
+          $apartment -> update($newAptImg);
+        }
 
         // l'appartamento viene salvato nel DB
         return redirect()->route("userApartment.show", $userId);
@@ -293,7 +297,7 @@ class ApartmentController extends Controller
     ]);
 
     $clientToken = $gateway->clientToken()->generate([
-      /* TODO? (see section "Generate a client token" in this page: 
+      /* TODO? (see section "Generate a client token" in this page:
       https://developers.braintreepayments.com/start/hello-server/php) */
       // "customerId" => $aCustomerId
     ]);
@@ -317,6 +321,6 @@ class ApartmentController extends Controller
       'submitForSettlement' => True
       ]
     ]);
-    return $result; 
+    return $result;
   }
 }
