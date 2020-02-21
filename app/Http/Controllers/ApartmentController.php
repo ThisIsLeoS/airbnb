@@ -267,7 +267,7 @@ class ApartmentController extends Controller
       }
     }
     // return view("pages.searchApartment", compact("filteredAptsAndDists"));
-     $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
+    $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
     return response()->json($html, 200);
     /* return response()->json(compact("filteredAptsAndDists")); si può fare anche così ti restituisce sempre l'oggetto */
   }
@@ -284,7 +284,7 @@ class ApartmentController extends Controller
     return view("pages.apartmentStats" , compact("apartment" ,"messagesCount"));
   }
 
-  public function sendTokenToClient() {
+  public function sendTokenToClient($aptId) {
     $gateway = new Braintree\gateway([
       'environment' => config('services.braintree.environment'),
       'merchantId' => config('services.braintree.merchantId'),
@@ -298,10 +298,12 @@ class ApartmentController extends Controller
       // "customerId" => $aCustomerId
     ]);
 
-    return view("pages.apartmentSponsor", compact("clientToken"));
+    return view("pages.apartmentSponsor", compact("clientToken", "aptId"));
   }
 
    public function sendNonceToServer(Request $request) {
+    $data = $request -> all(); 
+    return $data;
     $nonceFromTheClient = $_POST["nonce"];
     $gateway = new Braintree\gateway([
       'environment' => config('services.braintree.environment'),
@@ -317,6 +319,8 @@ class ApartmentController extends Controller
       'submitForSettlement' => True
       ]
     ]);
+
+    // if result->success
     return $result; 
   }
 }

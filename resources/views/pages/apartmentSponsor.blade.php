@@ -15,10 +15,11 @@
                     if (err) alert("C'è stato un errore");
                     console.log(payload.nonce);
                     $.ajax({
-                        "url": "{{ route('apartment.sponsorship') }}",
+                        "url": "{{ route('apartment.sendNonce') }}",
                         "method": "POST",
                         "data": {
                             "nonce": payload.nonce,
+                            "aptId": "{{ $aptId }}"
                         },
                         "headers": {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -35,8 +35,8 @@ Route::post('/apartament/search', 'ApartmentController@apartmentAdvSearch') -> n
 Route::get('/apartament/{id}/statistics', 'ApartmentController@apartmentStatistics') -> name('apartment.stats');
 
 // Sponsorship routes
-Route::get("/apartment/sponsorship", "ApartmentController@sendTokenToClient")-> name("apartment.sponsorship");
-Route::post("/apartment/sponsorship", "ApartmentController@sendNonceToServer")-> name("apartment.sponsorship");
+Route::get("/apartment/{id}/sponsorship", "ApartmentController@sendTokenToClient")-> name("apartment.sponsorship");
+Route::post("/apartment/sponsorship", "ApartmentController@sendNonceToServer")-> name("apartment.sendNonce");
 
 
 //User route
