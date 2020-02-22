@@ -231,18 +231,39 @@
     </div>
 </div>
 
-{{-- <script type="text/javascript">
-console.log(typeahead())
-var path="{{route('autocomplete.sender')}}";
-$("input.typeahead").typeahead({
-    source:function(query,process){
-        return $.get(path,{query:sender},function(data){
-            return process(data);
-        })
-    }
-});
+{{-- <form id="views-info" action="{{ route("apartment.handleViews", $apartment->id) }}" method="POST">
+  @csrf
+  @method("POST")
+  <input id="ipAddress" type="text" name="ipAddress" hidden>
+</form> --}}
 
+<script>
+  $(document).ready(function () {
+    $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+      var ipWrapper = JSON.stringify(data, null, 2);
+      var obj = JSON.parse(ipWrapper);
+      // $("#ipAddress").val(obj.ip);
+
+      // $("#views-info").submit();
+      $.ajax({
+        "url": "{{ route('apartment.handleViews') }}",
+        "method": "POST",
+        "data": {
+          "aptId": "{{ $apartment->id }}",
+          "ip": obj.ip
+        },
+        "headers": {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        "success": function (data) {
+          console.log(data);
+        }
+      });
+    });
+    
+    // {
+    //   "ip": "93.47.39.104"
+    // }
+  });
 </script>
- --}}
-
 @endsection

@@ -30,6 +30,7 @@
     </div>
 </div>
 
+Le views di questo appartamento sono: {{ $viewsCount }}
 
 <script>
     //funzione per far restituire un array con elementi NON ripetuti

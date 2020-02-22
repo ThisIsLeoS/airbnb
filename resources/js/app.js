@@ -62,15 +62,10 @@ function showMessage(){
   })
 }
 
-
-
-
-
 function init(){
   alertHide();
   showMessage();
   navbar();
-
 
 
   $(".showFooter").on("click", function () {

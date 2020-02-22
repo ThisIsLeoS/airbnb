@@ -33,6 +33,7 @@ Route::post('/apartament/{id}/update', 'ApartmentController@update') -> name('ap
 Route::get('/apartment/search', "ApartmentController@apartmentSearch") ->name('apartment.search');
 Route::post('/apartament/search', 'ApartmentController@apartmentAdvSearch') -> name('apartment.adv.search');
 Route::get('/apartament/{id}/statistics', 'ApartmentController@apartmentStatistics') -> name('apartment.stats');
+Route::post('/apartment/handle-views', 'ApartmentController@handleAptViews')->name('apartment.handleViews');
 
 // Sponsorship routes
 Route::get("/apartment/{id}/sponsorship", "ApartmentController@sendTokenToClient")-> name("apartment.sponsorship");

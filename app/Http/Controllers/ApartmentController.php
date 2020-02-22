@@ -12,6 +12,8 @@ use App\Http\Requests\ApartmentRequest;
 use Illuminate\Support\Facades\Auth;
 use Braintree;
 use DateTime;
+use DB;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -245,6 +247,7 @@ class ApartmentController extends Controller
   }
 
   public function apartmentAdvSearch(Request $request) {
+    $sponsorships = Sponsorship::all();
     $data = $request -> all();
     $numOfRooms = $data["rooms"];
     $numOfBeds = $data["beds"];
@@ -275,7 +278,7 @@ class ApartmentController extends Controller
       }
     }
     // return view("pages.searchApartment", compact("filteredAptsAndDists"));
-    $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists'))->render();
+    $html = view('partials.foundApartments')->with(compact('filteredAptsAndDists', "sponsorships"))->render();
     return response()->json($html, 200);
     /* return response()->json(compact("filteredAptsAndDists")); si può fare anche così ti restituisce sempre l'oggetto */
   }
@@ -288,8 +291,12 @@ class ApartmentController extends Controller
     ->groupBy('created_date')
     ->get();
 
+    $viewsCount = $apartment->views()
+    ->selectRaw('count(*) as count, date(created_at) as created_date')
+    ->groupBy('created_date')
+    ->get();
 
-    return view("pages.apartmentStats" , compact("apartment" ,"messagesCount"));
+    return view("pages.apartmentStats" , compact("apartment" ,"messagesCount", "viewsCount"));
   }
 
   public function sendTokenToClient($aptId) {
@@ -413,5 +420,29 @@ class ApartmentController extends Controller
     // }
         
         
+  }
+
+  public function handleAptViews(Request $request) {
+    $data = $request->all();
+    // return $data;
+    // se nella tabella views ad aptId NON è già associato ip, metti nella tabella una nuova riga con l'aptId e l'ip
+    /* 
+    SELECT * FROM views
+    WHERE apartment_id = 2 AND ip_address = "Ut repellendus porro ea amet rerum recusandae." */
+    $rows = 
+      DB::table("views") 
+      ->where("apartment_id", "=", $data["aptId"])
+      ->where("ip_address", "=", $data["ip"])
+      ->get();
+    if (count($rows) == 0) {
+      DB::table('views')->insert(
+        [
+          'ip_address' => $data["ip"], 
+          'apartment_id' => $data["aptId"],
+          'created_at' => Carbon::now()->toDateTimeString(),
+          'updated_at' => Carbon::now()->toDateTimeString()
+        ]
+      );
+    }
   }
 }
