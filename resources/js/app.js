@@ -115,7 +115,7 @@ function init(){
     }, 500)
   );
 
-  $(document).on("click", "li", function () {
+  $(document).on("click", "li.autocompleteLi", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
   });
@@ -180,7 +180,7 @@ function init(){
               '<ul class="dropdown-menu" style="display:block; position:absolute">'
             );
               for (var i = 0; i < data.results.length ; i++) {
-                $("#addressesList ul").append("<li>" + data.results[i].address.freeformAddress + "</li>");
+                $("#addressesList ul").append("<li class='autocompleteLi'>" + data.results[i].address.freeformAddress + "</li>");
               }
             $("#addressesList").append("</ul>");
           }

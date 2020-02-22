@@ -128,8 +128,13 @@
 }
 
 .sponsorApt{
-    height:250px;
-    background:rgba(255, 230, 0, 0.603);
+    .card-body{
+        background:rgb(187, 157, 81);
+    }
+}
+
+.my_height{
+    max-height: 1000px;
 }
 
 /* .my_form_style{

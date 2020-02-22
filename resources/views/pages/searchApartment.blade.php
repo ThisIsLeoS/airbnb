@@ -18,7 +18,7 @@
               <label for="beds">Numero Letti</label>
               <input type="number" id="beds" name="beds" min="1" max="4">
               <span class="text-center ml-5 m">Raggio di ricerca: <span class="ml-2" id="valOfRadius"></span> km</span>
-              <input id="radius" name="radius" type="range" min="1" max="10000000" value="50" class="slider ml-2">
+              <input id="radius" name="radius" type="range" min="1" max="200" value="50" class="slider ml-2">
             </div>
             <div class="mt-3 text-center">
               <p>Seleziona i servizi che desideri:</p>

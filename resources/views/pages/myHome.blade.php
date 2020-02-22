@@ -43,7 +43,7 @@
     <div class="col-12 myCards">
       @foreach ($apartments as $apt)
         <div class="card homeCard">
-          @if ($apt -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
+          @if ($apt -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
           @else
             <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">

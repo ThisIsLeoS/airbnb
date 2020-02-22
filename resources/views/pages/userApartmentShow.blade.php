@@ -17,7 +17,7 @@
       @foreach ($user->apartments as $apartment)
       {{-- <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true"> --}}
         <div class="card" style="width:21rem">
-          @if ($apartment -> poster_img == "https://source.unsplash.com/random/400x250/?apartment")
+          @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
           <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
           @else
           <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">

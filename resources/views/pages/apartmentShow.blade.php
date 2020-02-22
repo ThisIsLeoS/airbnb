@@ -1,10 +1,15 @@
 @extends('layouts.base')
 
 @section("content")
-<div class="container-fluid">
+<div class="container-fluid my_height">
     <div class="row p-2">
-        <div class="col-6 ms_img noGutter border border-dark">
-            <img src="{{asset('images/ShowApt/img1.jpg')}}" alt="">
+      
+        <div class="col-6  ms_img noGutter border border-dark">
+          @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+            <img class="img-fluid" src="{{$apartment->poster_img}}" alt="">
+          @else
+            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
+          @endif
         </div>
         <div class="col-6 ms_img ">
             <div class="row ">
@@ -24,7 +29,7 @@
                 </div>
             </div>
         </div>
-
+      
     </div>
 </div>
 <div class="container-fluid">
