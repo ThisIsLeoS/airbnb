@@ -92,6 +92,7 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
+      
         $apartment = Apartment::findOrFail($id);
 
         return view("pages.apartmentShow" , compact("apartment"));
