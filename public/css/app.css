@@ -1523,6 +1523,10 @@ a.ui-button:active,
   border: 1px solid black;
 }
 
+.test {
+  overflow: hidden;
+}
+
 .ms_img {
   overflow: hidden;
 }
@@ -1681,8 +1685,32 @@ button #showMyApt {
 }
 
 .inactive {
-  background-color: rgba(31, 43, 43, 0.66) !important;
+  opacity: 0.6 !important;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+  border-radius: 10px;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+  border-radius: 10px;
+}
+
+#myBar p {
+  color: white;
+}
+
+/* .boxPayment{
+    width:50%;
+    img{
+        width:100%;
+    }
+} */
 
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -12587,12 +12615,35 @@ a.text-dark:focus {
 
 .homeCard {
   width: 18rem;
+  height: 350px;
+  overflow: hidden;
+}
+
+.homeCard .my_ovFlowHid {
+  overflow: hidden;
 }
 
 .myCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.myCards a {
+  color: black;
+  text-decoration: none;
+}
+
+.myCards a img {
+  transition: transform 0.6s;
+}
+
+.myCards a img:hover {
+  transform: scale(1.1);
+}
+
+.myCards a:hover img {
+  transform: scale(1.1);
 }
 
 .myCards .card {

@@ -46,19 +46,23 @@
 
       @foreach ($apartments as $apt)
         @if ($apt->visibility == 1)
-          
-          <div class="card homeCard">
-            @if ($apt -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-              <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
-            @else
-              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
-            @endif
-            <div class="card-body">
-              <h5 class="card-title">{{$apt -> title}}</h5>
-              <p class="card-text">{{$apt -> description}}</p>
-            <a href="{{route("apartment.show",$apt-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
+          <a href="{{route("apartment.show",$apt-> id)}}">
+            <div class="card homeCard">
+              @if ($apt -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+              <div class="my_ovFlowHid">
+                <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
+              </div>
+              @else
+              <div class="my_ovFlowHid">
+                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
+              </div>
+              @endif
+              <div class="card-body">
+                <h5 class="card-title">{{$apt -> title}}</h5>
+                <p class="card-text">{{$apt -> description}}</p>
+              </div>
             </div>
-          </div>
+          </a>
         @endif
       @endforeach
     </div>

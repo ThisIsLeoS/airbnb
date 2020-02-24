@@ -400,15 +400,15 @@ class ApartmentController extends Controller
                     }
                 }
             }
-            $message = "il pagamento è andato a buon fine";
+            $message = "Il pagamento è andato a buon fine";
             // return back()->with('message', 'Transaction successful');
-            return view("pages.paymentResult", compact("message")).header("Refresh:4; url =" . route('userApartment.show', Auth::user()->id, false));
+            return view("pages.paymentResult", compact("message"));/* .header("Refresh:4; url =" . route('userApartment.show', Auth::user()->id, false)); */
         } else {
             // $errorString = "C'è stato un errore";
             //foreach ($result->errors->deepAll() as $error) {
                 // $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             // }
-            $message = "il pagamento NON è andato a buon fine";
+            $message = "Il pagamento NON è andato a buon fine";
 
             // return back()->with('message', 'Transaction UNsuccessful');
             return view("pages.paymentResult", compact("message"));

@@ -1,13 +1,13 @@
 @extends('layouts.base')
 
 @section("content")
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-6">
             <div class="wrapper mt-5">
                 <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
                 <script>
-                var created_at = [];
+                var created_atMex = [];
                 var messageCount = [];
                 </script>
                 <div class="d-none">
@@ -20,17 +20,41 @@
                     @foreach ($apartment -> messages as $message)
                         {{$message -> created_at}}
                         <script>
-                            created_at.push("{{$message -> created_at ->format('d-m-Y')}}")
+                            created_atMex.push("{{$message -> created_at ->format('d-m-Y')}}")
                         </script>
                     @endforeach
                 </div>
-                <canvas id="myChart"></canvas>
+                <canvas id="myChartMex"></canvas>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="wrapper mt-5">
+            <h4 class="text-center">Visualizzazioni totali per questo appartamento : {{$apartment-> views()->count()}}</h4>
+            <script>
+                var created_atViews = [];
+                var viewsCount = [];
+            </script>
+            <div class="d-none">
+                @foreach ($viewsCount as $viewCount)
+                    {{$viewCount -> count}}
+                    <script>
+                        viewsCount.push("{{$viewCount -> count}}")
+                    </script>
+                @endforeach
+                @foreach ($apartment -> views as $view)
+                    {{$view -> created_at}}
+                    <script>
+                        created_atViews.push("{{$view -> created_at ->format('d-m-Y')}}")
+                    </script>
+                @endforeach
+                </div>
+            </div>
+            <canvas id="myChartViews"></canvas>
         </div>
     </div>
 </div>
 
-Le views di questo appartamento sono: {{ $viewsCount }}
+{{-- Le views di questo appartamento sono: {{ $viewsCount }} --}}
 
 <script>
     //funzione per far restituire un array con elementi NON ripetuti
@@ -52,15 +76,20 @@ var unique = function(origArr) {
 }
     return newArr;
 }
-    console.log(unique(created_at))
-    var ctx = document.getElementById('myChart').getContext('2d');
+
+    printGraphs("myChartMex",unique(created_atMex),"Messaggi",messageCount);
+    printGraphs("myChartViews",unique(created_atViews),"Visite",viewsCount);
+
+
+    function printGraphs(where,labels,label,data){
+    var ctx = document.getElementById(where).getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels : unique(created_at),
+            labels : labels,
             datasets: [{
-                label: 'Messaggi',
-                data: messageCount,
+                label: label,
+                data: data,
                 backgroundColor: [
                     'rgba(99,180,255,0.21)'
                 ],
@@ -89,6 +118,7 @@ var unique = function(origArr) {
             }
         }
     });
+  }
 </script>
 
 
