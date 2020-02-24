@@ -92,7 +92,7 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-      
+
         $apartment = Apartment::findOrFail($id);
 
         return view("pages.apartmentShow" , compact("apartment"));
@@ -312,7 +312,7 @@ class ApartmentController extends Controller
     ]);
 
     $clientToken = $gateway->clientToken()->generate([
-      /* TODO? (see section "Generate a client token" in this page: 
+      /* TODO? (see section "Generate a client token" in this page:
       https://developers.braintreepayments.com/start/hello-server/php) */
       // "customerId" => $aCustomerId
     ]);
@@ -321,8 +321,8 @@ class ApartmentController extends Controller
   }
 
    public function sendNonceToServer(Request $request) {
-    // $data = $request -> all(); 
-    
+    // $data = $request -> all();
+
     // $nonceFromTheClient = $_POST["nonce"];
     // $gateway = new Braintree\gateway([
     //   'environment' => config('services.braintree.environment'),
@@ -343,7 +343,7 @@ class ApartmentController extends Controller
 
     // if ($result->success){
     //   $sponsorships = Sponsorship::all();
-    // return $result; 
+    // return $result;
     // }
     $apartment = Apartment::findOrFail($request->aptId);
     // if($apartment->sponsored == 0) {
@@ -373,7 +373,7 @@ class ApartmentController extends Controller
             // header("Location: transaction.php?id=" . $transaction->id);
             // Sponsorizzare appartamento
             $sponsorships = Sponsorship::all();
-            // $apSponsor = $apartment -> sponsored; 
+            // $apSponsor = $apartment -> sponsored;
             // $apSponsor=[
             //     "sponsored" => 1
             // ];
@@ -383,12 +383,12 @@ class ApartmentController extends Controller
                 if($sponsorship->price == $amount){
 
                     if($amount == "2.99"){
-                        $startTime = new DateTime();                  
+                        $startTime = new DateTime();
 
                         $endTime = date("Y-m-d H:i:s", time() + 60);
 
                         $apartment -> sponsorships() -> attach($sponsorship, ["start_time" => $startTime, "end_time" => $endTime]);
-                        
+
                     } else if ($amount == "5.99") {
                         $startTime = new DateTime();
                         $endTime = date("Y-m-d H:i:s", time() + 259200);
@@ -413,32 +413,32 @@ class ApartmentController extends Controller
             // return back()->with('message', 'Transaction UNsuccessful');
             return view("pages.paymentResult", compact("message"));
 
-            
+
             // return back()->withErrors('An error occurred with the message: ', "c'è stato un errore");
         }
     // } else {
     //     return back()->withErrors('Hai già una sponsorizzazione attiva');
     // }
-        
-        
+
+
   }
 
   public function handleAptViews(Request $request) {
     $data = $request->all();
     // return $data;
     // se nella tabella views ad aptId NON è già associato ip, metti nella tabella una nuova riga con l'aptId e l'ip
-    /* 
+    /*
     SELECT * FROM views
     WHERE apartment_id = 2 AND ip_address = "Ut repellendus porro ea amet rerum recusandae." */
-    $rows = 
-      DB::table("views") 
+    $rows =
+      DB::table("views")
       ->where("apartment_id", "=", $data["aptId"])
       ->where("ip_address", "=", $data["ip"])
       ->get();
     if (count($rows) == 0) {
       DB::table('views')->insert(
         [
-          'ip_address' => $data["ip"], 
+          'ip_address' => $data["ip"],
           'apartment_id' => $data["aptId"],
           'created_at' => Carbon::now()->toDateTimeString(),
           'updated_at' => Carbon::now()->toDateTimeString()
@@ -446,4 +446,19 @@ class ApartmentController extends Controller
       );
     }
   }
+
+  public function makeAptVisible(Request $request)
+  {
+    $data = $request-> all();
+    $apartment = Apartment::findOrFail($data["aptId"]);
+    if ($apartment->visibility === 1) {
+      $apartment -> visibility = 0;
+      $apartment -> save();
+    } else {
+      $apartment -> visibility = 1;
+      $apartment -> save();
+    }
+      return $apartment;
+  }
+
 }

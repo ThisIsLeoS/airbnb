@@ -34,6 +34,7 @@ Route::get('/apartment/search', "ApartmentController@apartmentSearch") ->name('a
 Route::post('/apartament/search', 'ApartmentController@apartmentAdvSearch') -> name('apartment.adv.search');
 Route::get('/apartament/{id}/statistics', 'ApartmentController@apartmentStatistics') -> name('apartment.stats');
 Route::post('/apartment/handle-views', 'ApartmentController@handleAptViews')->name('apartment.handleViews');
+Route::post('/apartment/visibility', 'ApartmentController@makeAptVisible')->name('apartment.visibility');
 
 // Sponsorship routes
 Route::get("/apartment/{id}/sponsorship", "ApartmentController@sendTokenToClient")-> name("apartment.sponsorship");
@@ -48,5 +49,3 @@ Route::post('user/image/set' , "UserController@setUserImage") -> name("user.set.
 
 //Message route
 Route::post("/apartment/{id}/show" , "MessageController@createMessageForApt") -> name("message.apartment.create");
-
-

@@ -26,6 +26,7 @@ class CreateApartmentsTable extends Migration
             $table->decimal("lon", 10, 7);
             // $table->integer("views")->default(0);
             $table->string("poster_img")->nullable();
+            $table->boolean("visibility")->default(true);
             $table->timestamps();
         });
     }

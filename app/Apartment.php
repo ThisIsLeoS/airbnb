@@ -16,7 +16,8 @@ class Apartment extends Model
         "address",
         "lat",
         "lon",
-        "poster_img"
+        "poster_img",
+        "visibility"
 
     ];
 
