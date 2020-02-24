@@ -10,6 +10,7 @@
 @import 'unauthorized';
 @import 'userShowApt';
 @import 'payment';
+@import 'aptPlus';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -20,6 +21,22 @@
     margin:0;
 }
 
+.myBg{
+background: url("/images/bnbplus.jpg");
+background-position: right;
+    button{
+        color: rgb(72, 72, 72) ;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 800 ;
+        background:rgb(255, 255, 255);
+        &:active,&:hover{
+            color: rgb(72, 72, 72);
+            background: rgb(226, 226, 226);
+        }
+       
+    }
+}
 .pagination{
     justify-content: center;
 }
@@ -46,6 +63,16 @@
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    .card{
+        border:1px solid rgba(128, 128, 128, 0.11);
+        &:hover{
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        h5{
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+    }
     a{
         img{
             transition: transform .6s;

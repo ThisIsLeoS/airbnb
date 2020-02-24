@@ -461,4 +461,9 @@ class ApartmentController extends Controller
       return $apartment;
   }
 
+  public function apartmentPlus(){
+    $sponsorships = Sponsorship::all();
+    return view("pages.apartmentPlus", compact("sponsorships"));
+  }
+
 }

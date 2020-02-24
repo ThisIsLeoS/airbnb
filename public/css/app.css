@@ -1523,10 +1523,6 @@ a.ui-button:active,
   border: 1px solid black;
 }
 
-.test {
-  overflow: hidden;
-}
-
 .ms_img {
   overflow: hidden;
 }
@@ -1711,6 +1707,55 @@ button #showMyApt {
         width:100%;
     }
 } */
+
+.multi-item-carousel .carousel-inner > .item {
+  transition: 500ms ease-in-out left;
+}
+
+.multi-item-carousel .carousel-inner .active.left {
+  left: -33%;
+}
+
+.multi-item-carousel .carousel-inner .active.right {
+  left: 33%;
+}
+
+.multi-item-carousel .carousel-inner .next {
+  left: 33%;
+}
+
+.multi-item-carousel .carousel-inner .prev {
+  left: -33%;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .multi-item-carousel .carousel-inner > .item {
+    transition: 500ms ease-in-out left;
+    transition: 500ms ease-in-out all;
+    -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+    transform: none !important;
+  }
+}
+
+.multi-item-carousel .carouse-control.left,
+.multi-item-carousel .carouse-control.right {
+  background-image: none;
+}
+
+body {
+  background: #333;
+  color: #ddd;
+}
+
+h1 {
+  color: white;
+  font-size: 2.25em;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  text-shadow: 0px 2px 0px black;
+}
 
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -12601,6 +12646,25 @@ a.text-dark:focus {
   margin: 0;
 }
 
+.myBg {
+  background: url("/images/bnbplus.jpg");
+  background-position: right;
+}
+
+.myBg button {
+  color: #484848;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+  background: white;
+}
+
+.myBg button:active,
+.myBg button:hover {
+  color: #484848;
+  background: #e2e2e2;
+}
+
 .pagination {
   justify-content: center;
 }
@@ -12627,6 +12691,19 @@ a.text-dark:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.myCards .card {
+  border: 1px solid rgba(128, 128, 128, 0.11);
+}
+
+.myCards .card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.myCards .card h5 {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .myCards a {

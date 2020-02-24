@@ -39,7 +39,7 @@ Route::post('/apartment/visibility', 'ApartmentController@makeAptVisible')->name
 // Sponsorship routes
 Route::get("/apartment/{id}/sponsorship", "ApartmentController@sendTokenToClient")-> name("apartment.sponsorship");
 Route::post("/apartment/sponsorship", "ApartmentController@sendNonceToServer")-> name("apartment.sendNonce");
-
+Route::get("/apartment/plus","ApartmentController@apartmentPlus") ->name("apartment.plus");
 
 //User route
 Route::get('/user/{id}/show', 'UserController@show') -> name('user.show');
