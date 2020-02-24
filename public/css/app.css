@@ -1680,6 +1680,10 @@ button #showMyApt {
   height: 200px;
 }
 
+.inactive {
+  background-color: rgba(31, 43, 43, 0.66) !important;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
