@@ -20,9 +20,9 @@
       @endphp
       @foreach ($user->apartments as $apartment)
       {{-- <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true"> --}}
-      {{-- @if ($apartment->visibility == 0) --}}
+      @if ($apartment->visibility == 0)
 
-    <div class="card inactive apt-user-show-card {{ $apartment->visibility }}" style="width:21rem">
+        <div class="card inactive apt-user-show-card inactive {{ $apartment->visibility }}" style="width:21rem">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
           <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
           @else
@@ -39,8 +39,8 @@
               </div>
             </div>
           </div>
-        {{-- @else
-          <div class="card" style="width:21rem">
+        @else
+          <div class="card apt-user-show-card {{ $apartment->visibility }}" style="width:21rem">
             @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
             @else
@@ -57,8 +57,7 @@
               </div>
             </div>
           </div>
-          @endif --}}
-
+          @endif
 
       @endforeach
     </div>
@@ -83,11 +82,11 @@ $(document).on('click','.visibilityBtn', function(event){
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       "success": function (data) {
-        if (thisEl.parents(".apt-user-show-card").hasClass("0")) {
-          thisEl.parents(".apt-user-show-card.0").addClass("inactive");
+        if (thisEl.parents(".apt-user-show-card").hasClass("inactive")) {
+          thisEl.parents(".apt-user-show-card").removeClass("inactive");
         }
         else {
-          thisEl.parents(".apt-user-show-card.1").removeClass("inactive");
+          thisEl.parents(".apt-user-show-card").addClass("inactive");
         }    
         console.log(data);
       },
