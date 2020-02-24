@@ -63,6 +63,7 @@ function showMessage(){
 }
 
 function init(){
+  $(".apt-user-show-card.0").addClass("inactive");
   alertHide();
   showMessage();
   navbar();
