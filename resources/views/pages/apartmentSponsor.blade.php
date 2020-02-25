@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section("content")
-    
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -30,23 +29,29 @@
         </div>
     </div>
 </div>
-<div>
-
     <div id="dropin-container"></div>
-    <button id="submit-button">Request payment method</button>
-</div>
+    {{-- <button id="submit-button">Request payment method</button> --}}
      <script>
-         $("[data-braintree-id='card']").append("#submit-button");
-        var button = document.querySelector('#submit-button');
+        var button = document.createElement("BUTTON");
+        button.innerHTML = "Request payment method";
+        $(button).attr("id", "submit-button");
+        // $("<button id='submit-button'>Request payment method</button>");
         braintree.dropin.create({
             authorization: '{{ $clientToken }}',
             container: '#dropin-container'
-        }, function (createErr, instance) {
+        }, function (createErr, instance) {  
+            $("[data-braintree-id='card']").append(button);
             button.addEventListener('click', function () {
                 instance.requestPaymentMethod(function (err, payload) {
-                    $("#nonce").val(payload.nonce);
-                    $("#aptId").val("{{ $aptId }}");
-                    /* $("#sponsorships-form").submit(); */
+                    var payBtn = document.createElement("BUTTON");
+                    payBtn.innerHTML = "Pay";
+                    $(button).attr("id", "pay-button");
+                    $("#dropin-container").append(payBtn);
+                    payBtn.addEventListener('click', function () {
+                        $("#nonce").val(payload.nonce);
+                        $("#aptId").val("{{ $aptId }}");
+                        $("#sponsorships-form").submit();
+                    });
                     // if (err) alert("C'è stato un errore");
                     // console.log(payload.nonce);
                     // $.ajax({
