@@ -12681,6 +12681,14 @@ a.text-dark:focus {
   background: #e2e2e2;
 }
 
+.ms_img {
+  max-height: 630px;
+}
+
+.card-img-top {
+  height: 200px;
+}
+
 .pagination {
   justify-content: center;
 }
@@ -12833,8 +12841,8 @@ a.text-dark:focus {
   background: #bb9d51;
 }
 
-.my_height {
-  max-height: 1000px;
+.myHeight {
+  height: 50%;
 }
 
 /* .my_form_style{

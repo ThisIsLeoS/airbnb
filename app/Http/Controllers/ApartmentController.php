@@ -166,7 +166,7 @@ class ApartmentController extends Controller
           $file = $request -> file("poster_img");
           $extension = $file -> getClientOriginalExtension();
           $filename = time().'.'.$extension;
-          $file -> move("images/AptImg", $filename);
+          $file -> move("images/AptImg/".$apartment->id, $filename);
           $newAptImg = [
               "poster_img" => $filename
           ];

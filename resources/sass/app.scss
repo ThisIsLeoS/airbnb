@@ -37,6 +37,13 @@ background-position: right;
        
     }
 }
+
+.ms_img{
+    max-height: 630px;
+}
+.card-img-top{
+    height: 200px;;
+}
 .pagination{
     justify-content: center;
 }
@@ -182,8 +189,8 @@ background-position: right;
     }
 }
 
-.my_height{
-    max-height: 1000px;
+.myHeight{
+    height:50%;
 }
 
 /* .my_form_style{

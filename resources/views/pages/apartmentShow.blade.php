@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section("content")
-<div class="container-fluid my_height">
+<div class="container-fluid">
     <div class="row p-2">
       
         <div class="col-6  ms_img noGutter border border-dark">
@@ -14,7 +14,7 @@
           @endif
         </div>
         <div class="col-6 ms_img ">
-            <div class="row ">
+            <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
                     <img src="{{asset('images/ShowApt/img2.jpg')}}" alt="">
                 </div>
@@ -22,7 +22,7 @@
                     <img src="{{asset('images/ShowApt/img3.jpg')}}" alt="">
                 </div>
             </div>
-            <div class="row">
+            <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
                     <img src="{{asset('images/ShowApt/img4.jpg')}}" alt="">
                 </div>
