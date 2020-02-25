@@ -8,9 +8,7 @@
     padding:0.5%;
 }
 
-.myTestl {
-    right: 100%;
-}
+
 /*
 .carousel-control-next {
     left: 100%;
@@ -75,6 +73,7 @@
         </div>
         <div class="col-10 offset-1 mt-5">
             <div class="row mx-auto my-auto">
+                <div class="col-12">
                 <div id="myCarousel" class="carousel slide " data-ride="carousel">
                     <div class="carousel-inner w-100" role="listbox">
                         @php
@@ -129,14 +128,16 @@
                         @endforeach
                     </div>
                 </div>
+                </div>
             </div>
+
             <a class="carousel-control-prev myTestl bg-dark w-auto" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true">TEst</span>
-            <span class="sr-only">Previous</span>
+            <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+            
             </a>
             <a class="carousel-control-next bg-dark w-auto" href="#myCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            
             </a>
         </div>
     </div>
