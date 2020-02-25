@@ -1,5 +1,69 @@
 @extends('layouts.base')
 @section('content')
+<style>
+     .carousel-control-prev, .carousel-control-next{
+    top:50% !important;
+    height:20px;
+    border-radius:50%;
+    padding:0.5%;
+}
+
+.myTestl {
+    right: 100%;
+}
+/*
+.carousel-control-next {
+    left: 100%;
+}
+ */
+@media (min-width: 768px) {
+
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(50%);
+    }
+
+    .carousel-inner .carousel-item-left.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-50%);
+    }
+}
+
+/* large - display 3 */
+@media (min-width: 992px) {
+
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(33%);
+    }
+
+    .carousel-inner .carousel-item-left.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-33%);
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item>div {
+        display: none;
+    }
+
+    .carousel-inner .carousel-item>div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left {
+    transform: translateX(0);
+}
+</style>
 
 <div class="container-fluid">
     <div class="row">
@@ -83,7 +147,7 @@
 
 
 $('#myCarousel').carousel({
-    interval: 30000000
+    interval: 3000
 })
 
 $('.carousel .carousel-item').each(function() {
