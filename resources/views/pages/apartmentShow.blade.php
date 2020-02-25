@@ -7,8 +7,10 @@
         <div class="col-6  ms_img noGutter border border-dark">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <img class="img-fluid" src="{{$apartment->poster_img}}" alt="">
+          @elseif($apartment -> poster_img == NULL)
+            <img class="img-fluid" src="{{URL::to('images/noUpload.png')}}" alt="">
           @else
-            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
+            <img class="img-fluid" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
           @endif
         </div>
         <div class="col-6 ms_img ">

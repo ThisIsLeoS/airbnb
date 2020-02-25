@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section("content")
-    {{ $clientToken }}
+    
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -30,9 +30,13 @@
         </div>
     </div>
 </div>
+<div>
+
     <div id="dropin-container"></div>
     <button id="submit-button">Request payment method</button>
+</div>
      <script>
+         $("[data-braintree-id='card']").append("#submit-button");
         var button = document.querySelector('#submit-button');
         braintree.dropin.create({
             authorization: '{{ $clientToken }}',
@@ -42,7 +46,7 @@
                 instance.requestPaymentMethod(function (err, payload) {
                     $("#nonce").val(payload.nonce);
                     $("#aptId").val("{{ $aptId }}");
-                    $("#sponsorships-form").submit();
+                    /* $("#sponsorships-form").submit(); */
                     // if (err) alert("C'è stato un errore");
                     // console.log(payload.nonce);
                     // $.ajax({

@@ -26,7 +26,7 @@
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
           <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
           @else
-          <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
+          <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
           @endif
             <div class="card-body d-flex">
               <h4 class="card-title text-center">{{$apartment -> title}}</h4>

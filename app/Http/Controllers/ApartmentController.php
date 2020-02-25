@@ -14,6 +14,7 @@ use Braintree;
 use DateTime;
 use DB;
 use Carbon\Carbon;
+use App\Image;
 
 class ApartmentController extends Controller
 {
@@ -62,10 +63,26 @@ class ApartmentController extends Controller
         if ($request -> hasfile("poster_img")) {
           $file = $request -> file("poster_img");
           $filename = $file -> getClientOriginalName();
-          $file -> move("images/AptImg", $filename);
+          $file -> move("images/AptImg/".$apt->id, $filename);
           $newAptImg = [
               "poster_img" => $filename
           ];
+        }
+        
+        foreach($data["images"] as $key => $value){
+          
+          if($request -> hasfile("images.".$key)){
+            /* dd($request -> hasfile("images.".$key)); */
+            $fileM = $request -> file("images.".$key);
+            $filenameM = $fileM -> getClientOriginalName();
+            $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
+             $newAptImgM = [
+              "path" => $filenameM
+            ];
+            $image= Image::make($newAptImgM);
+            $image -> apartment() -> associate($apt);
+            $image -> save();
+          };
         }
         if (isset($data["services"]))
         {
@@ -141,7 +158,7 @@ class ApartmentController extends Controller
       $apartment = Apartment::findOrFail($id);
       if (isset($data['services'])) {
         $services = Service::find($data['services']);
-        $apartment -> services() -> attach($services);
+        $apartment -> services() -> sync($services);
       } else {
         $services = [];
       }
@@ -402,7 +419,7 @@ class ApartmentController extends Controller
             }
             $message = "Il pagamento è andato a buon fine";
             // return back()->with('message', 'Transaction successful');
-            return view("pages.paymentResult", compact("message"));/* .header("Refresh:4; url =" . route('userApartment.show', Auth::user()->id, false)); */
+            return view("pages.paymentResult", compact("message")).header("Refresh:4; url =" . route('userApartment.show', Auth::user()->id, false));
         } else {
             // $errorString = "C'è stato un errore";
             //foreach ($result->errors->deepAll() as $error) {

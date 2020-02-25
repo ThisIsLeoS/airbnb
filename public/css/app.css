@@ -1708,53 +1708,69 @@ button #showMyApt {
     }
 } */
 
-.multi-item-carousel .carousel-inner > .item {
-  transition: 500ms ease-in-out left;
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50% !important;
+  height: 20px;
+  border-radius: 50%;
+  padding: 0.5%;
 }
 
-.multi-item-carousel .carousel-inner .active.left {
-  left: -33%;
+.myTestl {
+  right: 100%;
 }
 
-.multi-item-carousel .carousel-inner .active.right {
-  left: 33%;
+/*
+.carousel-control-next {
+    left: 100%;
 }
+ */
 
-.multi-item-carousel .carousel-inner .next {
-  left: 33%;
-}
+@media (min-width: 768px) {
+  .carousel-inner .carousel-item-right.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(50%);
+  }
 
-.multi-item-carousel .carousel-inner .prev {
-  left: -33%;
-}
-
-@media all and (transform-3d), (-webkit-transform-3d) {
-  .multi-item-carousel .carousel-inner > .item {
-    transition: 500ms ease-in-out left;
-    transition: 500ms ease-in-out all;
-    -webkit-backface-visibility: visible;
-            backface-visibility: visible;
-    transform: none !important;
+  .carousel-inner .carousel-item-left.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-50%);
   }
 }
 
-.multi-item-carousel .carouse-control.left,
-.multi-item-carousel .carouse-control.right {
-  background-image: none;
+/* large - display 3 */
+
+@media (min-width: 992px) {
+  .carousel-inner .carousel-item-right.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(33%);
+  }
+
+  .carousel-inner .carousel-item-left.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-33%);
+  }
 }
 
-body {
-  background: #333;
-  color: #ddd;
+@media (max-width: 768px) {
+  .carousel-inner .carousel-item > div {
+    display: none;
+  }
+
+  .carousel-inner .carousel-item > div:first-child {
+    display: block;
+  }
 }
 
-h1 {
-  color: white;
-  font-size: 2.25em;
-  text-align: center;
-  margin-top: 1em;
-  margin-bottom: 2em;
-  text-shadow: 0px 2px 0px black;
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left {
+  transform: translateX(0);
 }
 
 /*!

@@ -60,7 +60,7 @@
               </div>
               @else
               <div class="my_ovFlowHid">
-                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt -> poster_img)}}" alt="Card image cap">
+                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt->id."/".$apt -> poster_img)}}" alt="Card image cap">
               </div>
               @endif
               <div class="card-body">

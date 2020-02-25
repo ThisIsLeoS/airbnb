@@ -25,8 +25,10 @@
                     <input type="number" id="beds" min="1" max="4" name="beds">
                     <label for="bathrooms" >Bagni</label>
                     <input type="number" id="bathrooms" min="1" max="2" name="bathrooms">
-                    <label for="poster_img" >Carica Immagine</label>
+                    <label for="poster_img" >Carica Immagine principale</label>
                     <input type="file" id="photo"  name="poster_img">
+                    <label for="images" >Carica fino ad altre 4 immagini</label>
+                    <input type="file" id="photos"  name="images[]" multiple>
                     Quali servizi metti a disposizione?
                     {{-- <select name="services[]" class="custom-select" multiple> --}}
                         <div>

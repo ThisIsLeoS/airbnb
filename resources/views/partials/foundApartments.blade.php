@@ -16,7 +16,7 @@
             @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
               <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
             @else
-              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
+              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
             @endif
             <div class="card-body">
             <h5 class="card-title">{{$apartment -> title}}</h5>
@@ -51,7 +51,7 @@
           @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
           @else
-            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"] -> poster_img)}}" alt="Card image cap">
+            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"] -> id."/".$aptAndDist["apartment"] -> poster_img)}}" alt="Card image cap">
           @endif
           <div class="card-body">
             <h5 class="card-title">Test</h5>
