@@ -12811,6 +12811,10 @@ a.text-dark:focus {
   text-transform: capitalize;
 }
 
+.min_height {
+  min-height: 400px;
+}
+
 @media (max-width: 1200px) {
   #mySearch {
     width: 30%;

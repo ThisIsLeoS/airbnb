@@ -223,7 +223,9 @@ background-size:cover;
     }
 }
 
-
+.min_height {
+    min-height: 400px;
+}
 
 //media query
 @media (max-width: 1200px) {

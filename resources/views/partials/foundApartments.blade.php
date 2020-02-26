@@ -1,6 +1,18 @@
 
 
-<h4><strong> Alloggi Airbnb Plus</strong></h4>
+@php
+  $numbOfapartments=0;
+@endphp
+@foreach ($sponsorships as $sponsorship)
+  @foreach ($sponsorship->apartments as $apartment)
+    @php  
+      $numbOfapartments++;
+    @endphp
+  @endforeach
+@endforeach
+
+@if ($numbOfapartments > 0)
+  <h4><strong> Alloggi Airbnb Plus</strong></h4>
   <h5>Una selezione di alloggi verificati per qualità e design.</h5>
   <div class="col-12 myCards sponsorApt mb-3">
     @php
@@ -33,9 +45,17 @@
       @endforeach
     @endforeach
   </div>
- 
-@if (count($filteredAptsAndDists) > 0 )
-  <h4><strong> "Abbiamo trovato {{ count($filteredAptsAndDists) }} risultati per la tua ricerca"</strong></h4>
+@endif
+
+@php
+  $numOfFiltAptsAndDists = count($filteredAptsAndDists);
+  foreach ($filteredAptsAndDists as $filteredAptAndDist) {
+    if ($filteredAptAndDist["apartment"] -> visibility === 0) $numOfFiltAptsAndDists--;
+  }
+@endphp
+
+@if ($numOfFiltAptsAndDists > 0 )
+  <h4><strong> "Abbiamo trovato {{ $numOfFiltAptsAndDists }} risultati per la tua ricerca"</strong></h4>
   <div  class="row">
     <div class="col-12 myCards">
       @php

@@ -2,9 +2,9 @@
 
 @section("content")
 <div class="container-fluid">
-    <div class="row p-2">
+    <div class="row p-2 min_height">
       
-        <div class="col-6  ms_img noGutter border border-dark">
+        <div class="col-12 col-sm-6 ms_img noGutter border border-dark">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <img class="img-fluid" src="{{$apartment->poster_img}}" alt="">
           @elseif($apartment -> poster_img == NULL)
@@ -13,7 +13,7 @@
             <img class="img-fluid" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
           @endif
         </div>
-        <div class="col-6 ms_img ">
+        <div class="col-6 ms_img d-none d-sm-block">
             <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
                   
@@ -82,7 +82,13 @@
             Servizi Aggiuntivi :
             
                 @foreach ($apartment -> services as $service)
-                <span class="services">{{$service -> type}},</span>
+                  <span class="services">
+                    @if ($service -> type === "wifi")
+                      <i class="fas fa-wifi"></i>
+                    {{-- @elseif --}}
+
+                    @endif
+                  </span>
                 @endforeach
             
         </div>
@@ -268,7 +274,6 @@
     
 
 <script>
-
   
   var userId = null;
   @if (Auth::user())
