@@ -18,49 +18,41 @@
                 <div class="col-6 ms_img noGutter border border-dark">
                   
                     @if (!isset($apartment -> images[0] -> path))
-                    <img src="{{asset('images/ShowApt/img1.jpg')}}" alt="">
-                    @elseif(isset($apartment -> images[0] -> path) == NULL)
-                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
-                    @elseif(isset($apartment -> images[0] -> path))
-                    
-                    <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[0]->path)}}" alt="">
-                    
+                      <img  src="{{URL::to('images/noUpload.png')}}" alt="">
+                    @elseif($apartment -> images[0] -> path == "/images/ShowApt/img1.jpg")
+                      <img src="{{asset('images/ShowApt/img1.jpg')}}" alt="">
+                    @else
+                      <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[0]->path)}}" alt="">
                     @endif
                     
                 </div>
                 <div class="col-6 ms_img noGutter border border-dark">
-                   @if (!isset($apartment -> images[1] -> path))
-                   <img src="{{asset('images/ShowApt/img2.jpg')}}" alt="">
-                   @elseif(isset($apartment -> images[1] -> path) == NULL)
-                   <img  src="{{URL::to('images/noUpload.png')}}" alt="">
-                    @elseif(isset($apartment -> images[1] -> path))
-                    
-                    <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[1]->path)}}" alt="">
-                    
+                    @if (!isset($apartment -> images[1] -> path))
+                      <img  src="{{URL::to('images/noUpload.png')}}" alt="">
+                    @elseif($apartment -> images[1] -> path == "/images/ShowApt/img2.jpg")
+                      <img src="{{asset('images/ShowApt/img2.jpg')}}" alt="">
+                    @else
+                      <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[1]->path)}}" alt="">
                     @endif
                 </div>
             </div>
             <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
                     @if (!isset($apartment -> images[2] -> path))
-                    <img src="{{asset('images/ShowApt/img3.jpg')}}" alt="">
-                    @elseif(isset($apartment -> images[2] -> path) && $apartment -> images[2] -> path == "sono un immagine")
-                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
-                    @elseif(isset($apartment -> images[2] -> path))
-                    
-                    <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[2]->path)}}" alt="">
-                    
+                      <img  src="{{URL::to('images/noUpload.png')}}" alt="">
+                    @elseif($apartment -> images[2] -> path == "/images/ShowApt/img3.jpg")
+                      <img src="{{asset('images/ShowApt/img3.jpg')}}" alt="">
+                    @else
+                      <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[2]->path)}}" alt="">
                     @endif
                 </div>
                 <div class="col-6 ms_img noGutter border border-dark">
                     @if (!isset($apartment -> images[3] -> path))
-                    <img src="{{asset('images/ShowApt/img4.jpg')}}" alt="">
-                    @elseif(isset($apartment -> images[3] -> path) && $apartment -> images[3] -> path == "sono un immagine")
-                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
-                    @elseif(isset($apartment -> images[3] -> path))
-                    
-                    <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[3]->path)}}" alt="">
-                    
+                      <img  src="{{URL::to('images/noUpload.png')}}" alt="">
+                    @elseif($apartment -> images[3] -> path == "/images/ShowApt/img4.jpg")
+                      <img src="{{asset('images/ShowApt/img4.jpg')}}" alt="">
+                    @else
+                      <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[3]->path)}}" alt="">
                     @endif
                 </div>
             </div>

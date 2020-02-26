@@ -69,30 +69,33 @@ class ApartmentController extends Controller
           ];
         }
         
-        foreach($data["images"] as $key => $value){
-          
-          if($request -> hasfile("images.".$key)){
-            /* dd($request -> hasfile("images.".$key)); */
-            $fileM = $request -> file("images.".$key);
-            $filenameM = $fileM -> getClientOriginalName();
-            $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
-             $newAptImgM = [
-              "path" => $filenameM
-            ];
-            $image= Image::make($newAptImgM);
-            $image -> apartment() -> associate($apt);
-            $image -> save();
-          };
+        if (isset($data["images"])) { 
+          foreach($data["images"] as $key => $value){
+            
+            if($request -> hasfile("images.".$key)){
+              /* dd($request -> hasfile("images.".$key)); */
+              $fileM = $request -> file("images.".$key);
+              $filenameM = $fileM -> getClientOriginalName();
+              $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
+              $newAptImgM = [
+                "path" => $filenameM
+              ];
+              $image= Image::make($newAptImgM);
+              $image -> apartment() -> associate($apt);
+              $image -> save();
+            };
+          }
         }
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
           $services = Service::find($data["services"]);
+          $apt -> services() -> sync($services);
         }
         else {
-          $apt->services =[];
+          $apt->services = [];
+          // $apt -> services() -> sync($services);
         }
-        $apt -> services() -> sync($services);
         if ($request -> hasfile("poster_img")) {
           $apt -> update($newAptImg);
         }
@@ -191,6 +194,7 @@ class ApartmentController extends Controller
     {
       $apartment = Apartment::findOrFail($id);
       $apartment -> services() -> detach();
+      $apartment -> images() -> delete();
       $apartment -> messages() -> delete();
       $apartment -> views() -> delete();
       $apartment -> delete();
