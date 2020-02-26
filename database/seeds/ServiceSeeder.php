@@ -20,11 +20,11 @@ class ServiceSeeder extends Seeder
             ["type" =>'sauna'],
             ["type" =>'sea_view'],
             ["type" =>'reception']
-    ];
+        ];
     
-    foreach($services as $service){
-      $newService = new Service;
-      $newService -> fill($service) -> save();
-    }
+        foreach($services as $service){
+          $newService = new Service;
+          $newService -> fill($service) -> save();
+        }
     }
 }

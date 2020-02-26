@@ -5,6 +5,7 @@ use App\Apartment;
 use App\Service;
 use App\User;
 use App\Sponsorship;
+use App\Image;
 
 
 
@@ -28,6 +29,9 @@ class ApartmentSeeder extends Seeder
 
             $services = Service::inRandomOrder() -> take(rand(0,6)) -> get();
             $apartment -> services() -> attach($services);
+
+            // $images = Image::inRandomOrder() -> take(4) -> get();
+            // $apartment -> images() -> associate($images);
 
             $sponsorships = Sponsorship::inRandomOrder() -> take(rand(0,1)) -> get();
             $start = new DateTime();
