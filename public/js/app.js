@@ -37112,6 +37112,7 @@ function showMessage() {
 
 function init() {
   $(".apt-user-show-card.0").addClass("inactive");
+  $(".apt-user-show-card.0").find(".visibilityBtn").prop("checked", false);
   alertHide();
   showMessage();
   navbar();

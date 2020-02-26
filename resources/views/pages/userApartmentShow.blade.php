@@ -1,7 +1,72 @@
 @extends('layouts.base')
 
 @section("content")
+
+<style>
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  height: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
 <div class="container">
+  
   <div class="row">
     <div class="col-12 mt-3">
       <div class="card-header">
@@ -35,7 +100,11 @@
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
                 <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
                 <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
-                <a class="visibilityBtn" data-aptId="{{$apartment->id}}" href="">Cambia visibilità</a>
+                <a {{-- class="visibilityBtn" --}}  href="">Cambia visibilità</a>
+                <label class="switch">
+                  <input data-aptId="{{$apartment->id}}" class="visibilityBtn" type="checkbox" checked id="test">
+                  <span class="slider round"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -65,7 +134,7 @@
 </div>
 
 <script>
-
+/* console.log(($("#test").is(":checked")) */
 
 $(document).on('click','.visibilityBtn', function(event){
 
@@ -84,9 +153,11 @@ $(document).on('click','.visibilityBtn', function(event){
       "success": function (data) {
         if (thisEl.parents(".apt-user-show-card").hasClass("inactive")) {
           thisEl.parents(".apt-user-show-card").removeClass("inactive");
+          thisEl.prop("checked",true);
         }
         else {
           thisEl.parents(".apt-user-show-card").addClass("inactive");
+          thisEl.prop("checked", false );
         }    
         console.log(data);
       },
