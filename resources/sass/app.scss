@@ -24,6 +24,7 @@
 .myBg{
 background: url("/images/bnbplus.jpg");
 background-position: right;
+background:cover;
     button{
         color: rgb(72, 72, 72) ;
         text-transform: uppercase;
@@ -33,6 +34,12 @@ background-position: right;
         &:active,&:hover{
             color: rgb(72, 72, 72);
             background: rgb(226, 226, 226);
+        }
+        a{
+            color:black;
+            &:hover{
+                text-decoration: none;
+            }
         }
        
     }
@@ -138,6 +145,7 @@ background-position: right;
         &:active{
             background:#df3c47;
         }
+        
     }
 
 }

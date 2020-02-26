@@ -18,9 +18,9 @@
                 <div class="col-6 ms_img noGutter border border-dark">
                   
                     @if (!isset($apartment -> images[0] -> path))
-                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
-                    @elseif(isset($apartment -> images[0] -> path) && $apartment -> images[0] -> path == "sono un immagine")
                     <img src="{{asset('images/ShowApt/img1.jpg')}}" alt="">
+                    @elseif(isset($apartment -> images[0] -> path) == NULL)
+                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif(isset($apartment -> images[0] -> path))
                     
                     <img src="{{asset('images/AptImg/'.$apartment->id.'/others/'.$apartment->images[0]->path)}}" alt="">
@@ -31,7 +31,7 @@
                 <div class="col-6 ms_img noGutter border border-dark">
                    @if (!isset($apartment -> images[1] -> path))
                    <img src="{{asset('images/ShowApt/img2.jpg')}}" alt="">
-                   @elseif(isset($apartment -> images[1] -> path) && $apartment -> images[1] -> path == "sono un immagine")
+                   @elseif(isset($apartment -> images[1] -> path) == NULL)
                    <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif(isset($apartment -> images[1] -> path))
                     

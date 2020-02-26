@@ -12600,6 +12600,7 @@ a.text-dark:focus {
 .myBg {
   background: url("/images/bnbplus.jpg");
   background-position: right;
+  background: cover;
 }
 
 .myBg button {
@@ -12614,6 +12615,14 @@ a.text-dark:focus {
 .myBg button:hover {
   color: #484848;
   background: #e2e2e2;
+}
+
+.myBg button a {
+  color: black;
+}
+
+.myBg button a:hover {
+  text-decoration: none;
 }
 
 .ms_img {
