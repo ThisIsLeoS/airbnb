@@ -33,7 +33,7 @@
               <div class="d-flex flex-column align-items-center justify-content-start">
                 <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="m-2 btn btn-success"><i class="fas fa-pen"> Modifica appartamento </i></a>
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
-                <a href="{{ route('apartment.stats', $apartment-> id) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
+                <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
                 <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
                 <a class="visibilityBtn" data-aptId="{{$apartment->id}}" href="">Cambia visibilità</a>
               </div>

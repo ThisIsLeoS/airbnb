@@ -307,7 +307,9 @@ class ApartmentController extends Controller
 
   public function apartmentStatistics($id){
     $apartment = Apartment::findOrFail($id);
-
+    
+    
+    if (Auth::user()-> id == $apartment -> user -> id){
     $messagesCount = $apartment->messages()
     ->selectRaw('count(*) as count, date(created_at) as created_date')
     ->groupBy('created_date')
@@ -319,12 +321,15 @@ class ApartmentController extends Controller
     ->get();
 
     return view("pages.apartmentStats" , compact("apartment" ,"messagesCount", "viewsCount"));
+    } else{
+        return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+    }
   }
 
   public function sendTokenToClient($aptId) {
 
-
-
+    $apartment= Apartment::findOrFail($aptId);
+    if (Auth::user()-> id == $apartment -> user -> id){
     $gateway = new Braintree\gateway([
       'environment' => config('services.braintree.environment'),
       'merchantId' => config('services.braintree.merchantId'),
@@ -339,33 +344,14 @@ class ApartmentController extends Controller
     ]);
 
     return view("pages.apartmentSponsor", compact("clientToken", "aptId"));
+    } else{
+      return view("pages.unauthorized").header("Refresh:4; url = 'http://localhost:3000");
+    }
   }
 
+
    public function sendNonceToServer(Request $request) {
-    // $data = $request -> all();
-
-    // $nonceFromTheClient = $_POST["nonce"];
-    // $gateway = new Braintree\gateway([
-    //   'environment' => config('services.braintree.environment'),
-    //   'merchantId' => config('services.braintree.merchantId'),
-    //   'publicKey' => config('services.braintree.publicKey'),
-    //   'privateKey' => config('services.braintree.privateKey')
-    // ]);
-    // $result = $gateway->transaction()->sale([
-    //   'amount' => '10.00',
-    //   'paymentMethodNonce' => $nonceFromTheClient,
-    //    // 'deviceData' => $deviceDataFromTheClient,
-    //   'options' => [
-    //   'submitForSettlement' => True
-    //   ]
-    // ]);
-
-
-
-    // if ($result->success){
-    //   $sponsorships = Sponsorship::all();
-    // return $result;
-    // }
+    
     $apartment = Apartment::findOrFail($request->aptId);
     // if($apartment->sponsored == 0) {
         $gateway = new Braintree\Gateway([
@@ -446,26 +432,27 @@ class ApartmentController extends Controller
 
   public function handleAptViews(Request $request) {
     $data = $request->all();
-    // return $data;
-    // se nella tabella views ad aptId NON è già associato ip, metti nella tabella una nuova riga con l'aptId e l'ip
-    /*
-    SELECT * FROM views
-    WHERE apartment_id = 2 AND ip_address = "Ut repellendus porro ea amet rerum recusandae." */
+    
     $rows =
       DB::table("views")
       ->where("apartment_id", "=", $data["aptId"])
       ->where("ip_address", "=", $data["ip"])
       ->get();
-    if (count($rows) == 0) {
-      DB::table('views')->insert(
-        [
-          'ip_address' => $data["ip"],
-          'apartment_id' => $data["aptId"],
-          'created_at' => Carbon::now()->toDateTimeString(),
-          'updated_at' => Carbon::now()->toDateTimeString()
-        ]
-      );
-    }
+    
+      if($data["userId"] === null){
+
+        if (count($rows) == 0) {
+          DB::table('views')->insert(
+            [
+              'ip_address' => $data["ip"],
+              'apartment_id' => $data["aptId"],
+              'created_at' => Carbon::now()->toDateTimeString(),
+              'updated_at' => Carbon::now()->toDateTimeString()
+            ]
+          );
+        }
+      }
+    
   }
 
   public function makeAptVisible(Request $request)

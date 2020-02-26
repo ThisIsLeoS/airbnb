@@ -12600,7 +12600,7 @@ a.text-dark:focus {
 .myBg {
   background: url("/images/bnbplus.jpg");
   background-position: right;
-  background: cover;
+  background-size: cover;
 }
 
 .myBg button {

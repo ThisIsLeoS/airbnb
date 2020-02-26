@@ -60,9 +60,9 @@
       
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid p-3">
     <h1>{{$apartment -> title}} </h1>
-    <div class="row">
+    <div class="row ">
         <div class="col-12 col-md-6">
           <h4>{{$apartment -> description}}</h4>
             <div class="row detail_apt">
@@ -80,18 +80,18 @@
                 </div>
             </div>
             Servizi Aggiuntivi :
-            <ul>
+            
                 @foreach ($apartment -> services as $service)
-                <li>{{$service -> type}}</li>
+                <span class="services">{{$service -> type}},</span>
                 @endforeach
-            </ul>
+            
         </div>
        {{-- Controllo prima di tutto se è un utente loggato --}} 
         @if (Auth::user())
           {{-- Una volta accertatomi che è un utente loggato controllo se quell'appartamento è effettivamente suo --}} 
           @if (Auth::user() -> id == $apartment -> user -> id)
-            <div class="col-12 col-md-6">
-              il Proprietario di questo appartamento sei tu
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+              Il proprietario di questo appartamento sei tu
               <div>
                 @if (Auth::user() -> profile_img )
                   <img class="imgUser"  src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true">
@@ -102,7 +102,7 @@
             </div>
             {{-- se non è suo mostro il nome del proprietario --}}
           @else
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
               il Proprietario di questo appartamento è {{$apartment -> user -> name}}
               <div>
 
@@ -116,7 +116,7 @@
           @endif
         {{-- Se siamo di fronte ad un GUEST allora mostro tutto normalmente --}}    
         @else
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-6 d-flex flex-column align-items-center">
             il Proprietario di questo appartamento è {{$apartment -> user -> name}}
             <div>
                 @if ($apartment -> user -> profile_img )
@@ -265,8 +265,20 @@
   <input id="ipAddress" type="text" name="ipAddress" hidden>
 </form> --}}
 
+    
+
 <script>
+
+  
+  var userId = null;
+  @if (Auth::user())
+    @if (Auth::user() -> id == $apartment -> user -> id)
+      userId = {{Auth::user()->id}};
+    @endif
+  @endif
+  console.log(userId)
   $(document).ready(function () {
+    
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
       var ipWrapper = JSON.stringify(data, null, 2);
       var obj = JSON.parse(ipWrapper);
@@ -278,7 +290,8 @@
         "method": "POST",
         "data": {
           "aptId": "{{ $apartment->id }}",
-          "ip": obj.ip
+          "ip": obj.ip,
+          "userId": userId
         },
         "headers": {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -293,5 +306,6 @@
     //   "ip": "93.47.39.104"
     // }
   });
+  
 </script>
 @endsection

@@ -27,9 +27,12 @@
                 })
             </script>
         </div>
+        <div class="col-12">
+    
+            <div id="dropin-container" class="p-3"></div>
+        </div>
     </div>
 </div>
-    <div id="dropin-container"></div>
     {{-- <button id="submit-button">Request payment method</button> --}}
      <script>
         var button = document.createElement("BUTTON");
@@ -38,7 +41,28 @@
         // $("<button id='submit-button'>Request payment method</button>");
         braintree.dropin.create({
             authorization: '{{ $clientToken }}',
-            container: '#dropin-container'
+            container: '#dropin-container',
+            card: {
+                overrides: {
+                    fields: {
+                        number: {
+                            placeholder: '1111 1111 1111 1111' // Update the number field placeholder
+                        },
+                        postalCode: {
+                            minlength: 5 // Set the minimum length of the postal code field
+                        },
+                        CVV: {} // Remove the CVV field from your form
+                    },
+                    styles: {
+                        input: {
+                            'font-size': '18px' // Change the font size for all inputs
+                        },
+                        ':focus': {
+                            color: 'red' // Change the focus color to red for all inputs
+                        }
+                    }
+                }
+            }
         }, function (createErr, instance) {  
             $("[data-braintree-id='card']").append(button);
             button.addEventListener('click', function () {
