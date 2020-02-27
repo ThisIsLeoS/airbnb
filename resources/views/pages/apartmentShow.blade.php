@@ -79,14 +79,22 @@
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
-            Servizi Aggiuntivi :
+            <span style="font-size: 1.5rem">Servizi Aggiuntivi :</span> 
             
                 @foreach ($apartment -> services as $service)
                   <span class="services">
                     @if ($service -> type === "wifi")
                       <i class="fas fa-wifi"></i>
-                    {{-- @elseif --}}
-
+                    @elseif($service -> type === "parking_slot")
+                      <i class="fas fa-parking"></i>
+                    @elseif($service -> type === "swimming_pool")
+                      <i class="fas fa-swimming-pool"></i>
+                    @elseif($service -> type === "sauna")
+                      <i class="fas fa-hot-tub"></i>
+                    @elseif($service -> type === "sea_view")
+                      <i class="fas fa-water"></i>
+                    @elseif($service -> type === "reception")
+                      <i class="fas fa-concierge-bell"></i>
                     @endif
                   </span>
                 @endforeach
@@ -109,7 +117,7 @@
             {{-- se non è suo mostro il nome del proprietario --}}
           @else
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-              il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+              Il proprietario di questo appartamento è {{$apartment -> user -> name}}
               <div>
 
                 @if ($apartment -> user -> profile_img )
@@ -123,7 +131,7 @@
         {{-- Se siamo di fronte ad un GUEST allora mostro tutto normalmente --}}    
         @else
           <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-            il Proprietario di questo appartamento è {{$apartment -> user -> name}}
+            Il proprietario di questo appartamento è {{$apartment -> user -> name}}
             <div>
                 @if ($apartment -> user -> profile_img )
                   <img class="imgUser"  src="{{asset('images/UserProfileImg/'.$apartment -> user -> profile_img)}}" alt=""  data-holder-rendered="true">
@@ -135,7 +143,7 @@
           </div> 
         @endif
         
-        <div class="col-12">
+        <div class="col-12 mt-5">
             <h3>Ubicazione</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi ratione iste unde aliquam, deleniti aspernatur ipsum, quae qui inventore debitis dolor possimus dolore eveniet quibusdam, corrupti necessitatibus tempora illum doloribus.</p>
             <div id='map' class='map'>
@@ -171,7 +179,7 @@
             {{-- Controllo se l'utente loggato è anche proprietario e in quel caso mostro --}}
            @if (Auth::user() -> id == $apartment -> user -> id)
                <div class="text-center">
-                  <a href="{{ route('userApartment.show',Auth::user() -> id) }}" class="btn btn-primary btn-rounded mb-4">Vai a tutti i tuoi appartamenti</a>
+                  <a href="{{ route('userApartment.show',Auth::user() -> id) }}" class="btn btn-primary btn-rounded mt-4 mb-4">Vai a tutti i tuoi appartamenti</a>
               </div>
             @else
             {{-- FORM utente loggato NON PROPRIETARIO --}}
@@ -213,7 +221,7 @@
           </div>
         </form>
         <div class="text-center">
-          <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
+          <a href="" class="btn btn-primary btn-rounded mt-4 mb-4" data-toggle="modal" data-target="#modalContactForm">Ti Piace l'appartamento ? Invia un messaggio al proprietario</a>
         </div>
            @endif 
            {{-- Altrimenti se mi trovo davanti un utente guest --}}

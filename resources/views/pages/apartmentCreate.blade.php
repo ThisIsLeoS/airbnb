@@ -1,15 +1,15 @@
 @extends('layouts.base')
 
 @section("content")
-<div class="container">
+<div class="container-fluid ">
+    <h3 class="text-center">
+        Ciao {{ Auth::user()->name }} ! Aggiungi un nuovo appartamento.
+    </h3>
     <div class="row">
-        <div class="col-12">
+        <div class="col-lg-6">
             <form id="create-aptm-form" action="{{ route("apartment.store", Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
-                <h3 class="text-center">
-                    Ciao {{ Auth::user()->name }}! Crea un annuncio per il tuo appartamento.
-                </h3>
                 <div class="d-flex flex-column">
                     <label for="title">Inserisci una breve titolo</label>
                     <input type="text" id="title" name="title">
@@ -39,6 +39,9 @@
                     <button id="create-aptm-btn">Aggiungi appartamento</button>
                 </div>
             </form>
+        </div>
+        <div class="col-lg-6 myBgCreate d-md-none d-lg-block" style="height:100vh">
+            
         </div>
     </div>
 </div>
