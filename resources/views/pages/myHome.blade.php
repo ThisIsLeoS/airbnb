@@ -55,13 +55,17 @@
           <a href="{{route("apartment.show",$apt-> id)}}">
             <div class="card homeCard">
               @if ($apt -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-              <div class="my_ovFlowHid">
-                <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
-              </div>
+                <div class="my_ovFlowHid">
+                  <img class="card-img-top" src={{$apt -> poster_img}} alt="Card image cap">
+                </div>
+              @elseif ($apt -> poster_img == null)
+                <div class="my_ovFlowHid">
+                  <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                </div>
               @else
-              <div class="my_ovFlowHid">
-                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt->id."/".$apt -> poster_img)}}" alt="Card image cap">
-              </div>
+                <div class="my_ovFlowHid">
+                  <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apt->id."/".$apt -> poster_img)}}" alt="Card image cap">
+                </div>
               @endif
               <div class="card-body">
                 <h5 class="card-title">{{$apt -> title}}</h5>

@@ -117,12 +117,19 @@
         @if($aptAndDist["apartment"] ->visibility == 1)
           <div class="card" style="width: 18rem;">
             @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-              <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
+              <div class="my_ovFlowHid">
+                <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
+              </div>
+            @elseif ($aptAndDist["apartment"] -> poster_img == null)
+              <div class="my_ovFlowHid">
+                <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+              </div>
             @else
-              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"] -> id."/".$aptAndDist["apartment"] -> poster_img)}}" alt="Card image cap">
+              <div class="my_ovFlowHid">
+                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"]->id."/".$aptAndDist["apartment"] -> poster_img)}}" alt="Card image cap">
+              </div>
             @endif
             <div class="card-body">
-              <h5 class="card-title">Test</h5>
               <p class="card-text"> {{$aptAndDist["apartment"]->id}}</p>
               <p class="card-text"> {{$aptAndDist["apartment"]->description}}</p>
               <p class="card-text"> {{$aptAndDist["distance"]}}</p>
