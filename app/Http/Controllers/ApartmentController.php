@@ -46,11 +46,11 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $userId)
+    public function store(ApartmentRequest $request, $userId)
     {
         // TODO: validazione dati
-        $data = $request->all();
-
+        $data = $request->validated();
+        dd($data);
         // viene creato l'appartamento (senza salvarlo nel DB)
         $apt = Apartment::make($data);
 

@@ -28,9 +28,9 @@
                     <label for="poster_img" >Carica Immagine principale</label>
                     <input type="file" id="photo"  name="poster_img">
                     <label for="images" >Carica fino ad altre 4 immagini</label>
-                    <input type="file" id="photos"  name="images[]" multiple>
+                    <input type="file" id="photos"  name="images[]" multiple> 
                     Quali servizi metti a disposizione?
-                    {{-- <select name="services[]" class="custom-select" multiple> --}}
+                   
                         <div>
                             @foreach ($services as $service)
                                 <input name="services[]" type="checkbox" value="{{$service -> id}}">{{$service -> type}}

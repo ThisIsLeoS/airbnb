@@ -1,7 +1,17 @@
 @extends('layouts.base')
 
+
 @section("content")
-<div class="container-fluid">
+<style>
+  main{
+    height:80vh;
+    background:url("/images/Statistic/statistic.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+</style>
+<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-lg-6">
             <div class="wrapper mt-5">

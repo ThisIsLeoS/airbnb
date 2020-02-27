@@ -1,6 +1,15 @@
 @extends('layouts.base')
 
 @section('content')
+<style>
+/*   main{
+    height:80vh;
+    background:url("/images/CreateApt/updApt.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-attachment: fixed;
+  } */
+</style>
 <div class="container-fluid">
   <h3 class="text-center">
         Ciao {{ Auth::user()->name }} ! Modifica il tuo appartamento.
@@ -39,14 +48,14 @@
             
           
               @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-                <div id="testupdate" 
+                <div class="mt-2 mb-2" id="testupdate" 
                   style="background:url('https://source.unsplash.com/random/1920x1280/?apartment');
                     width:250px;
                     height:250px;
                     background-size: cover; 
                     background-position:center;">
               @elseif(!$apartment -> poster_img == null)
-                <div id="testupdate" 
+                <div class="mt-2 mb-2" id="testupdate" 
                   style="background:url('/images/AptImg/{{$apartment->id."/".$apartment -> poster_img}}'); 
                     width:250px;
                     height:250px;

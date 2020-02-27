@@ -1,7 +1,10 @@
 @extends('layouts.base')
+<style>
+  
+</style>
 
 @section("content")
-<div class="container mt-5">
+<div class="container mt-5 p-3">
   <div class="row">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4">
       <div class="card">
@@ -12,21 +15,23 @@
                   @else
                   <img class="avatar rounded-circle" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3" alt="">
                   @endif
+          <div class="d-flex flex-column align-items-center">
 
-          <h6 class="card-text">Data di nascita: {{Auth::user() -> date_of_birth}}</h6>
-          <p class="card-text">Email: {{Auth::user() -> email}} </p>
-          <p class="card-text">Numero Appartamenti su BoolBnb: {{$user -> apartments() -> count()}} </p>
-          <form action="{{route("user.set.image")}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method("POST")
-                <input class="btn btn-info" type="file" name="profile_img" >
-                <input class="btn  btn-secondary mt-3" type="submit" value="Carica Immagine">
-              </form>
-        </div>
+            <h6 class="card-text">Data di nascita: {{Auth::user() -> date_of_birth}}</h6>
+            <p class="card-text">Email: {{Auth::user() -> email}} </p>
+            <p class="card-text">Numero Appartamenti su BoolBnb: {{$user -> apartments() -> count()}} </p>
+            <form action="{{route("user.set.image")}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  @method("POST")
+                  <input style="width:100%" class="btn btn-info" type="file" name="profile_img" >
+                  <input class="btn btn-secondary mt-3" type="submit" value="Carica Immagine">
+                </form>
+          </div>
+          </div>
       </div>
     </div>
     <div class="col-sm-8  col-md-6 offset-lg-1 col-lg-5 d-flex flex-column justify-content-center">
-        <h1>Ciao {{ $user->name }}</h1>
+        <h1 class="text-center">Ciao {{ $user->name }}</h1>
         <button class="mb-2"><a id="showMyApt" href="{{ route('userApartment.show',$user -> id) }}">I tuoi appartamenti({{ $user -> apartments() -> count()}}) </a></button>
         <button><a id="showMyApt" href="{{ route('apartment.create') }}">Aggiungi un nuovo appartamento </a></button>
     </div>

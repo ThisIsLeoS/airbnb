@@ -24,6 +24,7 @@ class ApartmentRequest extends FormRequest
     public function rules()
     {
         return [
+            "title" => "required",
             "description" => "required|string|max:255",
             "rooms" => "required|integer|gt:0|max:255",
             "beds" => "required|integer|gt:0|max:255",
@@ -32,8 +33,8 @@ class ApartmentRequest extends FormRequest
             "address" => "required|string|max:255",
             "lat" => "required|numeric|between:-90,90",
             "lon" => "required|numeric|between:-180,180",
-            "views" => "required|integer|gte:0",
-            "poster_img" => "string|max:255|nullable"
+            /* "views" => "required|integer|gte:0", */
+            /* "poster_img" => "string|max:255|nullable" */
         ];
     }
 }
