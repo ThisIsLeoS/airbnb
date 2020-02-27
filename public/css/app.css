@@ -1715,6 +1715,13 @@ button #showMyApt {
   background-size: contain;
 }
 
+.myBgCreateUpd {
+  background: url("/images/CreateApt/updApt.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -12836,9 +12843,13 @@ a.text-dark:focus {
 }
 
 @media (max-width: 768px) {
+  .mobile_carousel {
+    height: 80vh;
+  }
+
   #mySearch {
     width: 50%;
-    transform: translate(30%, 20%);
+    transform: translate(30%, 40%);
   }
 
   .showFooter {

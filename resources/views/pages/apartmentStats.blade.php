@@ -3,7 +3,7 @@
 @section("content")
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="wrapper mt-5">
                 <h4 class="text-center">Messaggi totali per questo appartamento : {{$apartment-> messages()->count()}}</h4>
                 <script>
@@ -27,7 +27,7 @@
                 <canvas id="myChartMex"></canvas>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="wrapper mt-5">
             <h4 class="text-center">Visualizzazioni totali per questo appartamento : {{$apartment-> views()->count()}}</h4>
             <script>
@@ -77,11 +77,11 @@ var unique = function(origArr) {
     return newArr;
 }
 
-    printGraphs("myChartMex",unique(created_atMex),"Messaggi",messageCount);
-    printGraphs("myChartViews",unique(created_atViews),"Visite",viewsCount);
+    printGraphs("myChartMex",unique(created_atMex),"Messaggi",messageCount,'rgba(99,180,255,0.21)','rgba(99,180,255,1)');
+    printGraphs("myChartViews",unique(created_atViews),"Visite",viewsCount,'rgba(255,219,156,0.21)','rgba(235,190,141,1)');
 
 
-    function printGraphs(where,labels,label,data){
+    function printGraphs(where,labels,label,data ,bgColor,borderColor){
     var ctx = document.getElementById(where).getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -91,10 +91,10 @@ var unique = function(origArr) {
                 label: label,
                 data: data,
                 backgroundColor: [
-                    'rgba(99,180,255,0.21)'
+                    bgColor
                 ],
                 borderColor: [
-                    'rgba(99,180,255,1)'
+                    borderColor
                 ],
 
                 borderWidth: 1

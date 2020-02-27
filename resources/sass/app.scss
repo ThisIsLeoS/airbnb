@@ -12,6 +12,7 @@
 @import 'payment';
 @import 'aptPlus';
 @import 'createApt';
+@import 'updateApt';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -244,9 +245,12 @@ background-size:cover;
  }
 
  @media (max-width: 768px) {
+     .mobile_carousel{
+         height:80vh;
+     }
      #mySearch{
         width:50%;
-        transform: translate(30%, 20%);
+        transform: translate(30%, 40%);
      }
      .showFooter{
          display:none !important;

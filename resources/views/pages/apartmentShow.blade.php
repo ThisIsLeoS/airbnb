@@ -83,10 +83,10 @@
     </div>
 </div>
 <div class="container-fluid p-3">
-    <h1>{{$apartment -> title}} </h1>
+    <h1 class="text-center">{{$apartment -> title}} </h1>
     <div class="row ">
         <div class="col-12 col-md-6">
-          <h4>{{$apartment -> description}}</h4>
+          <h4 class="text-center">{{$apartment -> description}}</h4>
             <div class="row detail_apt">
                 <div class="col-12 col-md-6 serviceApt">
                     <i class="fas fa-building"></i><p>Stanze disponibili : {{$apartment -> rooms}}</p>

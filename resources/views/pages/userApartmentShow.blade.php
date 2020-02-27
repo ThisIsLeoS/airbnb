@@ -67,7 +67,7 @@ input:checked + .slider:before {
 }
 </style>
 
-<div class="container">
+<div class="container-fluid">
   @if(session()->has('message'))
             <script type="text/javascript">
               $(document).ready(function() {
