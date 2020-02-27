@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <form id="update-aptm-form"  action="{{ route('apartment.update', $apartment -> id ) }}" method="post" enctype="multipart/form-data">>
+  <form id="update-aptm-form"  action="{{ route('apartment.update', $apartment -> id ) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('POST')
     <label for="title">Titolo</label>
@@ -24,10 +24,30 @@
           <input name="services[]" type="checkbox" value="{{$service -> id}}"  @if ($apartment -> services() -> find($service -> id))
           checked  @endif>{{$service -> type}}
       @endforeach
-  </div>
+    </div>
     
     <input type="file" name="poster_img" value="{{ $apartment -> poster_img }}"><br>
+    
+
+      @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+        <div id="testupdate" 
+          style="background:url('https://source.unsplash.com/random/1920x1280/?apartment');
+            width:250px;
+            height:250px;
+            background-size: cover; 
+            background-position:center;">
+      @elseif(!$apartment -> poster_img == null)
+        <div id="testupdate" 
+          style="background:url('/images/AptImg/{{$apartment->id."/".$apartment -> poster_img}}'); 
+            width:250px;
+            height:250px;
+            background-size:cover;
+            background-position:center;">
+      @endif 
+    </div>
     <button id="update-aptm-btn" >Modifica </button>
   </form>
+
+  
 
 @endsection
