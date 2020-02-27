@@ -37116,6 +37116,42 @@ function init() {
   alertHide();
   showMessage();
   navbar();
+  $("#date_of_birth").on("input", function () {
+    var ymdArray = $(this).val().split("-");
+
+    if (getAge(ymdArray[0], ymdArray[1], ymdArray[2]) < 18) {
+      this.setCustomValidity("You must be at least 18 years old to have an account");
+    } else {
+      this.setCustomValidity("");
+    }
+  });
+
+  function getAge(year, month, day) {
+    var today = new Date();
+    var birthDate = new Date(year, month, day);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || m === 0 && today.getDate() < birthDate.getDate()) {
+      age--;
+    }
+
+    return age;
+  }
+
+  $("#password-confirm").on("input", function () {
+    console.log("prova");
+    var passField = document.getElementById("password-signup");
+    var confirmPassField = this;
+
+    if (passField.value !== confirmPassField.value) {
+      console.log("if");
+      confirmPassField.setCustomValidity("Passwords must match");
+    } else {
+      console.log("else");
+      confirmPassField.setCustomValidity("");
+    }
+  });
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
     $("footer").toggleClass("d-none");
@@ -37355,8 +37391,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

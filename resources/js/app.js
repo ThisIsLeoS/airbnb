@@ -71,6 +71,41 @@ function init(){
   showMessage();
   navbar();
 
+  $("#date_of_birth").on("input", function () {
+    var ymdArray = $(this).val().split("-");
+    if (getAge(ymdArray[0], ymdArray[1], ymdArray[2]) < 18) {
+      this.setCustomValidity("You must be at least 18 years old to have an account");
+    }
+    else {
+      this.setCustomValidity("");
+    }
+  });
+
+  function getAge(year, month, day) {
+    var today = new Date();
+    var birthDate = new Date(year, month, day);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  $("#password-confirm").on("input", function () {
+    console.log("prova");
+    
+    var passField = document.getElementById("password-signup");
+    var confirmPassField = this;
+    if (passField.value !== confirmPassField.value) {
+      console.log("if"); 
+      confirmPassField.setCustomValidity("Passwords must match");
+    }
+    else {
+      console.log("else");
+      confirmPassField.setCustomValidity("");
+    }
+  });
 
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
