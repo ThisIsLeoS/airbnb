@@ -1,6 +1,28 @@
 @extends('layouts.base')
 
 @section("content")
+@if(session()->has('message'))
+            <script type="text/javascript">
+              $(document).ready(function() {
+              $('#popupmodal').modal();
+            });
+          </script>
+            <div class="modal fade" id="popupmodal" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" style="background:white;border-radius:10px" role="document">
+                <div class="modal-header" style="border-radius:10px">
+                  
+                  </button>
+                   <div class="modal-body">
+                    {{ session()->get('message') }}
+                  </div>
+                  <div class="modal-footer" style="border-top:none;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                  </div>
+                </div>
+              </div>
+                
+            </div>
+        @endif
 <div class="container-fluid">
     <div class="row p-2 min_height">
       
@@ -166,14 +188,10 @@
         </div>
         {{-- @if (Auth::user() -> id !== $apartment -> user -> id) --}}
             
-        
+  
             
         <div class="col-12">
-         @if(session()->has('message'))
-            <div class="alert alert-success my_message">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+         
         {{-- Controllo sempre se l'utente è loggato --}}
         @if (Auth::user())
             {{-- Controllo se l'utente loggato è anche proprietario e in quel caso mostro --}}
