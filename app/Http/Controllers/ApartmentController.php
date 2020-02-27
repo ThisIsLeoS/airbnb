@@ -50,7 +50,7 @@ class ApartmentController extends Controller
     {
         // TODO: validazione dati
         $data = $request->validated();
-        dd($data);
+
         // viene creato l'appartamento (senza salvarlo nel DB)
         $apt = Apartment::make($data);
 
