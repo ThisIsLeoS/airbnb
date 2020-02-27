@@ -101,7 +101,7 @@ class ApartmentController extends Controller
         }
 
         // l'appartamento viene salvato nel DB
-        return redirect()->route("userApartment.show", $userId);
+        return redirect()->route("userApartment.show", $userId) -> with('message', 'Appartamento Creato Correttamente');
     }
 
     /**
@@ -183,7 +183,7 @@ class ApartmentController extends Controller
       }
 
 
-      return redirect() -> route('userApartment.show', Auth::user()->id);
+      return redirect() -> route('userApartment.show', Auth::user()->id)->with('message', 'Appartamento Aggiornato Correttamente');
     }
 
     /**

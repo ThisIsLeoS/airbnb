@@ -68,6 +68,28 @@ input:checked + .slider:before {
 </style>
 
 <div class="container">
+  @if(session()->has('message'))
+            <script type="text/javascript">
+              $(document).ready(function() {
+              $('#popupmodal').modal();
+            });
+          </script>
+            <div class="modal fade" id="popupmodal" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" style="background:white;border-radius:10px" role="document">
+                <div class="modal-header" style="border-radius:10px">
+                  
+                  </button>
+                   <div class="modal-body">
+                    {{ session()->get('message') }}
+                  </div>
+                  <div class="modal-footer" style="border-top:none;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                  </div>
+                </div>
+              </div>
+                
+            </div>
+        @endif
   
   <div class="row">
     <div class="col-12 mt-3">
@@ -75,11 +97,7 @@ input:checked + .slider:before {
         <h4 class="m-3 text-center">Gestisci i tuoi appartamenti</h4>
       </div>
     </div>
-    @if(session()->has('message'))
-      <div class="alert alert-success my_message">
-    {{ session()->get('message') }}
-      </div>
-    @endif
+   
     <div class="col-12 myCards">
       @php
         $i = 0;
