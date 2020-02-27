@@ -157,7 +157,9 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+      
       $data = $request -> all();
+      
       $apartment = Apartment::findOrFail($id);
       if (isset($data['services'])) {
         $services = Service::find($data['services']);

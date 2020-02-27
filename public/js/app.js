@@ -37139,6 +37139,11 @@ function init() {
     event.preventDefault();
     geocode($("#address").val(), "#create-aptm-form");
   });
+  $("#update-aptm-btn").click(function (event) {
+    // la sottomissione del form viene abortita
+    event.preventDefault();
+    geocode($("#updateAddress").val(), "#update-aptm-form");
+  });
   $("#mySearch button").click(function (event) {
     event.preventDefault();
     geocode($("#address-to-search").val(), "#mySearch");
@@ -37168,6 +37173,7 @@ function init() {
   }
 
   function geocode(query, formId) {
+    console.log("ciao");
     $.ajax({
       "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
       "method": "GET",
@@ -37179,6 +37185,7 @@ function init() {
         "countrySet": "IT,FR"
       },
       "success": function success(data) {
+        console.log(data);
         $(formId) // al form vengono aggiunti i campi contenenti longitudine e latitudine
         .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
         .submit();

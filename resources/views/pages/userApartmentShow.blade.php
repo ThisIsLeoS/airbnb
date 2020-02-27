@@ -29,6 +29,8 @@
   height: 20px;
 }
 
+
+
 .slider:before {
   position: absolute;
   content: "";
@@ -100,11 +102,15 @@ input:checked + .slider:before {
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
                 <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
                 <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
-                <a {{-- class="visibilityBtn" --}}  href="">Cambia visibilità</a>
-                <label class="switch">
-                  <input data-aptId="{{$apartment->id}}" class="visibilityBtn" type="checkbox" checked id="test">
-                  <span class="slider round"></span>
-                </label>
+                <div class="d-flex justify-content-around">
+
+                  <span >Visibilità</span>
+                  <label class="switch">
+                    <input data-aptId="{{$apartment->id}}" class="visibilityBtn" type="checkbox" checked id="test">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                
               </div>
             </div>
           </div>
