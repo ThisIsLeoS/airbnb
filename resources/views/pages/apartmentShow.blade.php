@@ -101,6 +101,7 @@
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
+            @if(count($apartment -> services) > 0)
             <span style="font-size: 1.5rem">Servizi Aggiuntivi :</span> 
             
                 @foreach ($apartment -> services as $service)
@@ -120,6 +121,7 @@
                     @endif
                   </span>
                 @endforeach
+            @endif
             
         </div>
        {{-- Controllo prima di tutto se è un utente loggato --}} 

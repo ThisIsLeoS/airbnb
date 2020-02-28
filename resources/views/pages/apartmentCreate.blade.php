@@ -1,6 +1,14 @@
 @extends('layouts.base')
 
 @section("content")
+<style>
+    .my_style_drop {
+    position: absolute;
+    top: 0;
+}
+</style>
+
+
 <div class="container-fluid ">
     <h3 class="text-center">
         Ciao {{ Auth::user()->name }} ! Aggiungi un nuovo appartamento.

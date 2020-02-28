@@ -15,6 +15,33 @@
   }
 }
 
+.sponsorship_style{
+  width:50%;
+  font-size: larger;
+  text-transform: uppercase;
+}
+
+#dropin-container{
+        display:none;
+        button{
+          text-align: center;
+        }
+    }
+
+    .braintree-card{
+        padding:10px;
+    }
+
+    #submit-button{
+        padding:10px;
+        width:100%;
+        text-align: center;
+    }
+
+  #pay-button{
+    align-self: center;
+  }
+
 /* .boxPayment{
     width:50%;
     img{

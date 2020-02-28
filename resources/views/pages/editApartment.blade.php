@@ -2,13 +2,10 @@
 
 @section('content')
 <style>
-/*   main{
-    height:80vh;
-    background:url("/images/CreateApt/updApt.png");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-attachment: fixed;
-  } */
+    .my_style_drop {
+    position: absolute;
+    top: 0;
+}
 </style>
 <div class="container-fluid">
   <h3 class="text-center">

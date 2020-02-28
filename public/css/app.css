@@ -1669,7 +1669,16 @@ button #showMyApt {
 
 .stats {
   background-color: orange !important;
+  color: black !important;
+}
+
+.stats:hover {
   color: white !important;
+  background-color: #c06c1e !important;
+}
+
+.stats:focus {
+  box-shadow: 0 0 0 0.2rem rgba(172, 106, 21, 0.5) !important;
 }
 
 .btn-info {
@@ -1682,6 +1691,12 @@ button #showMyApt {
 
 .inactive {
   opacity: 0.6 !important;
+}
+
+.my_span {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: bold;
 }
 
 #myProgress {
@@ -1699,6 +1714,34 @@ button #showMyApt {
 
 #myBar p {
   color: white;
+}
+
+.sponsorship_style {
+  width: 50%;
+  font-size: larger;
+  text-transform: uppercase;
+}
+
+#dropin-container {
+  display: none;
+}
+
+#dropin-container button {
+  text-align: center;
+}
+
+.braintree-card {
+  padding: 10px;
+}
+
+#submit-button {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+#pay-button {
+  align-self: center;
 }
 
 /* .boxPayment{
@@ -12637,6 +12680,20 @@ a.text-dark:focus {
 
 .myBg button a:hover {
   text-decoration: none;
+}
+
+.my_style_drop {
+  position: absolute;
+  top: -12px;
+}
+
+.my_style_drop .autocompleteLi {
+  padding: 5px;
+}
+
+.my_style_drop .autocompleteLi:hover {
+  cursor: pointer;
+  background: rgba(160, 155, 155, 0.471);
 }
 
 .ms_img {
