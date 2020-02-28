@@ -37191,9 +37191,18 @@ function init() {
       autoComplete($("#address-to-search").val());
     }
   }, 500));
+  $("#create-aptm-form #address").keyup(delay(function () {
+    $("#create-aptm-form #addressesList").empty();
+
+    if ($(this).val().length >= 3) {
+      autoComplete($(this).val());
+    }
+  }, 500));
   $(document).on("click", "li.autocompleteLi", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
+    $("#create-aptm-form #address").val($(this).text());
+    $("#create-aptm-form #addressesList").fadeOut();
   });
 
   function delay(callback, ms) {
@@ -37391,8 +37400,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

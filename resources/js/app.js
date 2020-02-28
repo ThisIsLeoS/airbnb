@@ -135,6 +135,7 @@ function init(){
     event.preventDefault();
     geocode($("#address").val(), "#create-aptm-form");
   });
+
   $("#update-aptm-btn").click(function(event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
@@ -154,9 +155,19 @@ function init(){
     }, 500)
   );
 
+  $("#create-aptm-form #address").keyup(delay(function () {
+      $("#create-aptm-form #addressesList").empty();
+      if (($(this).val()).length >= 3) {
+        autoComplete($(this).val());
+      }
+    }, 500)
+  );
+
   $(document).on("click", "li.autocompleteLi", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
+    $("#create-aptm-form #address").val($(this).text());
+    $("#create-aptm-form #addressesList").fadeOut();
   });
 
   function delay(callback, ms) {

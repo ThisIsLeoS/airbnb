@@ -18,7 +18,6 @@ class Apartment extends Model
         "lon",
         "poster_img",
         "visibility"
-
     ];
 
     public function services(){

@@ -24,17 +24,20 @@ class ApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => "required",
+            "title" => "required|string|max:255",
             "description" => "required|string|max:255",
-            "rooms" => "required|integer|gt:0|max:255",
-            "beds" => "required|integer|gt:0|max:255",
-            "bathrooms" => "required|integer|gt:0|max:255",
-            "square_feet" => "integer|max:10000|gt:0",
             "address" => "required|string|max:255",
+            "square_feet" => "required|integer|gt:4|max:1000",
+            "rooms" => "required|integer|gt:0|max:10",
+            "beds" => "required|integer|gt:0|max:10",
+            "bathrooms" => "required|integer|gt:0|max:10",
             "lat" => "required|numeric|between:-90,90",
             "lon" => "required|numeric|between:-180,180",
-            /* "views" => "required|integer|gte:0", */
-            /* "poster_img" => "string|max:255|nullable" */
+            "poster_img" => "image|max:2048",
+            "images" => "array|max:4",
+            "images.*" => "image|max:2048",
+            "services" => "array|max:6",
+            "services.*" => "string|max:30"
         ];
     }
 }
