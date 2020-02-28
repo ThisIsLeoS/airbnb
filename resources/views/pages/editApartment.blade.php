@@ -57,11 +57,6 @@
             <div>
               <label for="square_feet">Metri quadri</label>
               <input type="number" name="square_feet" value="{{ $apartment -> square_feet }}" class="@error("square_feet") is-invalid @enderror" required min="1" max="1000">
-              @error("square_feet")
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
             </div>
             {{-- /square feet --}}
 
@@ -69,11 +64,6 @@
             <div>
               <label for="rooms">Stanze</label>
               <input type="number" name="rooms" value="{{ $apartment -> rooms }}" class="@error("rooms") is-invalid @enderror" required min="1" max="10">
-              @error("rooms")
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
             </div> 
             {{-- /rooms --}}
 
@@ -81,11 +71,6 @@
             <div>
               <label for="beds">Letti</label>
               <input type="number" name="beds" value="{{ $apartment -> beds }}" class="@error("beds") is-invalid @enderror" required min="1" max="10">
-              @error("beds")
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
             </div>
             {{-- /beds --}}
             
@@ -93,15 +78,30 @@
             <div>
               <label for="bathrooms">Bagni</label>
               <input type="number" name="bathrooms" value="{{ $apartment -> bathrooms }}" class="@error("bathrooms") is-invalid @enderror" required min="1" max="10">
-              @error("bathrooms")
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
             </div>
             {{-- /bathrooms --}}
-            
+
           </div>
+          @error("square_feet")
+            <span class="invalid-feedback d-block" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+          @error("rooms")
+            <span class="invalid-feedback d-block" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+          @error("beds")
+            <span class="invalid-feedback d-block" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+          @error("bathrooms")
+            <span class="invalid-feedback d-block" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
 
           {{-- main image --}}
           <label id="main-img-label">Immagine principale</label>
