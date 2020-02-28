@@ -54,6 +54,7 @@
                     height:250px;
                     background-size: cover; 
                     background-position:center;">
+                    </div>
               @elseif(!$apartment -> poster_img == null)
                 <div class="mt-2 mb-2" id="testupdate" 
                   style="background:url('/images/AptImg/{{$apartment->id."/".$apartment -> poster_img}}'); 
@@ -61,9 +62,9 @@
                     height:250px;
                     background-size:cover;
                     background-position:center;">
-              @endif 
             </div>
-            <button id="update-aptm-btn mt-3" >Modifica Appartamento</button>
+              @endif 
+            <button id="update-aptm-btn" class=" mt-3" >Modifica Appartamento</button>
         </div>
         </form>
 

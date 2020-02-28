@@ -10,7 +10,7 @@
   height: 24px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -77,7 +77,7 @@ input:checked + .slider:before {
             <div class="modal fade" id="popupmodal" role="dialog" aria-hidden="true">
               <div class="modal-dialog" style="background:white;border-radius:10px" role="document">
                 <div class="modal-header" style="border-radius:10px">
-                  
+
                   </button>
                    <div class="modal-body">
                     {{ session()->get('message') }}
@@ -87,17 +87,17 @@ input:checked + .slider:before {
                   </div>
                 </div>
               </div>
-                
+
             </div>
         @endif
-  
+
   <div class="row">
     <div class="col-12 mt-3">
       <div class="card-header">
         <h4 class="m-3 text-center">Gestisci i tuoi appartamenti</h4>
       </div>
     </div>
-   
+
     <div class="col-12 myCards">
       @php
         $i = 0;
@@ -109,9 +109,17 @@ input:checked + .slider:before {
 
         <div class="card apt-user-show-card {{ $apartment->visibility }}" style="width:21rem">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-          <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
+            <div class="my_ovFlowHid">
+              <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+            </div>
+          @elseif ($apartment -> poster_img == null)
+            <div class="my_ovFlowHid">
+              <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+            </div>
           @else
-          <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
+            <div class="my_ovFlowHid">
+              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment -> poster_img)}}" alt="Card image cap">
+            </div>
           @endif
             <div class="card-body d-flex">
               <h4 class="card-title text-center">{{$apartment -> title}}</h4>
@@ -128,7 +136,7 @@ input:checked + .slider:before {
                     <span class="slider round"></span>
                   </label>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -182,7 +190,7 @@ $(document).on('click','.visibilityBtn', function(event){
         else {
           thisEl.parents(".apt-user-show-card").addClass("inactive");
           thisEl.prop("checked", false );
-        }    
+        }
         console.log(data);
       },
       "error": function (iqXHR, textStatus, errorThrown) {
