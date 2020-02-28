@@ -1,6 +1,14 @@
 @extends("layouts.base")
 
 @section("content")
+<style>
+
+  /* addrress' autocomplete rules */
+  .my_style_drop {
+    top: 0;
+  }
+</style>
+
 <div class="container-fluid" id="update-aptm-container">
   <h3 class="text-center">
     Ciao {{ Auth::user() -> name }}! Modifica il tuo appartamento.
@@ -46,7 +54,7 @@
           <div class="inputs-number-container">
             
             {{-- square feet --}}
-            <div class="input-number-container">
+            <div>
               <label for="square_feet">Metri quadri</label>
               <input type="number" name="square_feet" value="{{ $apartment -> square_feet }}" class="@error("square_feet") is-invalid @enderror" required min="1" max="1000">
               @error("square_feet")
@@ -58,7 +66,7 @@
             {{-- /square feet --}}
 
             {{-- rooms --}}
-            <div class="input-number-container">
+            <div>
               <label for="rooms">Stanze</label>
               <input type="number" name="rooms" value="{{ $apartment -> rooms }}" class="@error("rooms") is-invalid @enderror" required min="1" max="10">
               @error("rooms")
@@ -70,7 +78,7 @@
             {{-- /rooms --}}
 
             {{-- beds --}}
-            <div class="input-number-container">
+            <div>
               <label for="beds">Letti</label>
               <input type="number" name="beds" value="{{ $apartment -> beds }}" class="@error("beds") is-invalid @enderror" required min="1" max="10">
               @error("beds")
@@ -82,7 +90,7 @@
             {{-- /beds --}}
             
             {{-- bathrooms --}}
-            <div class="input-number-container">
+            <div>
               <label for="bathrooms">Bagni</label>
               <input type="number" name="bathrooms" value="{{ $apartment -> bathrooms }}" class="@error("bathrooms") is-invalid @enderror" required min="1" max="10">
               @error("bathrooms")

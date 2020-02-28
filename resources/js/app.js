@@ -163,6 +163,13 @@ function init(){
     }, 500)
   );
 
+  $("#update-address").keyup(delay(function () {
+    $("#addressesList").empty();
+    if (($(this).val()).length >= 3) {
+      autoComplete($(this).val());
+    }
+  }, 500));
+
   $(document).on("click", "li.autocompleteLi", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
@@ -196,9 +203,12 @@ function init(){
           "<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>",
           "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>",
         );
-        /* il form viene validato ed eventualmente sottomesso (nota: non viene usato il metodo
-        submit di jQuery perchè sottomette il form senza la validazione dell'HTML5, viene invece
-        creato un elemento input di tipo submit su cui viene scatenato l'evento click) */
+        /* 
+        viene fatta la validazione dell'HTML 5 e, se passata, viene sottomesso il form (nota: non
+        viene usato il metodo submit di jQuery perchè sottomette il form senza la validazione 
+        dell'HTML5, viene invece creato un elemento input di tipo submit su cui viene scatenato 
+        l'evento click) 
+        */
         $(formId).append(
           "<input type='submit' id='input-type-submit' style='display:none;'></input>"
         );
@@ -229,7 +239,7 @@ function init(){
           if (data.results.length !== 0){
             $("#addressesList").fadeIn();
             $("#addressesList").append(
-              '<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute">'
+              '<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute;">'
             );
               for (var i = 0; i < data.results.length ; i++) {
                 $("#addressesList ul").append("<li class='autocompleteLi'>" + data.results[i].address.freeformAddress + "</li>");

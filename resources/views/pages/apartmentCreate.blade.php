@@ -2,12 +2,12 @@
 
 @section("content")
 <style>
-    .my_style_drop {
-    position: absolute;
+  
+  /* addrress' autocomplete rules */
+  .my_style_drop {
     top: 0;
-}
+  }
 </style>
-
 
 <div class="container-fluid ">
     <h3 class="text-center">

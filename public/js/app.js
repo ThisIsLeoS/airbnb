@@ -37198,6 +37198,13 @@ function init() {
       autoComplete($(this).val());
     }
   }, 500));
+  $("#update-address").keyup(delay(function () {
+    $("#addressesList").empty();
+
+    if ($(this).val().length >= 3) {
+      autoComplete($(this).val());
+    }
+  }, 500));
   $(document).on("click", "li.autocompleteLi", function () {
     $("#address-to-search").val($(this).text());
     $("#addressesList").fadeOut();
@@ -37229,9 +37236,12 @@ function init() {
       "success": function success(data) {
         // al form vengono aggiunti i campi contenenti longitudine e latitudine
         $(formId).append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>");
-        /* il form viene validato ed eventualmente sottomesso (nota: non viene usato il metodo
-        submit di jQuery perchè sottomette il form senza la validazione dell'HTML5, viene invece
-        creato un elemento input di tipo submit su cui viene scatenato l'evento click) */
+        /* 
+        viene fatta la validazione dell'HTML 5 e, se passata, viene sottomesso il form (nota: non
+        viene usato il metodo submit di jQuery perchè sottomette il form senza la validazione 
+        dell'HTML5, viene invece creato un elemento input di tipo submit su cui viene scatenato 
+        l'evento click) 
+        */
 
         $(formId).append("<input type='submit' id='input-type-submit' style='display:none;'></input>");
         $('#input-type-submit').click();
@@ -37258,7 +37268,7 @@ function init() {
 
         if (data.results.length !== 0) {
           $("#addressesList").fadeIn();
-          $("#addressesList").append('<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute">');
+          $("#addressesList").append('<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute;">');
 
           for (var i = 0; i < data.results.length; i++) {
             $("#addressesList ul").append("<li class='autocompleteLi'>" + data.results[i].address.freeformAddress + "</li>");
@@ -37401,8 +37411,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
