@@ -113,25 +113,37 @@ a:hover{
                                     $numbOfapt++;
                                 @endphp
                                 @if ($numbOfapt == 1)
-                               
+
                                     <div class="carousel-item active">
                                         <div class="col-lg-4 col-md-6">
                                             <div class="border shadow mb-5 ">
 
-                                                <a href="{{route("apartment.show",$apartment-> id)}}">
-                                               <img class="img-fluid" src="{{$apartment -> poster_img}}">
-                                               
+                                              <a href="{{route("apartment.show",$apartment-> id)}}">
+                                                @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+                                                  <div class="my_ovFlowHid">
+                                                    <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+                                                  </div>
+                                                @elseif ($apartment -> poster_img == null)
+                                                  <div class="my_ovFlowHid">
+                                                    <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                                                  </div>
+                                                @else
+                                                  <div class="my_ovFlowHid">
+                                                    <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment-> poster_img)}}" alt="Card image cap">
+                                                  </div>
+                                                @endif
+
                                                <div class="card-body p-2">
                                                    <h4 class="card-title">{{$apartment -> title}}</h4>
                                                    <h4 class="card-title">{{$apartment -> id}}</h4>
                                                    <p class="card-text">{{$apartment-> description}}</p>
-                                                   
+
                                                </div>
-                                               </a>
+                                              </a>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 @else
                                     @break
                                 @endif
@@ -140,13 +152,25 @@ a:hover{
                         @foreach ($sponsorships as $sponsorship)
                             @foreach ($sponsorship -> apartments as $apartment)
                                 @if($loop-> first) @continue @endif
-                                
+
                                 <div class="carousel-item">
                                     <div class="col-lg-4 col-md-6">
                                         <div class=" border shadow mb-5">
 
                                             <a href="{{route("apartment.show",$apartment-> id)}}">
-                                            <img class="img-fluid" src="{{$apartment -> poster_img}}">
+                                              @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+                                                <div class="my_ovFlowHid">
+                                                  <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+                                                </div>
+                                              @elseif ($apartment -> poster_img == null)
+                                                <div class="my_ovFlowHid">
+                                                  <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                                                </div>
+                                              @else
+                                                <div class="my_ovFlowHid">
+                                                  <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment-> poster_img)}}" alt="Card image cap">
+                                                </div>
+                                              @endif
                                             <div class="card-body p-2">
                                                 <h4 class="card-title">{{$apartment -> title}}</h4>
                                                 <h4 class="card-title">{{$apartment -> id}}</h4>
@@ -157,7 +181,7 @@ a:hover{
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             @endforeach
                         @endforeach
                     </div>
@@ -167,11 +191,11 @@ a:hover{
 
             <a class="carousel-control-prev myTestl w-auto" href="#myCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
-            
+
             </a>
             <a class="carousel-control-next  w-auto" href="#myCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
-            
+
             </a>
         </div>
     </div>
@@ -203,5 +227,5 @@ $('.carousel .carousel-item').each(function() {
     }
 });
 
-</script> 
+</script>
 @endsection

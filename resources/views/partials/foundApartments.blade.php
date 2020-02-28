@@ -1,4 +1,93 @@
+<style>
+ .carousel-control-prev, .carousel-control-next{
+      top:50% !important;
+      height:20px;
+      padding:0.5%;
+      background:grey;
+  }
 
+  a{
+      color:black;
+      text-decoration: none;
+  }
+
+  a:hover{
+      text-decoration: none;
+      color:black;
+  }
+
+  .myH5{
+      color:grey;
+      background:white;
+      padding:10px;
+      border-radius:10px;
+  }
+
+  .card-body{
+      height: 150px;
+  }
+
+  .carousel-control-prev:active,.carousel-control-next:active{
+      background:#808080;
+  }
+
+  .carousel-control-next-icon,.carousel-control-prev-icon{
+      background-image: none;
+  }
+
+  /*
+  .carousel-control-next {
+      left: 100%;
+  }
+   */
+  @media (min-width: 768px) {
+
+      .carousel-inner .carousel-item-right.active,
+      .carousel-inner .carousel-item-next {
+          transform: translateX(50%);
+      }
+
+      .carousel-inner .carousel-item-left.active,
+      .carousel-inner .carousel-item-prev {
+          transform: translateX(-50%);
+      }
+  }
+
+  /* large - display 3 */
+  @media (min-width: 992px) {
+
+      .carousel-inner .carousel-item-right.active,
+      .carousel-inner .carousel-item-next {
+          transform: translateX(33%);
+      }
+
+      .carousel-inner .carousel-item-left.active,
+      .carousel-inner .carousel-item-prev {
+          transform: translateX(-33%);
+      }
+  }
+
+  @media (max-width: 768px) {
+      .carousel-inner .carousel-item>div {
+          display: none;
+      }
+
+      .carousel-inner .carousel-item>div:first-child {
+          display: block;
+      }
+  }
+
+  .carousel-inner .carousel-item.active,
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+      display: flex;
+  }
+
+  .carousel-inner .carousel-item-right,
+  .carousel-inner .carousel-item-left {
+      transform: translateX(0);
+  }
+</style>
 
 @php
   $numbOfapartments=0;
@@ -33,16 +122,28 @@
                                   <div class="col-lg-4 col-md-6 sponsorApt">
                                       <div class="border shadow mb-5 ">
 
-                                          <a href="{{route("apartment.show",$apartment-> id)}}">
-                                         <img class="img-fluid" src="{{$apartment -> poster_img}}">
+                                        <a href="{{route("apartment.show",$apartment-> id)}}">
 
+                                          @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+                                            <div class="my_ovFlowHid">
+                                              <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+                                            </div>
+                                          @elseif ($apartment -> poster_img == null)
+                                            <div class="my_ovFlowHid">
+                                              <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                                            </div>
+                                          @else
+                                            <div class="my_ovFlowHid">
+                                              <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment-> poster_img)}}" alt="Card image cap">
+                                            </div>
+                                          @endif
                                          <div class="card-body p-2">
                                              <h4 class="card-title">{{$apartment -> title}}</h4>
                                              <h4 class="card-title">{{$apartment -> id}}</h4>
                                              <p class="card-text">{{$apartment-> description}}</p>
 
                                          </div>
-                                         </a>
+                                       </a>
                                       </div>
                                   </div>
                               </div>
@@ -57,16 +158,27 @@
                           @if($loop-> first) @continue @endif
 
                           <div class="carousel-item">
-                              <div class="col-lg-4 col-md-6">
-                                  <div class=" border shadow mb-5 sponsorApt">
+                              <div class="col-lg-4 col-md-6 sponsorApt">
+                                  <div class=" border shadow mb-5">
 
                                       <a href="{{route("apartment.show",$apartment-> id)}}">
-                                      <img class="img-fluid" src="{{$apartment -> poster_img}}">
+                                        @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+                                          <div class="my_ovFlowHid">
+                                            <img class="card-img-top" src={{$apartment -> poster_img}} alt="Card image cap">
+                                          </div>
+                                        @elseif ($apartment -> poster_img == null)
+                                          <div class="my_ovFlowHid">
+                                            <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                                          </div>
+                                        @else
+                                          <div class="my_ovFlowHid">
+                                            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment->id."/".$apartment-> poster_img)}}" alt="Card image cap">
+                                          </div>
+                                        @endif
                                       <div class="card-body p-2">
                                           <h4 class="card-title">{{$apartment -> title}}</h4>
                                           <h4 class="card-title">{{$apartment -> id}}</h4>
                                           <p class="card-text">{{$apartment-> description}}</p>
-                                          {{-- <a class="btn btn-primary" href="{{route("apartment.show",$apartment-> id)}}">Visita appartamento</a> --}}
                                       </div>
                                       </a>
                                   </div>
@@ -101,7 +213,7 @@
 @if ($numOfFiltAptsAndDists > 0 )
   <h4><strong> "Abbiamo trovato {{ $numOfFiltAptsAndDists }} risultati per la tua ricerca"</strong></h4>
   <div  class="row">
-    <div class="col-12 myCards">
+    <div class="col-12 d-flex flex-wrap">
       @php
         // l'array viene ordinato in base alla distanza
         function compare_by_int_key($a, $b) {
@@ -115,26 +227,30 @@
 
       @foreach ($filteredAptsAndDists as $aptAndDist)
         @if($aptAndDist["apartment"] ->visibility == 1)
-          <div class="card" style="width: 18rem;">
-            @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-              <div class="my_ovFlowHid">
-                <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
+          <div class="col-lg-3 col-md-5 col-sm-6">
+              <div class=" border shadow mb-5">
+
+                  <a href="{{route("apartment.show",$aptAndDist["apartment"]-> id)}}">
+                    @if ($aptAndDist["apartment"] -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
+                      <div class="my_ovFlowHid">
+                        <img class="card-img-top" src={{$aptAndDist["apartment"] -> poster_img}} alt="Card image cap">
+                      </div>
+                    @elseif ($aptAndDist["apartment"] -> poster_img == null)
+                      <div class="my_ovFlowHid">
+                        <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
+                      </div>
+                    @else
+                      <div class="my_ovFlowHid">
+                        <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"]->id."/".$aptAndDist["apartment"]-> poster_img)}}" alt="Card image cap">
+                      </div>
+                    @endif
+                  <div class="card-body p-2">
+                      <h4 class="card-title">{{$aptAndDist["apartment"] -> title}}</h4>
+                      <h4 class="card-title">{{$aptAndDist["apartment"]-> id}}</h4>
+                      <p class="card-text">{{$aptAndDist["apartment"]-> description}}</p>
+                  </div>
+                  </a>
               </div>
-            @elseif ($aptAndDist["apartment"] -> poster_img == null)
-              <div class="my_ovFlowHid">
-                <img class="card-img-top" src="{{URL::to('/images/noUpload.png')}}" alt="Card image cap">
-              </div>
-            @else
-              <div class="my_ovFlowHid">
-                <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$aptAndDist["apartment"]->id."/".$aptAndDist["apartment"] -> poster_img)}}" alt="Card image cap">
-              </div>
-            @endif
-            <div class="card-body">
-              <p class="card-text"> {{$aptAndDist["apartment"]->id}}</p>
-              <p class="card-text"> {{$aptAndDist["apartment"]->description}}</p>
-              <p class="card-text"> {{$aptAndDist["distance"]}}</p>
-              <a href="{{route("apartment.show",$aptAndDist["apartment"]-> id)}}" class="btn btn-primary">Vai a pagina dettaglio</a>
-            </div>
           </div>
 
         @endif
@@ -145,3 +261,27 @@
 @else
   <h4><strong> "Non abbiamo trovato risultati per la tua ricerca"</strong></h4>
 @endif
+
+<script>
+  $('#myCarouselAptPlus').carousel({
+      interval: 3000
+  })
+
+  $('.carousel .carousel-item').each(function() {
+      var minPerSlide = 4;
+      var next = $(this).next();
+      if (!next.length) {
+          next = $(this).siblings(':first');
+      }
+      next.children(':first-child').clone().appendTo($(this));
+
+      for (var i = 0; i < minPerSlide; i++) {
+          next = next.next();
+          if (!next.length) {
+              next = $(this).siblings(':first');
+          }
+
+          next.children(':first-child').clone().appendTo($(this));
+      }
+  });
+</script>
