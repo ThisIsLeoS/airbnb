@@ -106,7 +106,7 @@
           {{-- main image --}}
           <label id="main-img-label">Immagine principale</label>
           @if ($apartment -> poster_img === "https://source.unsplash.com/random/1920x1280/?apartment")
-            <div id="main-img" style="background-image: width:180px; height:180px; url('https://source.unsplash.com/random/1920x1280/?apartment'); background-size: cover; background-position:center;">
+            <div id="main-img" style="width:180px; height:180px; background-image: url('https://source.unsplash.com/random/1920x1280/?apartment'); background-size: cover; background-position:center;">
             </div>
           @elseif($apartment -> poster_img !== null)
             <div id="main-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/{{$apartment -> poster_img}}'); background-size:cover; background-position:center;">
