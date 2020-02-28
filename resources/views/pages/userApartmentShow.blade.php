@@ -127,10 +127,15 @@ input:checked + .slider:before {
                 <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="m-2 btn btn-success"><i class="fas fa-pen"> Modifica appartamento </i></a>
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
                 <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
-                <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
-                <div class="d-flex justify-content-around">
+                @if (count($apartment -> sponsorships) > 0)
+                  <a  class="m-2 btn btn-secondary"><i class="fas fa-money-check-alt"> Appartmento già sponsorizzato </i></a> 
+                @else
+                  <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
+                @endif
+                
+                <div class="d-flex mt-1  justify-content-center w-100">
 
-                  <span >Visibilità</span>
+                  <span class="my_span mr-3">Visibilità</span>
                   <label class="switch">
                     <input data-aptId="{{$apartment->id}}" class="visibilityBtn" type="checkbox" checked id="test">
                     <span class="slider round"></span>
@@ -140,25 +145,6 @@ input:checked + .slider:before {
               </div>
             </div>
           </div>
-        {{-- @else
-          <div class="card apt-user-show-card {{ $apartment->visibility }}" style="width:21rem">
-            @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
-            <img class="card-img-top my_card_height" src={{$apartment -> poster_img}} alt="Card image cap">
-            @else
-            <img class="card-img-top" src="{{URL::to('/images/AptImg/'.$apartment -> poster_img)}}" alt="Card image cap">
-            @endif
-            <div class="card-body d-flex ">
-              <h4 class="card-title text-center">{{$apartment -> title}}</h4>
-              <div class="d-flex flex-column align-items-center justify-content-start">
-                <a href="{{ route('apartment.edit',  $apartment-> id) }}" class="m-2 btn btn-success"><i class="fas fa-pen"> Modifica appartamento </i></a>
-                <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
-                <a href="{{ route('apartment.stats', $apartment-> id) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
-                <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
-                <a class="visibilityBtn" data-aptId="{{$apartment->id}}" href="">Cambia visibilità</a>
-              </div>
-            </div>
-          </div>
-          @endif --}}
 
       @endforeach
     </div>

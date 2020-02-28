@@ -47,6 +47,19 @@ background-size:cover;
     }
 }
 
+.my_style_drop{
+    position:absolute;
+    top:-12px;
+    .autocompleteLi{
+        padding:5px;
+        &:hover{
+            cursor:pointer;
+            background:rgba(160, 155, 155, 0.471);
+
+        }
+    }
+}
+
 .ms_img{
     max-height: 630px;
 }

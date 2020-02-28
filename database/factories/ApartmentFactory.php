@@ -16,10 +16,10 @@ $factory->define(Apartment::class, function (Faker $faker) {
         "beds"=> rand(1,4) ,
         "bathrooms" => rand(1,2),
         "square_feet" => rand(25,100),
-        "address" => $faker -> address ,
+        "address" => "Via Giuseppe Ugolini 20900 Monza MB" ,
         // 'views'=>rand(10, 1000) ,
-        'lat'=> $faker-> latitude($min = 40, $max = 70),
-        'lon'=> $faker-> longitude($min = 0, $max = 60),
+        'lat'=> "45.465454",
+        'lon'=> "9.186516",
         "poster_img" => "https://source.unsplash.com/random/1920x1280/?apartment"
     ];
 });

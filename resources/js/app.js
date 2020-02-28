@@ -229,7 +229,7 @@ function init(){
           if (data.results.length !== 0){
             $("#addressesList").fadeIn();
             $("#addressesList").append(
-              '<ul class="dropdown-menu" style="display:block; position:absolute">'
+              '<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute">'
             );
               for (var i = 0; i < data.results.length ; i++) {
                 $("#addressesList ul").append("<li class='autocompleteLi'>" + data.results[i].address.freeformAddress + "</li>");
