@@ -64,7 +64,7 @@
                     background-position:center;">
             </div>
               @endif 
-            <button id="update-aptm-btn" class=" mt-3" >Modifica Appartamento</button>
+            <button id="update-aptm-btn" class="mt-3" >Modifica Appartamento</button>
         </div>
         </form>
 
