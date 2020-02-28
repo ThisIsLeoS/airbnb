@@ -154,10 +154,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApartmentRequest $request, $id)
     {
-      
-      $data = $request -> all();
+      $data = $request -> validated();
       
       $apartment = Apartment::findOrFail($id);
       if (isset($data['services'])) {

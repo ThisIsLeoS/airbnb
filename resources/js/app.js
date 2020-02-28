@@ -139,7 +139,7 @@ function init(){
   $("#update-aptm-btn").click(function(event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
-    geocode($("#updateAddress").val(), "#update-aptm-form");
+    geocode($("#update-address").val(), "#update-aptm-form");
   });
 
   $("#mySearch button").click(function(event) {
@@ -183,26 +183,26 @@ function init(){
   }
 
   function geocode(query, formId) {
-    console.log("ciao")
     $.ajax({
       "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
       "method": "GET",
       "data": {
         "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
         "limit": "1", // opzione per farsi restituire solo 1 risultato
-        // TODO: aggiugnere altri paesi?
-        "countrySet": "IT,FR"
       },
       "success": function (data) {
-        console.log(data)
-        $(formId)
-          // al form vengono aggiunti i campi contenenti longitudine e latitudine
-          .append(
-            "<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>",
-            "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>"
-          )
-          // il form viene sottomesso
-          .submit();
+        // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        $(formId).append(
+          "<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>",
+          "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>",
+        );
+        /* il form viene validato ed eventualmente sottomesso (nota: non viene usato il metodo
+        submit di jQuery perchè sottomette il form senza la validazione dell'HTML5, viene invece
+        creato un elemento input di tipo submit su cui viene scatenato l'evento click) */
+        $(formId).append(
+          "<input type='submit' id='input-type-submit' style='display:none;'></input>"
+        );
+        $('#input-type-submit').click();
       },
       "error": function (iqXHR, textStatus, errorThrown) {
         alert(

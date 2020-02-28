@@ -15,10 +15,10 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             ["type" =>'wifi'],
-            ["type" =>'parking_slot'],
-            ["type" =>'swimming_pool'],
+            ["type" =>'posto auto'],
+            ["type" =>'piscina'],
             ["type" =>'sauna'],
-            ["type" =>'sea_view'],
+            ["type" =>'vista mare'],
             ["type" =>'reception']
         ];
     

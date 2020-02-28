@@ -1,6 +1,56 @@
+#update-aptm-container {
+    margin: 20px 0 20px 0;
+}
+
+label, #update-aptm-btn {
+    margin-top: 10px;
+}
+
+label {
+
+    // to overwrite bootstrap's rule
+    margin-bottom: 4px !important;
+}
+
+.inputs-number-container {
+    display: flex;
+    margin-top: 15px;
+
+    // for a better text alignment at lower resolutions
+    text-align: center;
+
+    justify-content: space-between;
+    align-items: center;
+
+    label {
+        margin-top: 0px;
+        margin-bottom: 0px !important;
+    }
+
+    input {
+        margin-left: 8px;
+    }
+}
+
+#services-container {
+    display: flex;
+    align-items: center;
+
+    label {
+        margin-top: 0px;
+        margin-right: 15px;
+        margin-bottom: 0px !important;
+        margin-left: 5px;
+    }
+}
+
+#main-img {
+    margin-bottom: 10px;
+}
+
 .myBgCreateUpd{
-    background:url("/images/CreateApt/updApt.png");
-    background-repeat:no-repeat;
+    background-image: url("/images/CreateApt/updApt.png");
     background-position: right;
     background-size: contain;
+    background-repeat: no-repeat;
 }

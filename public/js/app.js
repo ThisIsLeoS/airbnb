@@ -37178,7 +37178,7 @@ function init() {
   $("#update-aptm-btn").click(function (event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
-    geocode($("#updateAddress").val(), "#update-aptm-form");
+    geocode($("#update-address").val(), "#update-aptm-form");
   });
   $("#mySearch button").click(function (event) {
     event.preventDefault();
@@ -37218,22 +37218,23 @@ function init() {
   }
 
   function geocode(query, formId) {
-    console.log("ciao");
     $.ajax({
       "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
       "method": "GET",
       "data": {
         "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
-        "limit": "1",
-        // opzione per farsi restituire solo 1 risultato
-        // TODO: aggiugnere altri paesi?
-        "countrySet": "IT,FR"
+        "limit": "1" // opzione per farsi restituire solo 1 risultato
+
       },
       "success": function success(data) {
-        console.log(data);
-        $(formId) // al form vengono aggiunti i campi contenenti longitudine e latitudine
-        .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
-        .submit();
+        // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        $(formId).append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>");
+        /* il form viene validato ed eventualmente sottomesso (nota: non viene usato il metodo
+        submit di jQuery perchè sottomette il form senza la validazione dell'HTML5, viene invece
+        creato un elemento input di tipo submit su cui viene scatenato l'evento click) */
+
+        $(formId).append("<input type='submit' id='input-type-submit' style='display:none;'></input>");
+        $('#input-type-submit').click();
       },
       "error": function error(iqXHR, textStatus, errorThrown) {
         alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
@@ -37389,7 +37390,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleNotFoundError: Module not found: Error: Can't resolve 'jquery-ui/themes/base/all.css' in 'C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\resources\\sass'\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\Compilation.js:925:10\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\NormalModuleFactory.js:401:22\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\NormalModuleFactory.js:130:21\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\NormalModuleFactory.js:224:22\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\neo-async\\async.js:2830:7\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\neo-async\\async.js:6877:13\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\NormalModuleFactory.js:214:25\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:213:14\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\UnsafeCachePlugin.js:44:7\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:67:43\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:28:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\ModuleKindPlugin.js:30:40\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\forEachBail.js:30:14\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\UnsafeCachePlugin.js:44:7\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:67:43\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\enhanced-resolve\\lib\\Resolver.js:285:5\n    at eval (eval at create (C:\\Users\\unieuro\\Documents\\GitHub\\progetto-finale-airbnb\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

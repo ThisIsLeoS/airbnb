@@ -107,13 +107,13 @@
                   <span class="services">
                     @if ($service -> type === "wifi")
                       <i class="fas fa-wifi"></i>
-                    @elseif($service -> type === "parking_slot")
+                    @elseif($service -> type === "posto auto")
                       <i class="fas fa-parking"></i>
-                    @elseif($service -> type === "swimming_pool")
+                    @elseif($service -> type === "piscina")
                       <i class="fas fa-swimming-pool"></i>
                     @elseif($service -> type === "sauna")
                       <i class="fas fa-hot-tub"></i>
-                    @elseif($service -> type === "sea_view")
+                    @elseif($service -> type === "vista mare")
                       <i class="fas fa-water"></i>
                     @elseif($service -> type === "reception")
                       <i class="fas fa-concierge-bell"></i>

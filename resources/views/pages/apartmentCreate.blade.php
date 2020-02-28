@@ -68,7 +68,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <label for="images" >Carica fino ad altre 4 immagini</label>
+                    <label for="images">Carica fino ad altre 4 immagini</label>
                     <input type="file" id="photos"  name="images[]" multiple class="@error('images') is-invalid @enderror">
                     @error('images')
                         <span class="invalid-feedback" role="alert">
@@ -76,16 +76,16 @@
                         </span>
                     @enderror
                     Quali servizi metti a disposizione?
-                        <div>
-                            @foreach ($services as $service)
-                                <input name="services[]" type="checkbox" value="{{$service -> id}}" class="@error('services') is-invalid @enderror">{{$service -> type}}
-                            @endforeach
-                        @error('services')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <div>
+                        @foreach ($services as $service)
+                            <input name="services[]" type="checkbox" value="{{$service -> id}}" class="@error('services') is-invalid @enderror">{{$service -> type}}
+                        @endforeach
+                    </div>
+                    @error('services')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
-                        </div>
                     <button id="create-aptm-btn">Aggiungi appartamento</button>
                 </div>
             </form>
