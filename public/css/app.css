@@ -1751,6 +1751,48 @@ button #showMyApt {
     }
 } */
 
+#create-aptm-container {
+  margin: 20px 0 20px 0;
+}
+
+label,
+#update-aptm-btn {
+  margin-top: 10px;
+}
+
+label {
+  margin-bottom: 4px !important;
+}
+
+.inputs-number-container {
+  display: flex;
+  margin-top: 15px;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputs-number-container label {
+  margin-top: 0px;
+  margin-bottom: 0px !important;
+}
+
+.inputs-number-container input {
+  margin-left: 8px;
+}
+
+#services-container {
+  display: flex;
+  align-items: center;
+}
+
+#services-container label {
+  margin-top: 0px;
+  margin-right: 15px;
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
 .myBgCreate {
   background: url("/images/CreateApt/createApt.png");
   background-repeat: no-repeat;
@@ -1763,7 +1805,7 @@ button #showMyApt {
 }
 
 label,
-#update-aptm-btn {
+#create-aptm-btn {
   margin-top: 10px;
 }
 

@@ -22,7 +22,7 @@
 
           {{-- title --}}
           <label for="title">Titolo</label>
-          <input type="text" name="title" value="{{ $apartment -> title }}" class="@error("title") is-invalid @enderror" required maxlength="255">
+          <input type="text" id="title" name="title" value="{{ $apartment -> title }}" class="@error("title") is-invalid @enderror" required maxlength="255">
           @error("title")
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
 
           {{-- description --}}
           <label for="description">Descrizione</label>
-          <input type="text" name="description" value="{{ $apartment -> description }}" class="@error("description") is-invalid @enderror" required maxlength="255">
+          <input type="text" id="description" name="description" value="{{ $apartment -> description }}" class="@error("description") is-invalid @enderror" required maxlength="255">
           @error("description")
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -56,28 +56,28 @@
             {{-- square feet --}}
             <div>
               <label for="square_feet">Metri quadri</label>
-              <input type="number" name="square_feet" value="{{ $apartment -> square_feet }}" class="@error("square_feet") is-invalid @enderror" required min="1" max="1000">
+              <input type="number" id="square_feet" name="square_feet" value="{{ $apartment -> square_feet }}" class="@error("square_feet") is-invalid @enderror" required min="1" max="1000">
             </div>
             {{-- /square feet --}}
 
             {{-- rooms --}}
             <div>
               <label for="rooms">Stanze</label>
-              <input type="number" name="rooms" value="{{ $apartment -> rooms }}" class="@error("rooms") is-invalid @enderror" required min="1" max="10">
+              <input type="number" id="rooms" name="rooms" value="{{ $apartment -> rooms }}" class="@error("rooms") is-invalid @enderror" required min="1" max="10">
             </div> 
             {{-- /rooms --}}
 
             {{-- beds --}}
             <div>
               <label for="beds">Letti</label>
-              <input type="number" name="beds" value="{{ $apartment -> beds }}" class="@error("beds") is-invalid @enderror" required min="1" max="10">
+              <input type="number" id="beds" name="beds" value="{{ $apartment -> beds }}" class="@error("beds") is-invalid @enderror" required min="1" max="10">
             </div>
             {{-- /beds --}}
             
             {{-- bathrooms --}}
             <div>
               <label for="bathrooms">Bagni</label>
-              <input type="number" name="bathrooms" value="{{ $apartment -> bathrooms }}" class="@error("bathrooms") is-invalid @enderror" required min="1" max="10">
+              <input type="number" id="bathrooms" name="bathrooms" value="{{ $apartment -> bathrooms }}" class="@error("bathrooms") is-invalid @enderror" required min="1" max="10">
             </div>
             {{-- /bathrooms --}}
 
@@ -104,7 +104,7 @@
           @enderror
 
           {{-- main image --}}
-          <label id="main-img-label">Immagine principale</label>
+          <label id="main-img-label" for="main-img-input">Immagine principale</label>
           @if ($apartment -> poster_img === "https://source.unsplash.com/random/1920x1280/?apartment")
             <div id="main-img" style="width:180px; height:180px; background-image: url('https://source.unsplash.com/random/1920x1280/?apartment'); background-size: cover; background-position:center;">
             </div>
@@ -112,7 +112,7 @@
             <div id="main-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/{{$apartment -> poster_img}}'); background-size:cover; background-position:center;">
             </div>
           @endif
-          <input type="file" name="poster_img" value="{{ $apartment -> poster_img }}" class="@error("poster_img") is-invalid @enderror">
+          <input type="file" id="main-img-input" name="poster_img" value="{{ $apartment -> poster_img }}" class="@error("poster_img") is-invalid @enderror">
           @error("poster_img")
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -124,8 +124,8 @@
           <label>Quali servizi metti a disposizione?</label>
           <div id="services-container">
             @foreach ($services as $service)
-              <input type="checkbox" name="services[]" value="{{ $service -> id }}" @if ($apartment -> services() -> find($service -> id)) checked  @endif class="@error("services") is-invalid @enderror">
-              <label for="">{{ $service -> type }}</label>
+              <input type="checkbox" id="{{ $service -> type }}" name="services[]" value="{{ $service -> id }}" @if ($apartment -> services() -> find($service -> id)) checked  @endif class="@error("services") is-invalid @enderror">
+              <label for="{{ $service -> type }}">{{ $service -> type }}</label>
             @endforeach
           </div>
           @error("services")
