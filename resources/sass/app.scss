@@ -13,9 +13,9 @@
 @import 'aptPlus';
 @import 'createApt';
 @import 'updateApt';
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
 
+// libraries
+@import '~bootstrap/scss/bootstrap';
 @import '~jquery-ui/themes/base/all.css';
 
 .noGutter{
@@ -44,6 +44,19 @@ background-size:cover;
             }
         }
        
+    }
+}
+
+.my_style_drop{
+    position:absolute;
+    top:-12px;
+    .autocompleteLi{
+        padding:5px;
+        &:hover{
+            cursor:pointer;
+            background:rgba(160, 155, 155, 0.471);
+
+        }
     }
 }
 

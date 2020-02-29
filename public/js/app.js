@@ -37178,7 +37178,7 @@ function init() {
   $("#update-aptm-btn").click(function (event) {
     // la sottomissione del form viene abortita
     event.preventDefault();
-    geocode($("#updateAddress").val(), "#update-aptm-form");
+    geocode($("#update-address").val(), "#update-aptm-form");
   });
   $("#mySearch button").click(function (event) {
     event.preventDefault();
@@ -37193,6 +37193,13 @@ function init() {
   }, 500));
   $("#create-aptm-form #address").keyup(delay(function () {
     $("#create-aptm-form #addressesList").empty();
+
+    if ($(this).val().length >= 3) {
+      autoComplete($(this).val());
+    }
+  }, 500));
+  $("#update-address").keyup(delay(function () {
+    $("#addressesList").empty();
 
     if ($(this).val().length >= 3) {
       autoComplete($(this).val());
@@ -37218,22 +37225,26 @@ function init() {
   }
 
   function geocode(query, formId) {
-    console.log("ciao");
     $.ajax({
       "url": "https://api.tomtom.com/search/2/geocode/" + query + ".json",
       "method": "GET",
       "data": {
         "key": "PkKS2dAj8BrmI6ki7jkQEXlEbn5AkjKp",
-        "limit": "1",
-        // opzione per farsi restituire solo 1 risultato
-        // TODO: aggiugnere altri paesi?
-        "countrySet": "IT,FR"
+        "limit": "1" // opzione per farsi restituire solo 1 risultato
+
       },
       "success": function success(data) {
-        console.log(data);
-        $(formId) // al form vengono aggiunti i campi contenenti longitudine e latitudine
-        .append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>") // il form viene sottomesso
-        .submit();
+        // al form vengono aggiunti i campi contenenti longitudine e latitudine
+        $(formId).append("<input type='hidden' name='lat' value='" + data.results[0].position.lat + "'/>", "<input type='hidden' name='lon' value='" + data.results[0].position.lon + "'/>");
+        /* 
+        viene fatta la validazione dell'HTML 5 e, se passata, viene sottomesso il form (nota: non
+        viene usato il metodo submit di jQuery perchè sottomette il form senza la validazione 
+        dell'HTML5, viene invece creato un elemento input di tipo submit su cui viene scatenato 
+        l'evento click) 
+        */
+
+        $(formId).append("<input type='submit' id='input-type-submit' style='display:none;'></input>");
+        $('#input-type-submit').click();
       },
       "error": function error(iqXHR, textStatus, errorThrown) {
         alert("iqXHR.status: " + iqXHR.status + "\n" + "textStatus: " + textStatus + "\n" + "errorThrown: " + errorThrown);
@@ -37257,7 +37268,7 @@ function init() {
 
         if (data.results.length !== 0) {
           $("#addressesList").fadeIn();
-          $("#addressesList").append('<ul class="dropdown-menu" style="display:block; position:absolute">');
+          $("#addressesList").append('<ul class="dropdown-menu my_style_drop" style="display:block; position:absolute;">');
 
           for (var i = 0; i < data.results.length; i++) {
             $("#addressesList ul").append("<li class='autocompleteLi'>" + data.results[i].address.freeformAddress + "</li>");
@@ -37400,8 +37411,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\rispo\OneDrive\Desktop\Progetto Finale\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Leo\Documenti Leo\Boolean\Corso\Esercizi\BoolBnb (progetto finale)\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

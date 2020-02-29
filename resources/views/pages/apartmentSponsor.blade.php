@@ -1,19 +1,46 @@
 @extends('layouts.base')
 
 @section("content")
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card-header">
+            <h4 class="m-3 text-center">Sponsorizza il tuo appartamento</h4>
+        </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-12">
-        <form id="sponsorships-form" action="{{ route("apartment.sendNonce") }}" class="d-flex flex-column" method="POST">
+            
+        
+    
+            <h4 class=" text-center mt-4">Scegli il piano più adatto alle tue esigenze</h4>
+        <form class="d-flex flex-column justify-content-center text-center align-items-center" id="sponsorships-form" action="{{ route("apartment.sendNonce") }}" class="d-flex flex-column" method="POST">
             @csrf
             @method("POST")
-                <p>Please select your plans:</p>
-                <input type="radio" id="plan24h" name="plan" value="2.99">
-                <label for="plan24h">2,99 € per 24 ore di sponsorizzazione</label>
-                <input type="radio" id="plan72h" name="plan" value="5.99">
-                <label for="plan72h">5,99 € per 72 ore di sponsorizzazione</label>
-                <input type="radio" id="plan144h" name="plan" value="9.99">
-                <label for="plan144h">9,99 € per 144 ore di sponsorizzazione</label>
+                    <div class="sponsorship_style">
+
+                        <input type="radio" id="plan24h" name="plan" value="2.99">
+                        <label for="plan24h"><strong>2,99 €</strong> per <strong>24 ore</strong>  di sponsorizzazione</label>
+                    </div>
+                
+                
+                    <div class="sponsorship_style">
+
+                        <input type="radio" id="plan72h" name="plan" value="5.99">
+                        <label for="plan72h"><strong>5,99 €</strong>  per <strong>72 ore</strong>  di sponsorizzazione</label>
+                    </div>
+                
+                
+                    <div class="sponsorship_style">
+
+                        <input type="radio" id="plan144h" name="plan" value="9.99">
+                        <label for="plan144h"><strong>9,99 €</strong>  per <strong>144 ore</strong>  di sponsorizzazione</label>
+                    </div>
+                
                 <input id="nonce" name="nonce" type="hidden" />
                 <input id="aptId" name="aptId" type="hidden" />
             </form>
@@ -22,6 +49,11 @@
                
                 
                 var test = $('input[name="plan"]:checked').val()
+                if($('input[name="plan"]:checked')){
+                   $("#dropin-container").fadeIn().addClass("d-flex flex-column");
+                }else{
+                   $("#dropin-container").fadeOut().removeClass("d-flex flex-column"); 
+                }
 
                 console.log(test) 
                 })
@@ -29,12 +61,14 @@
         </div>
         <div class="col-12">
     
-            <div id="dropin-container" class="p-3"></div>
+            <div id="dropin-container" ></div>
         </div>
     </div>
 </div>
     {{-- <button id="submit-button">Request payment method</button> --}}
      <script>
+        
+
         var button = document.createElement("BUTTON");
         button.innerHTML = "Request payment method";
         $(button).attr("id", "submit-button");
@@ -43,13 +77,21 @@
             authorization: '{{ $clientToken }}',
             container: '#dropin-container'
         }, function (createErr, instance) {  
+
+
+             
+
             $("[data-braintree-id='card']").append(button);
             button.addEventListener('click', function () {
                 instance.requestPaymentMethod(function (err, payload) {
                     var payBtn = document.createElement("BUTTON");
-                    payBtn.innerHTML = "Pay";
-                    $(button).attr("id", "pay-button");
-                    $("#dropin-container").append(payBtn);
+                    payBtn.innerHTML = "Completa Pagamento";
+                    $(payBtn).attr("id", "pay-button");
+                    $(payBtn).addClass("btn btn-primary")
+                    
+                        $("#pay-button").remove(); 
+                        $("#dropin-container").append(payBtn);
+                    
                     payBtn.addEventListener('click', function () {
                         $("#nonce").val(payload.nonce);
                         $("#aptId").val("{{ $aptId }}");

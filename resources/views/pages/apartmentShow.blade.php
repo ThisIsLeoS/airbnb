@@ -101,25 +101,27 @@
                     <i class="fas fa-toilet-paper"></i><p>Bagni disponibili : {{$apartment -> bathrooms}}</p>
                 </div>
             </div>
+            @if(count($apartment -> services) > 0)
             <span style="font-size: 1.5rem">Servizi Aggiuntivi :</span> 
             
                 @foreach ($apartment -> services as $service)
                   <span class="services">
                     @if ($service -> type === "wifi")
                       <i class="fas fa-wifi"></i>
-                    @elseif($service -> type === "parking_slot")
+                    @elseif($service -> type === "posto auto")
                       <i class="fas fa-parking"></i>
-                    @elseif($service -> type === "swimming_pool")
+                    @elseif($service -> type === "piscina")
                       <i class="fas fa-swimming-pool"></i>
                     @elseif($service -> type === "sauna")
                       <i class="fas fa-hot-tub"></i>
-                    @elseif($service -> type === "sea_view")
+                    @elseif($service -> type === "vista mare")
                       <i class="fas fa-water"></i>
                     @elseif($service -> type === "reception")
                       <i class="fas fa-concierge-bell"></i>
                     @endif
                   </span>
                 @endforeach
+            @endif
             
         </div>
        {{-- Controllo prima di tutto se è un utente loggato --}} 
