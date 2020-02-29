@@ -97,6 +97,9 @@ input:checked + .slider:before {
         <h4 class="m-3 text-center">Gestisci i tuoi appartamenti</h4>
       </div>
     </div>
+    
+
+    
 
     <div class="col-12 myCards">
       @php
@@ -106,7 +109,8 @@ input:checked + .slider:before {
       @foreach ($user->apartments as $apartment)
       {{-- <img class="avatar rounded-circle" src="{{asset('images/UserProfileImg/'.Auth::user() -> profile_img)}}" alt=""  data-holder-rendered="true"> --}}
       {{-- @if ($apartment->visibility == 0) --}}
-
+      
+      
         <div class="card apt-user-show-card {{ $apartment->visibility }}" style="width:21rem">
           @if ($apartment -> poster_img == "https://source.unsplash.com/random/1920x1280/?apartment")
             <div class="my_ovFlowHid">
@@ -128,12 +132,46 @@ input:checked + .slider:before {
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
                 <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
                 @if (count($apartment -> sponsorships) > 0)
-                  <a  class="m-2 btn btn-secondary"><i class="fas fa-money-check-alt"> Appartmento già sponsorizzato </i></a> 
+                  <a  class="m-2 btn btn-secondary"><i class="fas fa-money-check-alt"> Appartmento già sponsorizzato </i></a>
+                  @foreach (DB::table("apartment_sponsorship")->where("apartment_id" ,"=" , $apartment->id) -> get() as $end_time_sponsor)
+                  <p class="demo"></p>
+                    <script>
+                    var countDownDate = new Date("{{$end_time_sponsor -> end_time }}").getTime();
+                    console.log(countDownDate)
+
+                      // Update the count down every 1 second
+                      var x = setInterval(function() {
+
+                        // Get today's date and time
+                        var now = new Date().getTime();
+                        
+                          
+                        // Find the distance between now and the count down date
+                        var distance = countDownDate - now;
+                          
+                        // Time calculations for days, hours, minutes and seconds
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                          
+                        // Output the result in an element with id="demo"
+                        $(".demo").text(days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s ");
+                          
+                        
+                        
+                      }, 1000);
+
+                  </script> 
+                      {{date('m-d-Y H:m:s', strtotime($end_time_sponsor -> end_time)) }}
+                      
+                  @endforeach
                 @else
                   <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
                 @endif
                 
-                <div class="d-flex mt-1  justify-content-center w-100">
+                <div class="d-flex mt-1 align-items-center  justify-content-center w-100">
 
                   <span class="my_span mr-3">Visibilità</span>
                   <label class="switch">
@@ -152,7 +190,6 @@ input:checked + .slider:before {
 </div>
 
 <script>
-/* console.log(($("#test").is(":checked")) */
 
 $(document).on('click','.visibilityBtn', function(event){
 

@@ -393,7 +393,7 @@ class ApartmentController extends Controller
                    if($amount == "2.99"){
                        $startTime = new DateTime();
 
-                       $endTime = date("Y-m-d H:i:s", time() + 60);
+                       $endTime = date("Y-m-d H:i:s", time() + 86400);
 
                        $apartment -> sponsorships() -> attach($sponsorship, ["start_time" => $startTime, "end_time" => $endTime]);
 
