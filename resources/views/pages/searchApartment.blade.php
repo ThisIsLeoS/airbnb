@@ -24,14 +24,14 @@
               <p>Seleziona i servizi che desideri:</p>
               <input type="checkbox" id="wifi" name="services[]" value="wifi">
               <label for="wifi">Wi-Fi</label>
-              <input type="checkbox" id="parking-slot" name="services[]" value="parking_slot">
-              <label for="parking-slot">posto auto</label>
-              <input type="checkbox" id="swimming-pool" name="services[]" value="swimming_pool">
-              <label for="swimming-pool">piscina</label>
+              <input type="checkbox" id="posto auto" name="services[]" value="posto auto">
+              <label for="posto auto">posto auto</label>
+              <input type="checkbox" id="piscina" name="services[]" value="piscina">
+              <label for="piscina">piscina</label>
               <input type="checkbox" id="sauna" name="services[]" value="sauna">
               <label for="sauna">sauna</label>
-              <input type="checkbox" id="sea-view" name="services[]" value="sea_view">
-              <label for="sea-view">vista mare</label>
+              <input type="checkbox" id="vista mare" name="services[]" value="vista mare">
+              <label for="vista mare">vista mare</label>
               <input type="checkbox" id="reception" name="services[]" value="reception">
               <label for="reception">reception</label>
             </div>
