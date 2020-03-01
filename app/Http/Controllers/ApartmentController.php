@@ -66,30 +66,31 @@ class ApartmentController extends Controller
           $newAptImg = [
               "poster_img" => $filename
           ];
+          $apt -> update($newAptImg);
         }
 
-          for ($i = 0; $i < 4; $i++){
-
-            if($request -> hasfile("images.".$i)){
-              $fileM = $request -> file("images.".$i);
-              $filenameM = $fileM -> getClientOriginalName();
-              $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
-              $newAptImgM = [
-                "path" => $filenameM
-              ];
-              $image= Image::make($newAptImgM);
-              $image -> apartment() -> associate($apt);
-              $image -> save();
-            }
-            else {
-              $newAptImgM = [
-                "path" => "noUpload"
-              ];
-              $image= Image::make($newAptImgM);
-              $image -> apartment() -> associate($apt);
-              $image -> save();
-            }
+        for ($i = 0; $i < 4; $i++){
+          if($request -> hasfile("images.".$i)){
+            $fileM = $request -> file("images.".$i);
+            $filenameM = $fileM -> getClientOriginalName();
+            $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
+            $newAptImgM = [
+              "path" => $filenameM
+            ];
+            $image= Image::make($newAptImgM);
+            $image -> apartment() -> associate($apt);
+            $image -> save();
           }
+          else {
+            $newAptImgM = [
+              "path" => "noUpload"
+            ];
+            $image= Image::make($newAptImgM);
+            $image -> apartment() -> associate($apt);
+            $image -> save();
+          }
+        }
+
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
@@ -100,9 +101,9 @@ class ApartmentController extends Controller
           $apt->services = [];
           // $apt -> services() -> sync($services);
         }
-        if ($request -> hasfile("poster_img")) {
-          $apt -> update($newAptImg);
-        }
+        // if ($request -> hasfile("poster_img")) {
+        //   $apt -> update($newAptImg);
+        // }
 
         // l'appartamento viene salvato nel DB
         return redirect()->route("userApartment.show", $userId) -> with('message', 'Appartamento Creato Correttamente');
