@@ -127,8 +127,10 @@
           <label>Quali servizi metti a disposizione?</label>
           <div id="services-container">
             @foreach ($services as $service)
-              <input type="checkbox" id="{{ $service -> type }}" name="services[]" value="{{$service -> id}}" class="@error("services") is-invalid @enderror">
-              <label for="{{ $service -> type }}">{{ $service -> type }}</label>
+              <div>
+                <input type="checkbox" id="{{ $service -> type }}" name="services[]" value="{{$service -> id}}" class="@error("services") is-invalid @enderror">
+                <label for="{{ $service -> type }}">{{ $service -> type }}</label>
+              </div>
             @endforeach
           </div>
           @error("services")

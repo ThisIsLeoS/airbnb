@@ -1784,6 +1784,7 @@ label {
 #services-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 #services-container label {
@@ -1833,6 +1834,7 @@ label {
 #services-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 #services-container label {
@@ -1844,6 +1846,30 @@ label {
 
 #main-img {
   margin-bottom: 10px;
+}
+
+.image-0-input-file,
+.image-1-input-file,
+.image-2-input-file,
+.image-3-input-file {
+  width: 186px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.image-3-input-file {
+  margin-bottom: 0;
+}
+
+#img-0-box,
+#img-2-box {
+  padding-right: 50px;
+}
+
+#images-row {
+  display: flex;
+  flex-grow: 0;
+  flex-wrap: wrap;
 }
 
 .myBgCreateUpd {

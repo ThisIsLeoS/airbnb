@@ -35,6 +35,7 @@ label {
 #services-container {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     label {
         margin-top: 0px;

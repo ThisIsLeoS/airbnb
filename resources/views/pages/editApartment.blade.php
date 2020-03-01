@@ -112,20 +112,89 @@
             <div id="main-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/{{$apartment -> poster_img}}'); background-size:cover; background-position:center;">
             </div>
           @endif
-          <input type="file" id="main-img-input" name="poster_img" value="{{ $apartment -> poster_img }}" class="@error("poster_img") is-invalid @enderror">
+          <input type="file" id="main-img-input" name="poster_img" class="@error("poster_img") is-invalid @enderror">
           @error("poster_img")
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
           @enderror
           {{-- /main image --}}
+          
+          {{-- secondary images --}}
+          <label>Altre immagini</label>
+          <div id="images-row">
+            @for ($i = 0; $i < 2; $i++)
+              <div id="img-{{ $i }}-box">
+                @if ($apartment -> images[$i] -> path === "noUpload")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/noUpload.png'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img1.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img1.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img2.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img2.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img3.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img3.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img4.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img4.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path !== null)
+                  <div id="secondary-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/others/{{$apartment -> images[$i] -> path}}'); background-size:cover; background-position:center;">
+                  </div>
+                @else
+                  <div id="secondary-img" style="width:180px; height:180px; background:url('/images/noUpload.png'); background-size:cover; background-position:center;">
+                  </div>
+                @endif
+                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("secondary_img") is-invalid @enderror">
+              </div>
+            @endfor
+          </div>
+          <div id="images-row">
+            @for ($i = 2; $i < 4; $i++)
+              <div id="img-{{ $i }}-box">
+                @if ($apartment -> images[$i] -> path === "noUpload")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/noUpload.png'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img1.jpg")
+                <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img1.jpg'); background-size: cover; background-position:center;">
+                </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img2.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img2.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img3.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img3.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path === "/images/ShowApt/img4.jpg")
+                  <div id="secondary-img" style="width:180px; height:180px; background-image: url('/images/ShowApt/img4.jpg'); background-size: cover; background-position:center;">
+                  </div>
+                @elseif ($apartment -> images[$i] -> path !== null)
+                  <div id="secondary-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/others/{{$apartment -> images[$i] -> path}}'); background-size:cover; background-position:center;">
+                  </div>
+                @else
+                  <div id="secondary-img" style="width:180px; height:180px; background:url('/images/noUpload.png'); background-size:cover; background-position:center;">
+                  </div>
+                @endif
+                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("secondary_img") is-invalid @enderror">
+              </div>
+            @endfor
+          </div>
+          @error("secondary_img")
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror          
+          {{-- /secondary images --}}
 
           {{-- services --}}
           <label>Quali servizi metti a disposizione?</label>
           <div id="services-container">
             @foreach ($services as $service)
+            <div>
               <input type="checkbox" id="{{ $service -> type }}" name="services[]" value="{{ $service -> id }}" @if ($apartment -> services() -> find($service -> id)) checked  @endif class="@error("services") is-invalid @enderror">
               <label for="{{ $service -> type }}">{{ $service -> type }}</label>
+            </div>
             @endforeach
           </div>
           @error("services")
@@ -143,4 +212,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  // seleziona button
+  // al click
+  //
+</script>
 @endsection

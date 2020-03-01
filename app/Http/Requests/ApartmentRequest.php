@@ -37,7 +37,11 @@ class ApartmentRequest extends FormRequest
             "images" => "array|max:4",
             "images.*" => "image|max:2048",
             "services" => "array|max:6",
-            "services.*" => "string|max:30"
+            "services.*" => "string|max:30",
+            "image0" => "image|max:2048",
+            "image1" => "image|max:2048",
+            "image2" => "image|max:2048",
+            "image3" => "image|max:2048"
         ];
     }
 }

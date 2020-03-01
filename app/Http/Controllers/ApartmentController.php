@@ -68,12 +68,10 @@ class ApartmentController extends Controller
           ];
         }
 
-        if (isset($data["images"])) {
-          foreach($data["images"] as $key => $value){
+          for ($i = 0; $i < 4; $i++){
 
-            if($request -> hasfile("images.".$key)){
-              /* dd($request -> hasfile("images.".$key)); */
-              $fileM = $request -> file("images.".$key);
+            if($request -> hasfile("images.".$i)){
+              $fileM = $request -> file("images.".$i);
               $filenameM = $fileM -> getClientOriginalName();
               $fileM -> move("images/AptImg/".$apt->id."/others", $filenameM);
               $newAptImgM = [
@@ -82,9 +80,16 @@ class ApartmentController extends Controller
               $image= Image::make($newAptImgM);
               $image -> apartment() -> associate($apt);
               $image -> save();
-            };
+            }
+            else {
+              $newAptImgM = [
+                "path" => "noUpload"
+              ];
+              $image= Image::make($newAptImgM);
+              $image -> apartment() -> associate($apt);
+              $image -> save();
+            }
           }
-        }
         if (isset($data["services"]))
         {
           // all'appartamento vengono "agganciati" i servizi
@@ -157,14 +162,18 @@ class ApartmentController extends Controller
     public function update(ApartmentRequest $request, $id)
     {
       $data = $request -> validated();
-
+      // dd($data);
       $apartment = Apartment::findOrFail($id);
+      $apartment -> update($data);
+
       if (isset($data['services'])) {
         $services = Service::find($data['services']);
         $apartment -> services() -> sync($services);
       } else {
         $services = [];
       }
+      $apartment -> services() -> sync($services);
+
       if ($request -> hasfile("poster_img")) {
           $file = $request -> file("poster_img");
           $extension = $file -> getClientOriginalExtension();
@@ -173,13 +182,37 @@ class ApartmentController extends Controller
           $newAptImg = [
               "poster_img" => $filename
           ];
-      }
-      $apartment -> services() -> sync($services);
-      $apartment -> update($data);
-      if ($request -> hasfile("poster_img")) {
-        $apartment -> update($newAptImg);
+          $apartment -> update($newAptImg);
       }
 
+      if($request -> hasfile("image0")){
+        $fileM = $request -> file("image0");
+        $filenameM = $fileM -> getClientOriginalName();
+        $fileM -> move("images/AptImg/".$apartment->id."/others", $filenameM);
+        $apartment -> images[0] -> path = $filenameM;
+        $apartment -> push();
+      }     
+      if($request -> hasfile("image1")){
+        $fileM = $request -> file("image1");
+        $filenameM = $fileM -> getClientOriginalName();
+        $fileM -> move("images/AptImg/".$apartment->id."/others", $filenameM);
+        $apartment -> images[1] -> path = $filenameM;
+        $apartment -> push();
+      };
+      if($request -> hasfile("image2")){
+        $fileM = $request -> file("image2");
+        $filenameM = $fileM -> getClientOriginalName();
+        $fileM -> move("images/AptImg/".$apartment->id."/others", $filenameM);
+        $apartment -> images[2] -> path = $filenameM;
+        $apartment -> push();
+      };
+      if($request -> hasfile("image3")){
+        $fileM = $request -> file("image3");
+        $filenameM = $fileM -> getClientOriginalName();
+        $fileM -> move("images/AptImg/".$apartment->id."/others", $filenameM);
+        $apartment -> images[3] -> path = $filenameM;
+        $apartment -> push();
+      };
 
       return redirect() -> route('userApartment.show', Auth::user()->id)->with('message', 'Appartamento Aggiornato Correttamente');
     }

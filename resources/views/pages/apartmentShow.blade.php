@@ -39,7 +39,7 @@
             <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
                   
-                    @if (!isset($apartment -> images[0] -> path))
+                    @if ($apartment -> images[0] -> path === "noUpload")
                       <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif($apartment -> images[0] -> path == "/images/ShowApt/img1.jpg")
                       <img src="{{asset('images/ShowApt/img1.jpg')}}" alt="">
@@ -49,7 +49,7 @@
                     
                 </div>
                 <div class="col-6 ms_img noGutter border border-dark">
-                    @if (!isset($apartment -> images[1] -> path))
+                    @if ($apartment -> images[1] -> path === "noUpload")
                       <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif($apartment -> images[1] -> path == "/images/ShowApt/img2.jpg")
                       <img src="{{asset('images/ShowApt/img2.jpg')}}" alt="">
@@ -60,7 +60,7 @@
             </div>
             <div class="row myHeight">
                 <div class="col-6 ms_img noGutter border border-dark">
-                    @if (!isset($apartment -> images[2] -> path))
+                    @if ($apartment -> images[2] -> path === "noUpload")
                       <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif($apartment -> images[2] -> path == "/images/ShowApt/img3.jpg")
                       <img src="{{asset('images/ShowApt/img3.jpg')}}" alt="">
@@ -69,7 +69,7 @@
                     @endif
                 </div>
                 <div class="col-6 ms_img noGutter border border-dark">
-                    @if (!isset($apartment -> images[3] -> path))
+                    @if ($apartment -> images[3] -> path === "noUpload")
                       <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif($apartment -> images[3] -> path == "/images/ShowApt/img4.jpg")
                       <img src="{{asset('images/ShowApt/img4.jpg')}}" alt="">
