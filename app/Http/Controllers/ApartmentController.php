@@ -272,6 +272,7 @@ class ApartmentController extends Controller
   public function apartmentAdvSearch(Request $request) {
     $sponsorships = Sponsorship::all();
     $data = $request -> all();
+    
     $numOfRooms = $data["rooms"];
     $numOfBeds = $data["beds"];
     $radius = $data["radius"];
