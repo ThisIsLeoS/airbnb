@@ -67,10 +67,10 @@ class ApartmentController extends Controller
               "poster_img" => $filename
           ];
         }
-        
-        if (isset($data["images"])) { 
+
+        if (isset($data["images"])) {
           foreach($data["images"] as $key => $value){
-            
+
             if($request -> hasfile("images.".$key)){
               /* dd($request -> hasfile("images.".$key)); */
               $fileM = $request -> file("images.".$key);
@@ -157,7 +157,7 @@ class ApartmentController extends Controller
     public function update(ApartmentRequest $request, $id)
     {
       $data = $request -> validated();
-      
+
       $apartment = Apartment::findOrFail($id);
       if (isset($data['services'])) {
         $services = Service::find($data['services']);
@@ -194,6 +194,7 @@ class ApartmentController extends Controller
     {
       $apartment = Apartment::findOrFail($id);
       $apartment -> services() -> detach();
+      $apartment -> sponsorships() -> detach();
       $apartment -> images() -> delete();
       $apartment -> messages() -> delete();
       $apartment -> views() -> delete();
@@ -307,8 +308,8 @@ class ApartmentController extends Controller
 
   public function apartmentStatistics($id){
     $apartment = Apartment::findOrFail($id);
-    
-    
+
+
     if (Auth::user()-> id == $apartment -> user -> id){
     $messagesCount = $apartment->messages()
     ->selectRaw('count(*) as count, date(created_at) as created_date')
@@ -351,7 +352,7 @@ class ApartmentController extends Controller
 
 
    public function sendNonceToServer(Request $request) {
-    
+
     $apartment = Apartment::findOrFail($request->aptId);
      if(count($apartment -> sponsorships) == 0){
 
@@ -436,13 +437,13 @@ class ApartmentController extends Controller
 
   public function handleAptViews(Request $request) {
     $data = $request->all();
-    
+
     $rows =
       DB::table("views")
       ->where("apartment_id", "=", $data["aptId"])
       ->where("ip_address", "=", $data["ip"])
       ->get();
-    
+
       if($data["userId"] === null){
 
         if (count($rows) == 0) {
@@ -456,7 +457,7 @@ class ApartmentController extends Controller
           );
         }
       }
-    
+
   }
 
   public function makeAptVisible(Request $request)
