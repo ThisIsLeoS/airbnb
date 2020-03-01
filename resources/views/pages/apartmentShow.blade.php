@@ -1,6 +1,11 @@
 @extends('layouts.base')
 
 @section("content")
+<style>
+  .prova{
+    width:50px;
+  }
+</style>
 @if(session()->has('message'))
             <script type="text/javascript">
               $(document).ready(function() {
@@ -108,11 +113,11 @@
                 <div class="text-center">
   
                   @foreach ($apartment -> services as $service)
-                    <span style="font-size: 1.2rem" class="services mr-2">
+                    <span data-toggle="popover" data-content="{{$service -> type}}" data-placement="bottom" style="font-size: 1.2rem" class="services mr-2">
                       @if ($service -> type === "wifi")
-                        <i class="fas fa-wifi"></i>
+                        <i  class="fas fa-wifi"></i>
                       @elseif($service -> type === "posto auto")
-                        <i class="fas fa-parking"></i>
+                        <i  class="fas fa-parking"></i>
                       @elseif($service -> type === "piscina")
                         <i class="fas fa-swimming-pool"></i>
                       @elseif($service -> type === "sauna")
@@ -171,7 +176,7 @@
            
           </div> 
         @endif
-        
+        <br>
         <div class="col-12 mt-5">
             <h3>Ubicazione</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi ratione iste unde aliquam, deleniti aspernatur ipsum, quae qui inventore debitis dolor possimus dolore eveniet quibusdam, corrupti necessitatibus tempora illum doloribus.</p>
@@ -191,6 +196,26 @@
                   zoom: 8
                 });
                 var marker = new tt.Marker().setLngLat(myCoord).addTo(map);
+
+                $(".mapboxgl-marker svg").attr("data-toggle","popover");
+                $(".mapboxgl-marker svg").attr("data-html","true");
+                $(".mapboxgl-marker svg").attr("data-placement","top");
+                
+                  $(".mapboxgl-marker svg").attr("data-content","<strong>{{$apartment->title}}</strong> <br> {{$apartment->address}}");
+                
+                
+                
+                
+                
+                
+                $('[data-toggle="popover"]').click(function(){
+                  $(this).popover("show");
+                  
+                });
+                $('[data-toggle="popover"]').mouseleave(function(){
+                  $(this).popover("hide");
+                }); 
+                
                 </script>
         </div>
         {{-- @if (Auth::user() -> id !== $apartment -> user -> id) --}}

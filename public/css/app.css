@@ -1751,6 +1751,13 @@ button #showMyApt {
     }
 } */
 
+.my_style_plus {
+  padding: 3px;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: smaller;
+}
+
 #create-aptm-container {
   margin: 20px 0 20px 0;
 }
@@ -12967,7 +12974,7 @@ a.text-dark:focus {
 }
 
 .sponsorApt .card-body {
-  background: #bb9d51;
+  background: #e9cf8e;
 }
 
 .myHeight {

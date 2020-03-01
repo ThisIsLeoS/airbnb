@@ -306,6 +306,7 @@ class ApartmentController extends Controller
     $sponsorships = Sponsorship::all();
     $data = $request -> all();
     
+    
     $numOfRooms = $data["rooms"];
     $numOfBeds = $data["beds"];
     $radius = $data["radius"];

@@ -2,7 +2,7 @@
 
 
 @section("content")
-<style>
+{{-- <style>
   main{
     height:80vh;
     background:url("/images/Statistic/statistic.png");
@@ -10,7 +10,7 @@
     background-position: center center;
     background-attachment: fixed;
   }
-</style>
+</style> --}}
 <div class="container-fluid mt-5">
     <div class="row">
         <div class="col-lg-6">
@@ -87,8 +87,8 @@ var unique = function(origArr) {
     return newArr;
 }
 
-    printGraphs("myChartMex",unique(created_atMex),"Messaggi",messageCount,'rgba(99,180,255,0.21)','rgba(99,180,255,1)');
-    printGraphs("myChartViews",unique(created_atViews),"Visite",viewsCount,'rgba(255,219,156,0.21)','rgba(235,190,141,1)');
+    printGraphs("myChartMex",unique(created_atMex),"Messaggi",messageCount,'rgba(99,180,255,0.6)','rgba(99,180,255,1)');
+    printGraphs("myChartViews",unique(created_atViews),"Visite",viewsCount,'rgba(255,219,156,0.6)','rgba(235,190,141,1)');
 
 
     function printGraphs(where,labels,label,data ,bgColor,borderColor){

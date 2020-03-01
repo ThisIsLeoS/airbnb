@@ -307,13 +307,18 @@ function navbar() {
   var page3000_3 = "http://localhost:3000/?page=3";
   var page3000_4 = "http://localhost:3000/?page=4";
   var page3000_5 = "http://localhost:3000/?page=5";
+  var page3000_6 = "http://localhost:3000/?page=6";
+  var page3000_7 = "http://localhost:3000/?page=7";
   var page8000 = "http://localhost:8000/";
   var page8000_1 = "http://localhost:8000/?page=1";
   var page8000_2 = "http://localhost:8000/?page=2";
   var page8000_3 = "http://localhost:8000/?page=3";
   var page8000_4 = "http://localhost:8000/?page=4";
   var page8000_5 = "http://localhost:8000/?page=5";
-  if (url == page3000 || url == page3000_1 || url == page3000_2 || url == page3000_3 || url == page3000_4 || url == page3000_5 || url == page8000 || url == page8000_1 || url == page8000_2 || url == page8000_3 || url == page8000_4 || url == page8000_5) {
+  var page8000_6 = "http://localhost:3000/?page=6";
+  var page8000_7 = "http://localhost:3000/?page=7";
+  if (url == page3000 || url == page3000_1 || url == page3000_2 || url == page3000_3 || url == page3000_4 || url == page3000_5 || url == page3000_6 || url == page3000_7 || url == page8000 || url == page8000_1 || url == page8000_2 || url == page8000_3 || url == page8000_4 || url == page8000_5 || url == page8000_6 || url == page8000_7) {
+    
     $(".my_nvb").addClass("nav_home").removeClass("bg-white shadow-sm")
     $(".my_nvb svg").addClass("my_svgW")
   } else {

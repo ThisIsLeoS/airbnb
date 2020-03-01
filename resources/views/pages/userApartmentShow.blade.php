@@ -132,9 +132,10 @@ input:checked + .slider:before {
                 <a href="{{ route('user.delete.apartment',  $apartment-> id) }}" class=" m-2 btn btn-danger"><i class="fas fa-trash-alt"> Rimuovi appartamento </i></a>
                 <a href="{{ route('apartment.stats', $apartment-> id ) }}" class="m-2 btn stats"><i class="fas fa-signal"> Statistiche appartamento </i></a>
                 @if (count($apartment -> sponsorships) > 0)
-                  <a  class="m-2 btn btn-secondary"><i class="fas fa-money-check-alt"> Appartmento già sponsorizzato </i></a>
-                  @foreach (DB::table("apartment_sponsorship")->where("apartment_id" ,"=" , $apartment->id) -> get() as $end_time_sponsor)
-                  <p class="demo"></p>
+                @foreach (DB::table("apartment_sponsorship")->where("apartment_id" ,"=" , $apartment->id) -> get() as $end_time_sponsor)
+                  <a data-toggle="popover" data-placement="bottom" data-content="La sponsorizzazione terminerà il {{date('d-m-Y', strtotime($end_time_sponsor -> end_time)) }} alle {{date('H:m:s', strtotime($end_time_sponsor -> end_time)) }}"  class="m-2 btn btn-secondary"><i class="fas fa-money-check-alt"> Appartmento già sponsorizzato </i></a>
+                  @endforeach
+                  {{--<p class="demo"></p>
                     <script>
                     var countDownDate = new Date("{{$end_time_sponsor -> end_time }}").getTime();
                     console.log(countDownDate)
@@ -166,7 +167,7 @@ input:checked + .slider:before {
                   </script> 
                       {{date('m-d-Y H:m:s', strtotime($end_time_sponsor -> end_time)) }}
                       
-                  @endforeach
+                   --}}
                 @else
                   <a href="{{ route("apartment.sponsorship", $apartment->id) }}" class="m-2 btn btn-info"><i class="fas fa-money-check-alt"> Sponsorizza appartamento </i></a>
                 @endif
@@ -190,6 +191,13 @@ input:checked + .slider:before {
 </div>
 
 <script>
+
+   $('[data-toggle="popover"]').click(function(){
+    $(this).popover("show");
+  });
+  $('[data-toggle="popover"]').mouseleave(function(){
+    $(this).popover("hide");
+  });
 
 $(document).on('click','.visibilityBtn', function(event){
 
