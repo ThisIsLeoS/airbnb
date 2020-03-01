@@ -17,8 +17,8 @@
   }
 
   .myH5{
-      color:grey;
-      background:white;
+      color:black;
+      font-weight: 800;
       padding:10px;
       border-radius:10px;
   }
@@ -138,9 +138,8 @@
                                             </div>
                                           @endif
                                          <div class="card-body p-2">
-                                             <h4 class="card-title">{{$apartment -> title}}</h4>
-                                             <h4 class="card-title">{{$apartment -> id}}</h4>
-                                             <p class="card-text">{{$apartment-> description}}</p>
+                                             <h4 class="card-title mt-1">{{$apartment -> title}}</h4>
+                                             <p class="card-text mt-4"><span class="my_style_plus mr-2" style="background:black;color:white;">PLUS</span>{{$apartment-> description}}</p>
 
                                          </div>
                                        </a>
@@ -156,7 +155,8 @@
                   @foreach ($sponsorships as $sponsorship)
                       @foreach ($sponsorship -> apartments as $apartment)
                           @if($loop-> first) @continue @endif
-
+                          @if ($apartment -> visibility === 1)
+                              
                           <div class="carousel-item">
                               <div class="col-lg-4 col-md-6 sponsorApt">
                                   <div class=" border shadow mb-5">
@@ -176,14 +176,14 @@
                                           </div>
                                         @endif
                                       <div class="card-body p-2">
-                                          <h4 class="card-title">{{$apartment -> title}}</h4>
-                                          <h4 class="card-title">{{$apartment -> id}}</h4>
-                                          <p class="card-text">{{$apartment-> description}}</p>
+                                          <h4 class="card-title mt-1">{{$apartment -> title}}</h4>
+                                          <p class="card-text mt-4"><span class="my_style_plus mr-2" style="background:black;color:white;">PLUS</span>{{$apartment-> description}}</p>
                                       </div>
                                       </a>
                                   </div>
                               </div>
                           </div>
+                          @endif
 
                       @endforeach
                   @endforeach
@@ -245,9 +245,8 @@
                       </div>
                     @endif
                   <div class="card-body p-2">
-                      <h4 class="card-title">{{$aptAndDist["apartment"] -> title}}</h4>
-                      <h4 class="card-title">{{$aptAndDist["apartment"]-> id}}</h4>
-                      <p class="card-text">{{$aptAndDist["apartment"]-> description}}</p>
+                      <h4 class="card-title mt-1">{{$aptAndDist["apartment"] -> title}}</h4>
+                      <p class="card-text mt-4">{{$aptAndDist["apartment"]-> description}}</p>
                   </div>
                   </a>
               </div>

@@ -19,11 +19,11 @@ a:hover{
 }
 
 .myH5{
-    color:grey;
-    background:white;
-    padding:10px;
-    border-radius:10px;
-}
+      color:black;
+      font-weight: 800;
+      padding:10px;
+      border-radius:10px;
+  }
 
 .card-body{
     height: 150px;
@@ -134,9 +134,10 @@ a:hover{
                                                 @endif
 
                                                <div class="card-body p-2">
-                                                   <h4 class="card-title">{{$apartment -> title}}</h4>
-                                                   <h4 class="card-title">{{$apartment -> id}}</h4>
-                                                   <p class="card-text">{{$apartment-> description}}</p>
+                                                   
+                                                   <h4 class="card-title mt-1"> {{$apartment -> title}}</h4>
+                                                   {{-- <h4 class="card-title">{{$apartment -> id}}</h4> --}}
+                                                   <p class="card-text mt-4"><span class="my_style_plus mr-2" style="background:#91174D;color:white;">PLUS</span>{{$apartment-> description}}</p>
 
                                                </div>
                                               </a>
@@ -152,6 +153,7 @@ a:hover{
                         @foreach ($sponsorships as $sponsorship)
                             @foreach ($sponsorship -> apartments as $apartment)
                                 @if($loop-> first) @continue @endif
+                                @if($apartment -> visibility === 1)
 
                                 <div class="carousel-item">
                                     <div class="col-lg-4 col-md-6">
@@ -172,15 +174,17 @@ a:hover{
                                                 </div>
                                               @endif
                                             <div class="card-body p-2">
-                                                <h4 class="card-title">{{$apartment -> title}}</h4>
-                                                <h4 class="card-title">{{$apartment -> id}}</h4>
-                                                <p class="card-text">{{$apartment-> description}}</p>
+                                                
+                                                <h4 class="card-title mt-1">{{$apartment -> title}}</h4>
+                                                {{-- <h4 class="card-title">{{$apartment -> id}}</h4> --}}
+                                                <p class="card-text mt-4"><span class="my_style_plus mr-2" style="background:#91174D;color:white;">PLUS</span>{{$apartment-> description}}</p>
                                                 {{-- <a class="btn btn-primary" href="{{route("apartment.show",$apartment-> id)}}">Visita appartamento</a> --}}
                                             </div>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
 
                             @endforeach
                         @endforeach
@@ -206,7 +210,7 @@ a:hover{
 
 
 $('#myCarousel').carousel({
-    interval: 300000000
+    interval: 2000
 })
 
 $('.carousel .carousel-item').each(function() {
