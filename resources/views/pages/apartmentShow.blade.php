@@ -42,8 +42,7 @@
         </div>
         <div class="col-6 ms_img d-none d-sm-block">
             <div class="row myHeight">
-                <div class="col-6 ms_img noGutter border border-dark">
-                  
+                <div class="col-6 ms_img noGutter border border-dark">     
                     @if ($apartment -> images[0] -> path === "noUpload")
                       <img  src="{{URL::to('images/noUpload.png')}}" alt="">
                     @elseif($apartment -> images[0] -> path == "/images/ShowApt/img1.jpg")

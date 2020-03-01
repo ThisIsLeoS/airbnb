@@ -148,4 +148,23 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("input[name='images[]']").on("input", function () {
+    var fileUpload = $("input[name='images[]']");
+    if (parseInt(fileUpload.get(0).files.length)>4){
+      this.setCustomValidity("Non puoi caricare più di 4 immagini");
+    }
+    else {
+      this.setCustomValidity("");
+    }
+  });
+
+  // $("#create-aptm-btn").click(function(){
+  //     var fileUpload = $("input[name='images[]']");
+  //     if (parseInt(fileUpload.get(0).files.length)>3){
+  //       alert("You can only upload a maximum of 2 files");
+  //     }
+  // });
+</script>
 @endsection

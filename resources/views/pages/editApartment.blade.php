@@ -111,6 +111,9 @@
           @elseif($apartment -> poster_img !== null)
             <div id="main-img" style="width:180px; height:180px; background:url('/images/AptImg/{{$apartment -> id}}/{{$apartment -> poster_img}}'); background-size:cover; background-position:center;">
             </div>
+          @else
+            <div id="main-img" style="width:180px; height:180px; background:url('/images/noUpload.png'); background-size:cover; background-position:center;">
+            </div>
           @endif
           <input type="file" id="main-img-input" name="poster_img" class="@error("poster_img") is-invalid @enderror">
           @error("poster_img")
@@ -147,7 +150,7 @@
                   <div id="secondary-img" style="width:180px; height:180px; background:url('/images/noUpload.png'); background-size:cover; background-position:center;">
                   </div>
                 @endif
-                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("secondary_img") is-invalid @enderror">
+                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("image{{$i}}") is-invalid @enderror">
               </div>
             @endfor
           </div>
@@ -176,12 +179,12 @@
                   <div id="secondary-img" style="width:180px; height:180px; background:url('/images/noUpload.png'); background-size:cover; background-position:center;">
                   </div>
                 @endif
-                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("secondary_img") is-invalid @enderror">
+                <input type="file" class="image-{{$i}}-input-file" name="image{{$i}}" class="@error("image{{$i}}") is-invalid @enderror">
               </div>
             @endfor
           </div>
-          @error("secondary_img")
-            <span class="invalid-feedback" role="alert">
+          @error("image1")
+            <span class="invalid-feedback d-block" role="alert">
               <strong>{{ $message }}</strong>
             </span>
           @enderror          
