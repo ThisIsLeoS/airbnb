@@ -37152,6 +37152,19 @@ function init() {
       confirmPassField.setCustomValidity("");
     }
   });
+  $("#password-signup").on("input", function () {
+    console.log("prova");
+    var passField = this;
+    var confirmPassField = document.getElementById("password-confirm");
+
+    if (passField.value !== confirmPassField.value) {
+      console.log("if");
+      confirmPassField.setCustomValidity("Passwords must match");
+    } else {
+      console.log("else");
+      confirmPassField.setCustomValidity("");
+    }
+  });
   $(".showFooter").on("click", function () {
     /* console.log("sto click") */
     $("footer").toggleClass("d-none");
