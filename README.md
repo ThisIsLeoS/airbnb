@@ -6,7 +6,6 @@
 
 <h2>Team</h2>
 <ul>
-<li><a href="https://github.com/ThisIsLeoS">Leonardo Siri</a></li>
 <li><a href="https://github.com/Mr2803">Marco Rispoli</a></li>
 <li><a href="https://github.com/andrea9llo">Andrea Novello</a></li>
 </ul>
