@@ -6,6 +6,7 @@
 
 <h2>Team</h2>
 <ul>
+<li>Leonardo Siri</li>
 <li><a href="https://github.com/Mr2803">Marco Rispoli</a></li>
 <li><a href="https://github.com/andrea9llo">Andrea Novello</a></li>
 </ul>
